@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPR &amp; First Aid Enrollment | CODE 3 FIRST AID</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>.site-header { background-color: #1a1a1a; }</style>
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden" data-page="cpr-enrollment">
+
+    <header class="site-header bg-obsidian sticky top-0 z-50 border-b border-white/10 shadow-lg">
+        <div class="flex justify-between items-center w-full py-4 page-container gap-4">
+            <a href="/index.html" class="flex items-center gap-3 shrink-0">
+                <img src="/images/brand/IMG_2594.png" alt="Code 3 First Aid" class="h-10 w-auto">
+                <span class="font-headline-md text-base md:text-headline-md font-bold text-white tracking-tighter hidden sm:block">CODE 3 FIRST AID</span>
+            </a>
+            <nav class="hidden lg:flex gap-5 xl:gap-7 items-center" data-nav="main"></nav>
+            <div class="flex items-center gap-3 shrink-0">
+                <button type="button" class="lg:hidden text-white p-2" data-mobile-nav-toggle aria-expanded="false" aria-label="Open menu">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+                <a href="/pages/forms/procurement.html" class="bg-primary hover:bg-primary-container text-on-primary px-5 py-2 font-label-caps text-label-caps transition-all active:scale-95">Request Quote</a>
+            </div>
+        </div>
+        <div class="mobile-nav lg:hidden" data-mobile-nav aria-hidden="true"></div>
+    </header>
+
+    <main>
+        <section class="relative bg-obsidian text-white py-section-padding-sm overflow-hidden form-hero-mask">
+            <div class="absolute inset-0 opacity-30">
+                <img src="/images/training/IMG_3626.jpeg" alt="" class="w-full h-full object-cover grayscale"/>
+                <div class="absolute inset-0 from-obsidian via-obsidian/80 to-transparent"></div>
+            </div>
+            <div class="page-container relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="font-label-caps text-primary tracking-widest block mb-4 uppercase">Advanced Readiness</span>
+                    <h1 class="font-display-lg text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase leading-tight mb-6">CPR &amp; First Aid<br/>Training Enrollment</h1>
+                    <p class="font-body-lg text-white/70 max-w-xl">Equip your team with the precision and confidence required for critical medical response. Certified instructors, modern gear, and AHA-aligned curriculums.</p>
+                </div>
+                <div class="hidden md:block relative">
+                    <div class="form-glass p-2 border-primary/30">
+                        <img src="/images/training/IMG_3628.jpeg" alt="CPR training session" class="w-full aspect-video object-cover grayscale-[20%]"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-y page-container" id="enrollment-form">
+            <div class="grid lg:grid-cols-12 gap-16">
+                <div class="lg:col-span-8">
+                    <div class="mb-12">
+                        <h2 class="font-headline-md text-2xl md:text-3xl font-bold uppercase mb-2">Registration Details</h2>
+                        <p class="text-secondary">Complete the fields below to schedule your organization's specialized training session.</p>
+                    </div>
+                    <form class="space-y-10" data-form="cpr-enrollment" novalidate>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="form-field space-y-2 md:col-span-2">
+                                <label class="font-label-caps text-label-caps text-secondary block" for="org-name">Organization Name</label>
+                                <input class="bg-transparent border-b-2 border-outline-variant py-3 font-body-md text-on-surface" id="org-name" name="organization" type="text" placeholder="Your company name" required/>
+                            </div>
+                            <div class="form-field space-y-2">
+                                <label class="font-label-caps text-label-caps text-secondary block" for="contact-email">Contact Email</label>
+                                <input class="bg-transparent border-b-2 border-outline-variant py-3 font-body-md text-on-surface" id="contact-email" name="email" type="email" placeholder="name@company.com" required/>
+                            </div>
+                            <div class="form-field space-y-2">
+                                <label class="font-label-caps text-label-caps text-secondary block" for="course-level">Course Level</label>
+                                <select class="bg-transparent border-b-2 border-outline-variant py-3 font-body-md text-on-surface" id="course-level" name="course" required>
+                                    <option value="">Select a course</option>
+                                    <option>BLS for Healthcare Providers</option>
+                                    <option>Heartsaver First Aid CPR AED</option>
+                                    <option>Basic First Aid</option>
+                                    <option>On-Site Corporate Training</option>
+                                </select>
+                            </div>
+                            <div class="form-field space-y-2">
+                                <label class="font-label-caps text-label-caps text-secondary block" for="group-size">Expected Group Size</label>
+                                <input class="bg-transparent border-b-2 border-outline-variant py-3 font-body-md text-on-surface" id="group-size" name="groupSize" type="number" min="1" placeholder="12" required/>
+                            </div>
+                            <div class="form-field space-y-2">
+                                <label class="font-label-caps text-label-caps text-secondary block" for="training-date">Preferred Training Date</label>
+                                <input class="bg-transparent border-b-2 border-outline-variant py-3 font-body-md text-on-surface" id="training-date" name="preferredDate" type="date"/>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <span class="font-label-caps text-label-caps text-secondary block">Training Venue Preference</span>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <label class="form-venue-card form-glass flex-1 p-6 cursor-pointer border-2 border-transparent transition-all">
+                                    <input class="sr-only" name="venue" type="radio" value="onsite" checked/>
+                                    <div class="form-venue-card__content flex items-center gap-4 text-on-surface">
+                                        <span class="material-symbols-outlined text-4xl">location_on</span>
+                                        <div>
+                                            <div class="font-bold uppercase text-sm">On-site Training</div>
+                                            <div class="text-sm opacity-70">We come to your facility</div>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="form-venue-card form-glass flex-1 p-6 cursor-pointer border-2 border-transparent transition-all">
+                                    <input class="sr-only" name="venue" type="radio" value="offsite"/>
+                                    <div class="form-venue-card__content flex items-center gap-4 text-on-surface">
+                                        <span class="material-symbols-outlined text-4xl">domain</span>
+                                        <div>
+                                            <div class="font-bold uppercase text-sm">Regional Center</div>
+                                            <div class="text-sm opacity-70">Train at our facility</div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <button class="w-full md:w-auto bg-obsidian text-white px-12 py-4 font-label-caps text-sm uppercase tracking-widest hover:bg-primary transition-all inline-flex items-center justify-center gap-3" type="submit">
+                                Submit Enrollment Request
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <aside class="lg:col-span-4 space-y-8">
+                    <div class="bg-surface-container-high p-8 border-l-4 border-primary">
+                        <h3 class="font-headline-md text-xl font-bold uppercase mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">verified</span>
+                            Certification Details
+                        </h3>
+                        <ul class="space-y-6 text-sm">
+                            <li class="flex gap-4">
+                                <span class="material-symbols-outlined text-secondary shrink-0">update</span>
+                                <div>
+                                    <h4 class="font-label-caps text-xs uppercase font-bold mb-1">Valid Duration</h4>
+                                    <p class="text-secondary">Official 2-year certification upon successful completion.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4">
+                                <span class="material-symbols-outlined text-secondary shrink-0">checklist_rtl</span>
+                                <div>
+                                    <h4 class="font-label-caps text-xs uppercase font-bold mb-1">Standard Compliance</h4>
+                                    <p class="text-secondary">AHA-aligned and OSHA 1910.151 standards.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4">
+                                <span class="material-symbols-outlined text-secondary shrink-0">medical_services</span>
+                                <div>
+                                    <h4 class="font-label-caps text-xs uppercase font-bold mb-1">Materials Included</h4>
+                                    <p class="text-secondary">Student manual, pocket mask, and barrier devices for participants.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-glass p-8">
+                        <h4 class="font-headline-md text-lg font-bold uppercase mb-4">Need a Custom Curriculum?</h4>
+                        <p class="text-secondary text-sm mb-6">Our specialists can tailor courses for hazardous environments or high-risk industrial sites.</p>
+                        <a href="mailto:info@code3firstaid.com" class="text-primary font-label-caps text-xs uppercase tracking-widest inline-flex items-center gap-2 hover:gap-4 transition-all">
+                            Talk to a Specialist
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                        </a>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-obsidian text-white pt-16 pb-8">
+        <div class="page-container border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between gap-4 text-[10px] font-label-caps text-white/30 uppercase tracking-widest">
+            <p>&copy; 2026 Code 3 First Aid. All rights reserved.</p>
+            <a href="/pages/cpr-training.html" class="hover:text-white">Back to CPR Training</a>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

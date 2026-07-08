@@ -1,0 +1,8 @@
+{
+    "snyk.advanced.organization": "3f3de9fc-ddcc-4687-9ba4-fb11802434dd",
+    "snyk.advanced.autoSelectOrganization": true,
+    "liveServer.settings.port": 5501,
+    "css.lint.unknownAtRules": "ignore",
+    "scss.lint.unknownAtRules": "ignore",
+    "less.lint.unknownAtRules": "ignore"
+}

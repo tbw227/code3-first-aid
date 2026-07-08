@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Extinguisher Training Enrollment | CODE 3 FIRST AID</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>.site-header { background-color: #1a1a1a; }</style>
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body class="bg-obsidian text-white font-body-md overflow-x-hidden" data-page="fire-enrollment">
+
+    <header class="site-header bg-obsidian sticky top-0 z-50 border-b border-white/10 shadow-lg">
+        <div class="flex justify-between items-center w-full px-section-padding-sm md:px-section-padding-lg py-4 max-w-container-max mx-auto gap-4">
+            <a href="/index.html" class="flex items-center gap-3 shrink-0">
+                <img src="/images/brand/IMG_2594.png" alt="Code 3 First Aid" class="h-10 w-auto">
+                <span class="font-headline-md text-base md:text-headline-md font-bold text-white tracking-tighter hidden sm:block">CODE 3 FIRST AID</span>
+            </a>
+            <nav class="hidden md:flex gap-8 items-center" data-nav="main"></nav>
+            <div class="flex items-center gap-3 shrink-0">
+                <button type="button" class="md:hidden text-white p-2" data-mobile-nav-toggle aria-expanded="false" aria-label="Open menu">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+                <a href="/pages/forms/procurement.html" class="bg-primary hover:bg-primary-container text-white px-6 py-2 font-label-caps text-label-caps transition-all active:scale-95">Request Quote</a>
+            </div>
+        </div>
+        <div class="mobile-nav md:hidden" data-mobile-nav aria-hidden="true"></div>
+    </header>
+
+    <main class="pt-20">
+        <section class="relative min-h-[40vh] flex items-center overflow-hidden form-hero-mask">
+            <div class="absolute inset-0 z-0">
+                <img src="/images/training/IMG_3627.jpeg" alt="" class="w-full h-full object-cover opacity-50 grayscale"/>
+                <div class="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
+            </div>
+            <div class="max-w-container-max mx-auto px-section-padding-sm md:px-section-padding-lg relative z-10 py-16 w-full">
+                <span class="font-label-caps text-accent-red tracking-[0.2em] uppercase text-sm block mb-4">Safety Compliance</span>
+                <h1 class="font-display-lg text-4xl md:text-6xl font-extrabold uppercase leading-tight mb-6">Fire Extinguisher<br/><span class="text-accent-red">Training Enrollment</span></h1>
+                <p class="font-body-lg text-white/70 max-w-2xl text-lg">Equip your team with the critical skills required to handle emergency fire situations. Professional on-site training tailored for industrial and commercial facilities.</p>
+            </div>
+        </section>
+
+        <section class="max-w-container-max mx-auto px-section-padding-sm md:px-section-padding-lg py-section-padding-lg grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <div class="lg:col-span-8 order-1">
+                <div class="mb-12">
+                    <h2 class="font-headline-md text-2xl md:text-3xl font-bold uppercase mb-2">Enrollment Details</h2>
+                    <p class="text-white/60">Complete the form below to secure your training date and receive a formal quote.</p>
+                </div>
+                <form class="grid grid-cols-1 md:grid-cols-2 gap-8" data-form="fire-enrollment" novalidate>
+                    <div class="form-field flex flex-col gap-2 md:col-span-2">
+                        <label class="font-label-caps text-xs text-white/50 uppercase" for="company-name">Company Name</label>
+                        <input class="bg-transparent border-0 border-b border-white/30 text-white py-3 placeholder:text-white/20" id="company-name" name="company" type="text" placeholder="Company name" required/>
+                    </div>
+                    <div class="form-field flex flex-col gap-2">
+                        <label class="font-label-caps text-xs text-white/50 uppercase" for="contact-person">Contact Person</label>
+                        <input class="bg-transparent border-0 border-b border-white/30 text-white py-3 placeholder:text-white/20" id="contact-person" name="contact" type="text" placeholder="Full name" required/>
+                    </div>
+                    <div class="form-field flex flex-col gap-2">
+                        <label class="font-label-caps text-xs text-white/50 uppercase" for="email">Work Email</label>
+                        <input class="bg-transparent border-0 border-b border-white/30 text-white py-3 placeholder:text-white/20" id="email" name="email" type="email" placeholder="name@company.com" required/>
+                    </div>
+                    <div class="form-field flex flex-col gap-2">
+                        <label class="font-label-caps text-xs text-white/50 uppercase" for="participants">Number of Participants</label>
+                        <select class="bg-transparent border-0 border-b border-white/30 text-white py-3" id="participants" name="participants" required>
+                            <option value="">Select range</option>
+                            <option>1 - 10 Participants</option>
+                            <option>11 - 25 Participants</option>
+                            <option>26 - 50 Participants</option>
+                            <option>50+ Participants</option>
+                        </select>
+                    </div>
+                    <div class="form-field flex flex-col gap-2">
+                        <label class="font-label-caps text-xs text-white/50 uppercase" for="date">Preferred Training Date</label>
+                        <input class="bg-transparent border-0 border-b border-white/30 text-white py-3 [color-scheme:dark]" id="date" name="preferredDate" type="date"/>
+                    </div>
+                    <div class="form-field flex flex-col gap-2 md:col-span-2">
+                        <span class="font-label-caps text-xs text-white/50 uppercase">Facility Type</span>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input class="w-4 h-4 text-primary bg-transparent border-white/30" name="facility" type="radio" value="warehouse"/>
+                                <span class="text-white/60 group-hover:text-accent-red text-sm">Warehouse</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input class="w-4 h-4 text-primary bg-transparent border-white/30" name="facility" type="radio" value="corporate"/>
+                                <span class="text-white/60 group-hover:text-accent-red text-sm">Corporate</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input class="w-4 h-4 text-primary bg-transparent border-white/30" name="facility" type="radio" value="healthcare"/>
+                                <span class="text-white/60 group-hover:text-accent-red text-sm">Healthcare</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input class="w-4 h-4 text-primary bg-transparent border-white/30" name="facility" type="radio" value="industrial"/>
+                                <span class="text-white/60 group-hover:text-accent-red text-sm">Industrial</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-field flex flex-col gap-2 md:col-span-2">
+                        <label class="font-label-caps text-xs text-white/50 uppercase" for="notes">Additional Requirements (Optional)</label>
+                        <textarea class="bg-transparent border-0 border-b border-white/30 text-white py-3 placeholder:text-white/20 resize-none" id="notes" name="notes" placeholder="Mention specific hazards or specialized training needs..." rows="4"></textarea>
+                    </div>
+                    <div class="md:col-span-2 flex justify-end mt-4">
+                        <button class="bg-primary hover:bg-red-700 text-white font-label-caps text-sm px-12 py-5 uppercase tracking-widest inline-flex items-center gap-3 transition-all" type="submit">
+                            Submit Enrollment
+                            <span class="material-symbols-outlined">send</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <aside class="lg:col-span-4 order-2 flex flex-col gap-8">
+                <div class="form-glass p-10 flex flex-col gap-8">
+                    <h3 class="font-headline-md text-xl font-bold uppercase border-l-4 border-primary pl-4">Training Benefits</h3>
+                    <div class="flex flex-col gap-6 text-sm">
+                        <div class="flex gap-4 items-start">
+                            <span class="material-symbols-outlined text-primary material-symbols-outlined--filled shrink-0">verified</span>
+                            <div>
+                                <h4 class="font-bold uppercase mb-1">OSHA Compliance</h4>
+                                <p class="text-white/60">Meet federal workplace safety standards with certified training records.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="material-symbols-outlined text-primary material-symbols-outlined--filled shrink-0">local_fire_department</span>
+                            <div>
+                                <h4 class="font-bold uppercase mb-1">Hands-on Experience</h4>
+                                <p class="text-white/60">Live-fire or digital simulation for realistic responder experience.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="material-symbols-outlined text-primary material-symbols-outlined--filled shrink-0">shield</span>
+                            <div>
+                                <h4 class="font-bold uppercase mb-1">Risk Mitigation</h4>
+                                <p class="text-white/60">Ensure immediate, effective response to small workplace fires.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-primary p-10">
+                    <h4 class="font-headline-md text-xl font-bold uppercase mb-4">Need a Custom Plan?</h4>
+                    <p class="text-white/90 text-sm mb-6">For organizations with 500+ employees, we offer multi-site enterprise scheduling.</p>
+                    <a href="mailto:info@code3firstaid.com" class="inline-flex items-center gap-2 font-label-caps text-xs uppercase border-b border-white pb-1 hover:opacity-80 transition-opacity">
+                        Speak to a Specialist
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="bg-black border-t border-white/10 py-8">
+        <div class="page-container flex flex-col md:flex-row justify-between gap-4 text-[10px] font-label-caps text-white/30 uppercase tracking-widest">
+            <p>&copy; 2026 Code 3 First Aid. All rights reserved.</p>
+            <a href="/pages/fire-training.html" class="hover:text-white">Back to Fire Training</a>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>
