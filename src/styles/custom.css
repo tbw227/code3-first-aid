@@ -1,22 +1,188 @@
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+/**
+ * Code 3 First Aid — custom styles
+ *
+ * Tailwind handles utilities; this file holds layout, heroes, nav, and page-specific UI.
+ *
+ * Organization:
+ *   1. Base styles (mobile-first defaults)
+ *   2. Footer
+ *   3. Forms
+ *   4. Media & container queries (all breakpoints at bottom)
+ */
+
+/* ==========================================================================
+   Lucide icons
+   ========================================================================== */
+
+.lucide {
+  width: 1em;
+  height: 1em;
+  stroke: currentColor;
+  flex-shrink: 0;
+  vertical-align: middle;
 }
 
-.material-symbols-outlined--filled {
-  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
+/* ==========================================================================
+   Site header
+   ========================================================================== */
 
-/* Site header — default solid bar */
 .site-header {
   background-color: #1a1a1a;
+  --site-header-height: 4.5rem;
+  overflow-x: clip;
 }
 
-/* Fire Training page — reference hero layout */
+.site-header > div:first-of-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  gap: clamp(0.5rem, 2vw, 1rem);
+}
+
+.site-header > div:first-of-type > a:first-child {
+  min-width: 0;
+  flex-shrink: 1;
+  padding-inline-start: clamp(0.75rem, 3vw, 1.25rem);
+}
+
+.site-header > div:first-of-type > a:first-child span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.site-header > div:first-of-type > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding-inline-end: clamp(0.75rem, 3vw, 1.25rem);
+}
+
+.site-header > div:first-of-type > div:last-child > a {
+  white-space: nowrap;
+}
+
+.site-header [data-nav="main"] {
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.site-header[data-scrolled="true"] {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.site-header[data-scrolled="false"] {
+  border-bottom-color: transparent;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   Desktop Training dropdown
+   ========================================================================== */
+
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+
+.nav-dropdown__chevron {
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown.is-open .nav-dropdown__chevron {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown__panel {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0.35rem);
+  min-width: 13.5rem;
+  padding: 1.25rem 0 0.5rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  z-index: 60;
+}
+
+.nav-dropdown__panel::before {
+  content: '';
+  position: absolute;
+  top: 0.75rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  z-index: -1;
+}
+
+.nav-dropdown.is-open .nav-dropdown__panel,
+.nav-dropdown:hover .nav-dropdown__panel,
+.nav-dropdown:focus-within .nav-dropdown__panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown__link {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 0.7rem 1.15rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-dropdown__link:hover,
+.nav-dropdown__link.is-active {
+  color: #db313f;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* ==========================================================================
+   Page-specific heroes & layout utilities
+   ========================================================================== */
+
 body[data-page="fire-training"] .fire-hero {
   padding-block: clamp(5rem, 10vh, 7rem);
 }
 
-/* Hide page scrollbar while keeping scroll */
 html {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -26,7 +192,6 @@ html::-webkit-scrollbar {
   display: none;
 }
 
-/* Shared layout utilities — container-based snap points */
 .page-container {
   container-type: inline-size;
   container-name: section;
@@ -44,12 +209,6 @@ html::-webkit-scrollbar {
   flex-direction: column;
   align-items: center;
   width: 100%;
-}
-
-@media (min-width: 768px) {
-  .page-container {
-    padding-inline: 2rem;
-  }
 }
 
 .section-y {
@@ -78,7 +237,10 @@ html::-webkit-scrollbar {
   color: transparent;
 }
 
-/* Glassmorphism — DESIGN.md Level 1 cards */
+/* ==========================================================================
+   Glassmorphism
+   ========================================================================== */
+
 .glass-card {
   background: rgba(255, 255, 255, 0.3);
   -webkit-backdrop-filter: blur(20px);
@@ -99,10 +261,13 @@ html::-webkit-scrollbar {
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* Homepage hero diagonal split */
+/* ==========================================================================
+   Homepage hero
+   ========================================================================== */
+
 .hero-split {
   position: relative;
-  min-height: 100vh;
+  min-height: calc(97vh - 4.5rem);
   overflow: hidden;
 }
 
@@ -129,7 +294,6 @@ html::-webkit-scrollbar {
   pointer-events: none;
 }
 
-/* Skewed collage panels — sized to collage container, not viewport */
 .hero-image-collage {
   container-type: inline-size;
   container-name: collage;
@@ -160,14 +324,13 @@ html::-webkit-scrollbar {
 
 .collage-img {
   position: absolute;
-  top: -20%;
-  left: -25%;
-  width: 150%;
-  height: 140%;
-  background-size: 185% 76%;
+  inset: -20%;
+  width: auto;
+  height: auto;
+  background-size: cover;
   background-position: center;
-  background-repeat: no-repeat ;
-  transform: skewX(10deg);
+  background-repeat: no-repeat;
+  transform: skewX(15deg);
   transition: transform 0.6s ease;
 }
 
@@ -175,19 +338,17 @@ html::-webkit-scrollbar {
 .panel-2 { left: calc(50% - 40px); top: 20px; z-index: 3; }
 .panel-3 { left: calc(50% + 410px); top: -30px; z-index: 2; }
 
-.panel-1 .collage-img { background-image: url('/images/training/IMG_3625.jpeg'); }
-.panel-2 .collage-img {
-  background-image: url('/images/supplies/first_aid_bag_enhanced.png');}
-.panel-3 .collage-img { background-image: url('/images/training/IMG_3626.jpeg'); }
+.panel-1 .collage-img { background-image: url('/images/brand/Copilot_20260721_131914.png'); }
+.panel-2 .collage-img { background-image: url('/images/supplies/Copilot_20260721_125234.png'); }
+.panel-3 .collage-img { background-image: url('/images/supplies/Copilot_20260721_132922.png'); }
 
-/* Homepage hero — full-width split layout (media queries) */
 body[data-page="home"] .hero-split__layout {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-top: calc(7rem - 50px);
-  padding-bottom: 4rem;
+  padding-top: clamp(5rem, 12vh, 8rem);
+  padding-bottom: clamp(4rem, 8vh, 6rem);
 }
 
 body[data-page="home"] .hero-split__content {
@@ -211,19 +372,25 @@ body[data-page="home"] .hero-content {
   width: 100%;
   max-width: 36rem;
   margin-inline: auto;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+body[data-page="home"] .hero-content h1,
+body[data-page="home"] .hero-content p {
+  margin-bottom: 0;
 }
 
 body[data-page="home"] .hero-image-collage {
   width: 100%;
-  margin-top: 2rem;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
   overflow: visible;
   height: clamp(280px, 48cqi, 420px);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  column-gap: 25px;
-  padding-inline: clamp(0.25rem, 2cqi, 1rem);
-  transform: translateY(-50px);
+  column-gap: clamp(1.75rem, 4vw, 2.75rem);
+  padding-inline: clamp(0.5rem, 2cqi, 1.5rem);
+  transform: translateY(-35px);
 }
 
 body[data-page="home"] .collage-panel {
@@ -232,6 +399,32 @@ body[data-page="home"] .collage-panel {
   top: auto;
   width: clamp(120px, 20cqi, 300px);
   height: clamp(190px, 36cqi, 560px);
+}
+
+/* Homepage collage images only: fill panels cleanly (aspect kept, skew-safe) */
+body[data-page="home"] .collage-img {
+  top: -15%;
+  right: auto;
+  bottom: auto;
+  left: -28%;
+  width: 156%;
+  height: 130%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body[data-page="home"] .panel-1 .collage-img {
+  background-position: 45% 40%;
+}
+
+body[data-page="home"] .panel-2 .collage-img {
+  background-position: center 35%;
+}
+
+body[data-page="home"] .panel-3 .collage-img {
+  background-position: center 45%;
 }
 
 body[data-page="home"] .panel-1 {
@@ -257,81 +450,17 @@ body[data-page="home"] .panel-3 {
   z-index: 2;
 }
 
-@media (min-width: 768px) {
-  body[data-page="home"] .hero-image-collage {
-    height: clamp(340px, 52cqi, 500px);
-  }
-
-  body[data-page="home"] .collage-panel {
-    width: clamp(130px, 21cqi, 320px);
-    height: clamp(210px, 38cqi, 600px);
-  }
+body[data-page="home"] #about.mission-bleed {
+  position: relative;
+  z-index: 20;
+  margin-top: calc(clamp(-5.5rem, -10vh, -3.5rem) + 85px);
+  padding-top: clamp(6rem, 12vw, 9rem);
 }
 
-@media (min-width: 768px) {
-  body[data-page="home"] .hero-split__content {
-    padding-inline: 2rem;
-  }
-}
+/* ==========================================================================
+   Shared hero layout
+   ========================================================================== */
 
-@media (min-width: 1024px) {
-  body[data-page="home"] .hero-split__layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    min-height: calc(100vh - 5rem);
-    max-width: none;
-    padding-bottom: 4rem;
-  }
-
-  body[data-page="home"] .hero-split__content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: none;
-    width: 100%;
-    padding-inline: 2rem;
-  }
-
-  body[data-page="home"] .hero-content-wrapper {
-    justify-content: flex-start;
-  }
-
-  body[data-page="home"] .hero-content {
-    align-items: flex-start;
-    text-align: left;
-    max-width: none;
-    margin-inline: 0;
-    margin-left: 75px;
-    padding-left: clamp(1rem, 3vw, 3rem);
-  }
-
-  body[data-page="home"] .hero-content > a {
-    margin-left: 165px;
-  }
-
-  body[data-page="home"] .hero-image-collage {
-    width: 100%;
-    height: clamp(520px, 62vh, 760px);
-    min-height: 520px;
-    margin-top: -25px;
-    flex: none;
-    transform: translate(-25px, -80px);
-  }
-
-  body[data-page="home"] .collage-panel {
-    width: clamp(180px, 26cqi, 400px);
-    height: clamp(280px, 46cqi, 720px);
-    border-width: 12px;
-    box-shadow: -20px 20px 40px rgba(0, 0, 0, 0.2);
-  }
-
-  body[data-page="home"] .collage-panel:hover {
-    box-shadow: -25px 30px 50px rgba(0, 0, 0, 0.28);
-  }
-}
-
-/* Shared hero layout — snaps to container width, not viewport */
 .hero-layout__content,
 .hero-content-wrapper {
   display: flex;
@@ -350,46 +479,10 @@ body[data-page="home"] .panel-3 {
   margin-inline: auto;
 }
 
-@container hero (min-width: 640px) {
-  .hero-layout {
-    flex-direction: row;
-    align-items: center;
-    min-height: calc(100vh - 7rem);
-  }
+/* ==========================================================================
+   CPR training page
+   ========================================================================== */
 
-  .hero-layout__content,
-  .hero-content-wrapper {
-    width: 50%;
-    flex-shrink: 0;
-    min-height: calc(100vh - 7rem);
-  }
-
-  .hero-layout__visual,
-  .hero-image-collage {
-    position: relative;
-    width: 50%;
-    flex-shrink: 0;
-    height: clamp(320px, 42cqi, 520px);
-    max-width: none;
-    margin: 0;
-    overflow: visible;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-@container hero (max-width: 639px) {
-  .hero-layout__visual,
-  .hero-image-collage {
-    position: relative;
-    width: 100%;
-    margin-top: 2rem;
-    transform: none;
-  }
-}
-
-/* CPR training — angular hero with skewed gallery */
 body[data-page="cpr-training"] .cpr-hero__diagonal {
   clip-path: polygon(0 0, 55% 0, 45% 100%, 0% 100%);
 }
@@ -399,12 +492,6 @@ body[data-page="cpr-training"] .cpr-hero__texture {
   background-size: cover;
   opacity: 0.15;
   mix-blend-mode: overlay;
-}
-
-@media (min-width: 1024px) {
-  body[data-page="cpr-training"] .cpr-hero__content {
-    transform: translateX(-150px);
-  }
 }
 
 body[data-page="cpr-training"] .cpr-hero__gallery {
@@ -445,15 +532,18 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
 }
 
 .collage-panel:hover .collage-img {
-  transform: skewX(10deg) scale(1.05);
+  transform: skewX(15deg) scale(1.05);
 }
 
-/* Hero header overlay */
+/* ==========================================================================
+   Hero header overlay
+   ========================================================================== */
+
 .site-header--hero {
   background: transparent;
 }
 
-.site-header--hero.site-header--scrolled {
+.site-header--hero[data-scrolled="true"] {
   background: rgba(26, 26, 26, 0.95);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
@@ -465,7 +555,10 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
   color: #e63946;
 }
 
-/* Supplies page — diagonal hero & catalog */
+/* ==========================================================================
+   Supplies page
+   ========================================================================== */
+
 .diagonal-mask {
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
 }
@@ -488,7 +581,10 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
     );
 }
 
-/* Restock facility section */
+/* ==========================================================================
+   Restock facility section
+   ========================================================================== */
+
 .restock-banner {
   position: relative;
   overflow: hidden;
@@ -514,12 +610,14 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
   z-index: 10;
 }
 
-/* Homepage CPR hero pass-rate card */
 .pass-rate-card {
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
 }
 
-/* Bento curriculum grid — container-based columns */
+/* ==========================================================================
+   Bento curriculum grid
+   ========================================================================== */
+
 .curriculum-bento {
   display: grid;
   gap: 1rem;
@@ -531,45 +629,25 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
     "corporate";
 }
 
-@container section (min-width: 640px) {
-  .curriculum-bento {
-    grid-template-columns: 1.2fr 1fr;
-    grid-template-areas:
-      "bls heartsaver"
-      "firstaid corporate";
-  }
-}
-
 .curriculum-bento__bls { grid-area: bls; min-height: 320px; }
 .curriculum-bento__heartsaver { grid-area: heartsaver; min-height: 280px; }
 .curriculum-bento__firstaid { grid-area: firstaid; min-height: 220px; }
 .curriculum-bento__corporate { grid-area: corporate; min-height: 280px; }
 
-/* Homepage services bento — equal column and card sizes */
-@container section (min-width: 640px) {
-  body[data-page="home"] .curriculum-bento {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(2, minmax(280px, 1fr));
-  }
-
-  body[data-page="home"] .curriculum-bento > article {
-    min-height: 280px;
-    height: 100%;
-  }
-}
-
-/* CTA banner with photo overlay */
 .cta-banner {
   background:
     linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
     url('/images/training/IMG_3626.jpeg') center/cover no-repeat;
 }
 
-/* Mobile navigation drawer */
+/* ==========================================================================
+   Mobile navigation drawer
+   ========================================================================== */
+
 .mobile-nav {
   position: fixed;
   inset: 0;
-  top: 73px;
+  top: var(--site-header-height, 4.5rem);
   z-index: 40;
   background: rgba(26, 26, 26, 0.98);
   -webkit-backdrop-filter: blur(12px);
@@ -579,6 +657,7 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
   overflow-y: auto;
   pointer-events: none;
   visibility: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-nav.is-open {
@@ -592,9 +671,11 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
   flex-direction: column;
   gap: 0;
   padding: 1.5rem;
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
 }
 
-.mobile-nav__links a {
+.mobile-nav__links a,
+.mobile-nav__group-trigger {
   display: block;
   padding: 1rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -607,10 +688,147 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
   transition: color 0.2s ease;
 }
 
+.mobile-nav__group-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mobile-nav__group-chevron {
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.mobile-nav__group.is-open .mobile-nav__group-chevron,
+.mobile-nav__group-trigger[aria-expanded="true"] .mobile-nav__group-chevron {
+  transform: rotate(180deg);
+}
+
+.mobile-nav__group-panel {
+  display: none;
+  flex-direction: column;
+  padding-left: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav__group-panel.is-open {
+  display: flex;
+}
+
+.mobile-nav__group-panel a {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-left: 0.25rem;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.mobile-nav__group-panel a:last-child {
+  border-bottom: none;
+}
+
 .mobile-nav__links a:hover,
-.mobile-nav__links a.is-active {
+.mobile-nav__links a.is-active,
+.mobile-nav__group-trigger:hover,
+.mobile-nav__group-trigger.is-active,
+.mobile-nav__group-panel a:hover,
+.mobile-nav__group-panel a.is-active {
   color: #db313f;
 }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+/* Site footer uses Tailwind utilities in HTML; add shared footer overrides here. */
+
+/* ==========================================================================
+   Form pages
+   ========================================================================== */
+
+.form-glass {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body[data-page="fire-enrollment"] .form-glass {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-field:has(:focus-visible) label {
+  color: #b7102a;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #b7102a;
+  box-shadow: 0 0 0 1px #b7102a;
+}
+
+[data-form] button[type="submit"][data-state="success"] {
+  background-color: #15803d !important;
+}
+
+[data-form] button[type="submit"][data-state="processing"],
+[data-form] button[type="submit"][data-state="success"] {
+  cursor: wait;
+}
+
+.form-hero-mask {
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+}
+
+.form-venue-card:has(input:checked) {
+  border-color: #b7102a;
+}
+
+.form-venue-card:has(input:checked) .form-venue-card__content {
+  color: #b7102a;
+}
+
+@keyframes form-spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: form-spin 1s linear infinite;
+}
+
+/* ==========================================================================
+   Media & container queries
+   ========================================================================== */
+
+/* --- max-width: 639px --- */
+
+@media (max-width: 639px) {
+  .site-header > div:first-of-type > div:last-child > a {
+    padding-inline: 0.75rem;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* --- max-width: 768px --- */
 
 @media (max-width: 768px) {
   .hero-split__dark {
@@ -630,6 +848,264 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
   }
 }
 
+/* --- min-width: 768px --- */
+
+@media (min-width: 768px) {
+  .page-container {
+    padding-inline: 2rem;
+  }
+
+  body[data-page="home"] .hero-image-collage {
+    height: clamp(340px, 52cqi, 500px);
+  }
+
+  body[data-page="home"] .collage-panel {
+    width: clamp(130px, 21cqi, 320px);
+    height: clamp(210px, 38cqi, 600px);
+  }
+
+  body[data-page="home"] .hero-split__content {
+    padding-inline: 2rem;
+  }
+}
+
+/* --- min-width: 640px and max-width: 1023px --- */
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .site-header > div:first-of-type > a:first-child {
+    padding-inline-start: clamp(1rem, 4vw, 2rem);
+  }
+
+  .site-header > div:first-of-type > div:last-child {
+    padding-inline-end: clamp(1rem, 3vw, 1.75rem);
+  }
+}
+
+/* --- min-width: 1024px --- */
+
+@media (min-width: 1024px) {
+  .site-header > div:first-of-type.page-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    max-width: none;
+    padding-inline: 0;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  .site-header > div:first-of-type > a:first-child {
+    grid-column: 1;
+    justify-self: start;
+    flex-shrink: 0;
+    padding-inline-start: clamp(1.5rem, 5vw, 100px);
+    transform: translateX(40px); /* add this — desktop only */
+  }
+
+  .site-header [data-nav="main"] {
+    grid-column: 2;
+    justify-self: center;
+    flex-shrink: 0;
+  }
+
+  .site-header > div:first-of-type > div:last-child {
+    grid-column: 3;
+    justify-self: end;
+    padding-inline-end: clamp(1rem, 3.5vw, 45px);
+    transform: translateX(-120px); /* add this — desktop only */
+  }
+
+  body[data-page="home"] .hero-split__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: calc(82vh - 5rem);
+    max-width: none;
+    padding-top: clamp(5.5rem, 11vh, 8.5rem);
+    padding-bottom: clamp(4.5rem, 8vh, 6.5rem);
+    column-gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  body[data-page="home"] .hero-split__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: none;
+    width: 100%;
+    padding-inline: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  body[data-page="home"] .hero-content-wrapper {
+    justify-content: flex-start;
+  }
+
+  body[data-page="home"] .hero-content {
+    align-items: flex-start;
+    text-align: left;
+    max-width: none;
+    margin-inline: 0;
+    margin-left: 75px;
+    padding-left: clamp(1.5rem, 3vw, 3.5rem);
+    gap: clamp(2rem, 3vw, 3rem);
+  }
+
+  body[data-page="home"] .hero-content > a {
+    margin-left: 165px;
+    margin-top: 0.5rem;
+  }
+
+  body[data-page="home"] .hero-image-collage {
+    width: 100%;
+    height: clamp(520px, 62vh, 760px);
+    min-height: 520px;
+    margin-top: 0;
+    flex: none;
+    transform: translate(-25px, -55px);
+    column-gap: clamp(2rem, 3vw, 3rem);
+    padding-inline: clamp(1rem, 2vw, 2rem);
+  }
+
+  body[data-page="home"] .collage-panel {
+    width: clamp(180px, 26cqi, 400px);
+    height: clamp(280px, 46cqi, 720px);
+    border-width: 12px;
+    box-shadow: -20px 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  body[data-page="home"] .collage-panel:hover {
+    box-shadow: -25px 30px 50px rgba(0, 0, 0, 0.28);
+  }
+
+  body[data-page="cpr-training"] .cpr-hero__content {
+    transform: translateX(-150px);
+  }
+}
+
+/* --- min-width: 1024px and max-width: 1598px (hero collage fits without clipping) --- */
+
+@media (min-width: 1024px) and (max-width: 1598px) {
+  body[data-page="home"] .hero-split__layout {
+    padding-inline-start: clamp(1rem, 2.5vw, 2rem);
+    padding-inline-end: clamp(1.5rem, 4vw, 3rem);
+    transform: translateX(clamp(-12px, -0.75vw, 0px));
+  }
+
+  body[data-page="home"] .hero-split__content {
+    padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  body[data-page="home"] .hero-content {
+    margin-left: clamp(1.5rem, 3vw, 3rem);
+    padding-left: clamp(1rem, 2vw, 2rem);
+  }
+
+  body[data-page="home"] .hero-content > a {
+    margin-left: clamp(2.5rem, 7vw, 96px);
+  }
+
+  body[data-page="home"] .hero-image-collage {
+    transform: translate(clamp(-36px, -2.5vw, -18px), -55px);
+    padding-inline: clamp(0.5rem, 1.5vw, 1.25rem);
+  }
+
+  body[data-page="home"] .collage-panel {
+    width: clamp(160px, 22cqi, 330px);
+    height: clamp(250px, 39cqi, 600px);
+  }
+
+  body[data-page="home"] .panel-2 {
+    margin-right: -22px;
+  }
+
+  body[data-page="home"] .panel-3 {
+    margin-left: clamp(0.5rem, 1.5vw, 24px);
+  }
+}
+
+/* --- min-width: 1024px and max-width: 1279px --- */
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .site-header [data-nav="main"] {
+    gap: 1.25rem;
+  }
+
+  .site-header [data-nav="main"] a,
+  .site-header [data-nav="main"] .nav-dropdown__trigger {
+    font-size: 12px;
+  }
+}
+
+/* --- min-width: 1280px --- */
+
+@media (min-width: 1280px) {
+  .site-header [data-nav="main"] {
+    gap: 3rem;
+  }
+}
+
+/* --- @container hero --- */
+
+@container hero (min-width: 640px) {
+  .hero-layout {
+    flex-direction: row;
+    align-items: center;
+    min-height: calc(100vh - 7rem);
+  }
+
+  .hero-layout__content,
+  .hero-content-wrapper {
+    width: 50%;
+    flex-shrink: 0;
+    min-height: calc(100vh - 7rem);
+  }
+
+  .hero-layout__visual,
+  .hero-image-collage {
+    position: relative;
+    width: 50%;
+    flex-shrink: 0;
+    height: clamp(320px, 42cqi, 520px);
+    max-width: none;
+    margin: 0;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@container hero (max-width: 639px) {
+  .hero-layout__visual,
+  .hero-image-collage {
+    position: relative;
+    width: 100%;
+    margin-top: 2rem;
+    transform: none;
+  }
+}
+
+/* --- @container section (bento grids) --- */
+
+@container section (min-width: 640px) {
+  .curriculum-bento {
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-areas:
+      "bls heartsaver"
+      "firstaid corporate";
+  }
+
+  body[data-page="home"] .curriculum-bento {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, minmax(280px, 1fr));
+  }
+
+  body[data-page="home"] .curriculum-bento > article {
+    min-height: 280px;
+    height: 100%;
+  }
+}
+
+/* --- @container collage --- */
+
 @container collage (max-width: 520px) {
   .collage-panel {
     border-width: 6px;
@@ -641,11 +1117,11 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
   }
 
   .collage-img {
-    transform: skewX(7deg);
+    transform: skewX(10deg);
   }
 
   .collage-panel:hover .collage-img {
-    transform: skewX(7deg) scale(1.05);
+    transform: skewX(10deg) scale(1.05);
   }
 
   .panel-1 { left: calc(50% - 100px); top: 30px; }
@@ -690,50 +1166,407 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
   }
 }
 
-/* Form pages — shared field styles */
-.form-glass {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* ==========================================================================
+   How It Works (process section)
+   One scale drives icons/type/spacing; equal-width step cards at every size.
+   ========================================================================== */
+
+.process-section {
+  /* Master scale: fluid between phone and desktop */
+  --process-scale: clamp(0.68, 0.55 + 0.45vw, 1);
+  --process-space: calc(1rem * var(--process-scale));
+  --process-icon: calc(4.75rem * var(--process-scale));
+  --process-svg: calc(2.35rem * var(--process-scale));
+  --process-title: calc(0.875rem * var(--process-scale));
+  --process-text: calc(0.8125rem * var(--process-scale));
+  --process-arrow: calc(1.15rem * var(--process-scale));
+  --process-cols: 6;
+  --process-row-gap: calc(1.35rem * var(--process-scale));
+  --process-col-gap: calc(0.35rem * var(--process-scale));
+  --process-pad-x: clamp(1rem, 4vw, 4rem);
+  --process-pad-y: clamp(1.5rem, 3.5vw, 2.75rem);
+  --process-layout-gap: clamp(1.5rem, 3vw, 3rem);
+  --process-media-w: clamp(8.5rem, 18vw, 18.75rem);
+  --process-media-gap: calc(1rem * var(--process-scale));
+  --process-media-offset: calc(1.5rem * var(--process-scale));
+  --process-media-pad: clamp(0rem, 2vw, 2.5rem);
+  --process-show-arrows: 1;
+  --process-icon-mb: calc(0.85rem * var(--process-scale));
+  --process-heading-mb: calc(0.55rem * var(--process-scale));
+  --process-text-mt: calc(0.35rem * var(--process-scale));
+  --process-heading-min-h: 2.5em;
+  --process-text-lh: 1.35;
+  --process-text-lines: 3;
+  --process-text-min-h: calc(var(--process-text-lines) * var(--process-text-lh) * 1em);
+
+  padding-block: var(--process-pad-y);
+  overflow-x: clip;
 }
 
-body[data-page="fire-enrollment"] .form-glass {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.form-field input,
-.form-field select,
-.form-field textarea {
+.process-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: var(--process-layout-gap);
   width: 100%;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  padding-inline: var(--process-pad-x);
 }
 
-.form-field input:focus,
-.form-field select:focus,
-.form-field textarea:focus {
-  outline: none;
-  border-color: #b7102a;
-  box-shadow: 0 0 0 1px #b7102a;
+.process-copy {
+  min-width: 0;
 }
 
-.form-hero-mask {
-  clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+.process-header {
+  margin-bottom: calc(1.15rem * var(--process-scale));
 }
 
-.form-venue-card:has(input:checked) {
-  border-color: #b7102a;
+.process-media {
+  display: grid;
+  grid-template-columns: repeat(2, var(--process-media-w));
+  gap: var(--process-media-gap);
+  align-items: start;
+  padding-inline-end: var(--process-media-pad);
 }
 
-.form-venue-card:has(input:checked) .form-venue-card__content {
-  color: #b7102a;
+.process-media__frame {
+  width: var(--process-media-w);
+  aspect-ratio: 300 / 432;
+  overflow: hidden;
 }
 
-@keyframes form-spin {
-  to { transform: rotate(360deg); }
+.process-media__frame--offset {
+  margin-top: var(--process-media-offset);
 }
 
-.animate-spin {
-  animation: form-spin 1s linear infinite;
+.process-media__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(1);
+  transition: filter 0.7s ease;
+}
+
+.process-media__img:hover {
+  filter: grayscale(0);
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(var(--process-cols), minmax(0, 1fr));
+  column-gap: var(--process-col-gap);
+  row-gap: var(--process-row-gap);
+  align-items: start;
+}
+
+.process-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+  padding-inline: calc(0.15rem * var(--process-scale));
+}
+
+.process-step__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--process-icon);
+  height: var(--process-icon);
+  border-radius: 9999px;
+  background-color: #e63946;
+  margin: 0 0 var(--process-icon-mb);
+  transition:
+    width 0.35s ease,
+    height 0.35s ease,
+    margin 0.35s ease;
+}
+
+.process-step__svg {
+  width: var(--process-svg);
+  height: var(--process-svg);
+  filter: brightness(0) invert(1);
+  transition:
+    width 0.35s ease,
+    height 0.35s ease;
+}
+
+.process-step__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 11.5ch;
+  margin-inline: auto;
+}
+
+.process-step__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: calc(0.35rem * var(--process-scale));
+  width: 100%;
+  margin: 0 0 var(--process-heading-mb);
+  min-height: var(--process-heading-min-h);
+  font-size: var(--process-title);
+  line-height: 1.25;
+  text-align: left;
+  transition:
+    font-size 0.35s ease,
+    gap 0.35s ease,
+    margin 0.35s ease,
+    min-height 0.35s ease;
+}
+
+.process-step__number {
+  flex-shrink: 0;
+  color: #e63946;
+  font-family: "JetBrains Mono", monospace;
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.process-step__title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.process-step__text {
+  display: -webkit-box;
+  width: 100%;
+  min-height: var(--process-text-min-h);
+  margin: var(--process-text-mt) 0 0;
+  overflow: hidden;
+  font-size: var(--process-text);
+  line-height: var(--process-text-lh);
+  letter-spacing: 0.01em;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--process-text-lines);
+  transition:
+    font-size 0.35s ease,
+    margin 0.35s ease,
+    min-height 0.35s ease;
+}
+
+/* Arrow sits between equal-width cards (desktop row only) */
+.process-step__arrow {
+  position: absolute;
+  top: calc(var(--process-icon) / 2);
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--process-arrow);
+  height: var(--process-arrow);
+  transform: translate(50%, -50%);
+  color: #e63946;
+  opacity: var(--process-show-arrows);
+  pointer-events: none;
+  transition:
+    width 0.35s ease,
+    height 0.35s ease,
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.process-step__arrow .lucide {
+  width: 100%;
+  height: 100%;
+  stroke-width: 2.25;
+}
+
+.process-step--last .process-step__arrow {
+  display: none;
+}
+
+.trust-bar {
+  padding-block: 1rem;
+  background-color: rgb(20 29 35 / 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.trust-bar__inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: center;
+}
+
+.trust-bar__item {
+  min-width: 0;
+}
+
+.trust-bar__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  filter: invert(16%) sepia(84%) saturate(4500%) hue-rotate(340deg) brightness(90%) contrast(95%);
+}
+
+/* Desktop trust bar: single row, fixed height from 1066px up */
+@media (min-width: 1066px) {
+  .trust-bar {
+    padding-block: 1rem;
+    min-height: 3.25rem;
+  }
+
+  .trust-bar__inner {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .trust-bar__item span {
+    white-space: nowrap;
+  }
+}
+
+.process-dashboard {
+  width: 100%;
+  max-width: 20rem;
+}
+
+.process-dashboard__image {
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  background-color: #e6eff8;
+}
+
+.process-feature {
+  padding: 0.625rem;
+  background-color: #ffffff;
+}
+
+.process-feature__image {
+  display: block;
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 0.375rem;
+  object-fit: cover;
+  object-position: center;
+  background-color: #dbe4ed;
+}
+
+/* lg and below: stack copy + media; 3 equal cards; no arrows */
+@media (max-width: 1023px) {
+  .process-section {
+    --process-scale: clamp(0.78, 0.55 + 0.55vw, 0.92);
+    --process-cols: 3;
+    --process-show-arrows: 0;
+    --process-col-gap: calc(1rem * var(--process-scale));
+    --process-row-gap: calc(1.5rem * var(--process-scale));
+    --process-media-w: min(42vw, 11.5rem);
+    --process-media-pad: 0;
+    --process-media-offset: calc(1.15rem * var(--process-scale));
+  }
+
+  .process-layout {
+    grid-template-columns: 1fr;
+    row-gap: var(--process-layout-gap);
+  }
+
+  .process-media {
+    justify-content: center;
+    margin-inline: auto;
+    padding-inline-end: 0;
+  }
+
+  .process-step__body {
+    max-width: 16ch;
+  }
+
+  .process-step__arrow {
+    display: none;
+  }
+}
+
+/* md: bump scale + keep 3 equal columns */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .process-section {
+    --process-scale: 0.92;
+    --process-col-gap: 1.15rem;
+    --process-row-gap: 1.65rem;
+  }
+}
+
+/* sm: 2 equal columns; scale icons/text down */
+@media (max-width: 767px) {
+  .process-section {
+    --process-scale: clamp(0.72, 0.5 + 0.7vw, 0.82);
+    --process-cols: 2;
+    --process-col-gap: calc(0.85rem * var(--process-scale));
+    --process-row-gap: calc(1.35rem * var(--process-scale));
+    --process-media-w: min(40vw, 9.75rem);
+  }
+
+  .process-step__body {
+    max-width: 14ch;
+  }
+}
+
+/* phone: slightly tighter equal 2-col */
+@media (max-width: 639px) {
+  .process-section {
+    --process-scale: 0.7;
+    --process-col-gap: 0.75rem;
+    --process-row-gap: 1.15rem;
+    --process-media-w: min(42vw, 8.75rem);
+  }
+}
+
+/* xl+: lock the desktop composition you already liked */
+@media (min-width: 1280px) {
+  .process-section {
+    --process-scale: 1;
+    --process-cols: 6;
+    --process-show-arrows: 1;
+    --process-col-gap: 0.15rem;
+    --process-row-gap: 0;
+    --process-media-w: 18.75rem; /* 300px */
+    --process-media-pad: clamp(1rem, 2vw, 2rem);
+    --process-media-offset: 1.5rem;
+    --process-pad-x: clamp(2rem, 5vw, 4rem);
+    --process-layout-gap: 3rem;
+    --process-heading-min-h: 2.65em;
+  }
+
+  .process-step__body {
+    max-width: 8.5rem;
+  }
+}
+
+/* Side-by-side: offset extra media padding so the block reads centered */
+@media (min-width: 1024px) {
+  .process-layout {
+    padding-inline-start: calc(var(--process-pad-x) + var(--process-media-pad) / 2);
+  }
+}
+
+/* Between lg and xl: side-by-side, but 3×2 cards (no cramped 6-across) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .process-section {
+    --process-scale: 0.88;
+    --process-cols: 3;
+    --process-show-arrows: 0;
+    --process-col-gap: 0.85rem;
+    --process-row-gap: 1.35rem;
+    --process-media-w: clamp(9.5rem, 14vw, 12rem);
+    --process-media-pad: clamp(0.5rem, 1.5vw, 1.25rem);
+    --process-layout-gap: 2rem;
+  }
+
+  .process-step__arrow {
+    display: none;
+  }
+
+  .process-step__body {
+    max-width: 12ch;
+  }
 }

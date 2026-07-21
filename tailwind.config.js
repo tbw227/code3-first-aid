@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
+  // Scan all HTML and JS/CSS so utility classes are not purged in production
   content: [
     './*.html',
     './pages/**/*.html',
@@ -8,6 +9,7 @@ export default {
   ],
   theme: {
     extend: {
+      // Brand palette — primary red, obsidian header, light blue-gray surfaces
       colors: {
         surface: '#f6faff',
         'surface-dim': '#d2dbe4',
@@ -50,6 +52,7 @@ export default {
         xl: '0.75rem',
         full: '9999px',
       },
+      // Section padding tokens used on marketing pages
       spacing: {
         'section-padding-sm': '64px',
         'section-padding-lg': '120px',
@@ -59,6 +62,7 @@ export default {
       maxWidth: {
         'container-max': '1280px',
       },
+      // Montserrat (headlines), Inter (body), JetBrains Mono (labels/caps)
       fontFamily: {
         'label-caps': ['JetBrains Mono', 'monospace'],
         'body-lg': ['Inter', 'sans-serif'],
@@ -85,6 +89,7 @@ export default {
     },
   },
   plugins: [],
+  // Use .page-container / .max-w-container-max instead of Tailwind container
   corePlugins: {
     container: false,
   },

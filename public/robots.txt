@@ -1,3 +1,4 @@
+# Allow crawlers to index the full site; point to sitemap for discovery.
 User-agent: *
 Allow: /
 

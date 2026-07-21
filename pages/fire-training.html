@@ -1,35 +1,37 @@
 <!DOCTYPE html>
+<!-- Code 3 First Aid - Fire Training (data-page="fire-training") -->
 <html class="scroll-smooth" lang="en">
 <head>
+    <!-- Document meta, fonts, and styles -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fire Extinguisher Training | CODE 3 FIRST AID</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <style>.site-header { background-color: #1a1a1a; }</style>
     <script>document.documentElement.classList.add('js');</script>
     <link rel="stylesheet" href="/src/styles/main.css">
 </head>
 <body class="bg-background text-on-background font-body-md overflow-x-hidden" data-page="fire-training">
 
+    <!-- Site header - nav links injected by site-nav.js -->
     <header class="site-header bg-obsidian sticky top-0 z-50 border-b border-white/10 shadow-lg transition-[border-color,box-shadow] duration-300">
-        <div class="flex justify-between items-center w-full px-section-padding-sm md:px-section-padding-lg py-4 max-w-container-max mx-auto gap-4">
+        <div class="flex justify-between items-center w-full py-4 page-container gap-4">
             <a href="/index.html" class="flex items-center gap-3 shrink-0">
                 <img src="/images/brand/IMG_2594.png" alt="Code 3 First Aid" class="h-10 w-auto">
                 <span class="font-headline-md text-base md:text-headline-md font-bold text-white tracking-tighter hidden sm:block">CODE 3 FIRST AID</span>
             </a>
-            <nav class="hidden md:flex gap-8 items-center" data-nav="main"></nav>
+            <nav class="hidden lg:flex gap-8 xl:gap-12 items-center" data-nav="main"></nav>
             <div class="flex items-center gap-3 shrink-0">
-                <button type="button" class="md:hidden text-white p-2" data-mobile-nav-toggle aria-expanded="false" aria-label="Open menu">
-                    <span class="material-symbols-outlined text-2xl">menu</span>
+                <button type="button" class="lg:hidden text-white p-2" data-mobile-nav-toggle aria-expanded="false" aria-label="Open menu">
+                    <i data-lucide="menu" class="text-2xl"></i>
                 </button>
                 <a href="/pages/forms/fire-enrollment.html" class="bg-primary hover:bg-primary-container text-white px-6 py-2 font-label-caps text-label-caps transition-all duration-300 active:scale-95">Contact Us</a>
             </div>
         </div>
-        <div class="mobile-nav md:hidden" data-mobile-nav aria-hidden="true"></div>
+        <div class="mobile-nav lg:hidden" data-mobile-nav aria-hidden="true"></div>
     </header>
 
-    <section class="fire-hero relative bg-black min-h-screen flex items-center overflow-hidden">
+    <section class="fire-hero relative bg-black min-h-[calc(100vh-25px)] flex items-center overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img alt="Fire Safety Training" class="w-full h-full object-cover opacity-50 grayscale" src="/images/training/IMG_3627.jpeg"/>
             <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
@@ -38,7 +40,7 @@
             <div class="max-w-xl">
                 <div class="flex items-center gap-4 mb-6">
                     <span class="w-12 h-[2px] bg-accent-red"></span>
-                    <span class="font-label-caps text-white uppercase tracking-widest text-sm">OSHA Certified Training</span>
+                    <!--<span class="font-label-caps text-white uppercase tracking-widest text-sm">OSHA Certified Training</span>-->
                 </div>
                 <h1 class="font-display-lg text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white font-extrabold uppercase leading-[0.9] mb-8">
                     Master <br/> The <span class="text-accent-red">Fire</span>
@@ -75,30 +77,22 @@
                     Our curriculum goes beyond theory, focusing on real-world application and psychological preparedness.
                 </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-black/10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-black/10">
                 <div class="group p-6 md:p-12 border-b md:border-b-0 md:border-r border-black/10 hover:bg-black transition-colors duration-500">
                     <span class="text-accent-red font-display-lg text-2xl font-black block mb-8">01</span>
-                    <h3 class="font-headline-md text-2xl text-black group-hover:text-white uppercase mb-6 transition-colors">Live Fire Scenarios</h3>
+                    <h3 class="font-headline-md text-2xl text-black group-hover:text-white uppercase mb-6 transition-colors">Live Fire Extinguisher Training</h3>
                     <p class="font-body-md text-secondary group-hover:text-white/60 mb-8 transition-colors">
-                        Hands-on experience with controlled live-fire simulations. Learn to manage heat and smoke in real-time.
+                        Hands-on live fire extinguisher training with controlled scenarios. Your team learns to identify extinguisher types, approach safely, and suppress real flames using the P.A.S.S. method.
                     </p>
-                    <a class="inline-flex items-center gap-2 text-accent-red font-label-caps text-xs uppercase group-hover:gap-4 transition-all" href="#">View Details <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+                    <a class="inline-flex items-center gap-2 text-accent-red font-label-caps text-xs uppercase group-hover:gap-4 transition-all" href="#">View Details <i data-lucide="arrow-right" class="text-sm"></i></a>
                 </div>
-                <div class="group p-6 md:p-12 border-b md:border-b-0 md:border-r border-black/10 hover:bg-black transition-colors duration-500">
+                <div class="group p-6 md:p-12 hover:bg-black transition-colors duration-500">
                     <span class="text-accent-red font-display-lg text-2xl font-black block mb-8">02</span>
-                    <h3 class="font-headline-md text-2xl text-black group-hover:text-white uppercase mb-6 transition-colors">Digital Simulations</h3>
-                    <p class="font-body-md text-secondary group-hover:text-white/60 mb-8 transition-colors">
-                        State-of-the-art laser training for indoor facilities where live fires aren't feasible. Safe and repeatable.
-                    </p>
-                    <a class="inline-flex items-center gap-2 text-accent-red font-label-caps text-xs uppercase group-hover:gap-4 transition-all" href="#">View Details <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
-                </div>
-                <div class="group p-12 hover:bg-black transition-colors duration-500">
-                    <span class="text-accent-red font-display-lg text-2xl font-black block mb-8">03</span>
                     <h3 class="font-headline-md text-2xl text-black group-hover:text-white uppercase mb-6 transition-colors">The P.A.S.S. Method</h3>
                     <p class="font-body-md text-secondary group-hover:text-white/60 mb-8 transition-colors">
                         In-depth mastery of the Pull, Aim, Squeeze, Sweep protocol. Turning knowledge into muscle memory.
                     </p>
-                    <a class="inline-flex items-center gap-2 text-accent-red font-label-caps text-xs uppercase group-hover:gap-4 transition-all" href="#">View Details <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+                    <a class="inline-flex items-center gap-2 text-accent-red font-label-caps text-xs uppercase group-hover:gap-4 transition-all" href="#">View Details <i data-lucide="arrow-right" class="text-sm"></i></a>
                 </div>
             </div>
         </div>
@@ -118,14 +112,14 @@
                 </p>
                 <ul class="space-y-6">
                     <li class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-accent-red">check_circle</span>
+                        <i data-lucide="circle-check" class="text-accent-red"></i>
                         <div>
                             <h4 class="font-headline-md text-lg uppercase">Zero Travel Time</h4>
                             <p class="text-secondary text-sm">We operate entirely at your facility, minimizing operational disruption.</p>
                         </div>
                     </li>
                     <li class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-accent-red">check_circle</span>
+                        <i data-lucide="circle-check" class="text-accent-red"></i>
                         <div>
                             <h4 class="font-headline-md text-lg uppercase">All Gear Included</h4>
                             <p class="text-secondary text-sm">Extinguishers, simulators, and safety gear—we handle the setup and cleanup.</p>
@@ -143,7 +137,7 @@
         <div class="page-container relative z-10 text-center max-w-4xl">
             <h2 class="font-display-lg text-4xl md:text-6xl text-white font-black uppercase mb-8">Ready to Certify Your Team?</h2>
             <p class="font-body-lg text-white/60 mb-12 text-lg">
-                Join hundreds of California businesses that trust Code 3 First Aid for emergency readiness. Secure your preferred date today and stay compliant.
+                Join hundreds of businesses in the Midwest that trust Code 3 First Aid for emergency readiness. Secure your preferred date today and stay compliant.
             </p>
             <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
                 <a href="/pages/forms/fire-enrollment.html" class="w-full md:w-auto bg-accent-red hover:bg-red-700 text-white px-10 py-5 font-label-caps text-sm uppercase tracking-widest transition-all text-center">
@@ -154,52 +148,69 @@
         </div>
     </section>
 
-    <footer class="bg-black text-white pt-20 border-t border-white/5">
-        <div class="page-container grid grid-cols-1 md:grid-cols-4 gap-12 pb-16 [&>*]:min-w-0">
-            <div class="col-span-1 md:col-span-1">
-                <div class="font-display-lg text-2xl font-black mb-6">CODE 3</div>
-                <p class="text-white/50 text-sm leading-relaxed max-w-xs">
-                    Professional emergency solutions and tactical safety training for industry leaders since 2012.
-                </p>
-            </div>
-            <div>
-                <h4 class="font-label-caps text-xs uppercase tracking-widest mb-8 text-accent-red">Services</h4>
-                <ul class="space-y-4 text-sm text-white/70" data-nav="footer-services"></ul>
-            </div>
-            <div>
-                <h4 class="font-label-caps text-xs uppercase tracking-widest mb-8 text-accent-red">Quick Links</h4>
-                <ul class="space-y-4 text-sm text-white/70">
-                    <li><a class="hover:text-white transition-colors" href="/index.html#services">Compliance Guide</a></li>
-                    <li><a class="hover:text-white transition-colors" href="/index.html#about">About Our Team</a></li>
-                    <li><a class="hover:text-white transition-colors" href="#">Privacy Policy</a></li>
-                    <li><a class="hover:text-white transition-colors" href="/pages/forms/fire-enrollment.html">Contact Support</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-label-caps text-xs uppercase tracking-widest mb-8 text-accent-red">Contact</h4>
-                <p class="text-sm text-white/70 mb-4">Los Angeles, CA</p>
-                <p class="text-sm text-white/70 mb-4">1-800-555-0199</p>
-                <div class="flex gap-4 mt-8">
-                    <a class="w-10 h-10 border border-white/10 flex items-center justify-center hover:bg-accent-red hover:border-accent-red transition-all" href="#">
-                        <span class="material-symbols-outlined text-sm">share</span>
+    <!-- Footer - service links injected by site-nav.js -->
+    <footer class="bg-[#111] text-white border-t-4 border-stone-800">
+        <div class="page-container py-12 md:py-14">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 [&>*]:min-w-0">
+                <div class="lg:col-span-3">
+                    <a href="/index.html" class="inline-flex items-center gap-3 mb-4">
+                        <img src="/images/brand/IMG_2594.png" alt="" class="h-8 w-auto opacity-90">
+                        <span class="font-headline-md text-sm font-bold tracking-tighter uppercase">Code 3 First Aid</span>
                     </a>
-                    <a class="w-10 h-10 border border-white/10 flex items-center justify-center hover:bg-accent-red hover:border-accent-red transition-all" href="mailto:info@code3firstaid.com">
-                        <span class="material-symbols-outlined text-sm">alternate_email</span>
+                    <p class="text-white/45 text-sm leading-relaxed max-w-[16rem]">
+                        OSHA-aligned training and industrial safety supplies for Midwest workplaces.
+                    </p>
+                </div>
+                <div class="lg:col-span-5 grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-accent-red mb-4">Services</h3>
+                        <ul class="space-y-2.5 text-sm text-white/65" data-nav="footer-services"></ul>
+                    </div>
+                    <div>
+                        <h3 class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-accent-red mb-4">Explore</h3>
+                        <ul class="space-y-2.5 text-sm text-white/65">
+                            <li><a class="hover:text-white transition-colors" href="/index.html">Home</a></li>
+                            <li><a class="hover:text-white transition-colors" href="/pages/service-areas.html">Service Areas</a></li>
+                            <li><a class="hover:text-white transition-colors" href="/pages/forms/procurement.html">Contact</a></li>
+                            <li><a class="hover:text-white transition-colors" href="/pages/forms/procurement.html">Get a Quote</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="lg:col-span-4 lg:border-l lg:border-white/10 lg:pl-8">
+                    <h3 class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-accent-red mb-4">Get in touch</h3>
+                    <dl class="space-y-4 text-sm">
+                        <div>
+                            <dt class="text-white/35 text-xs mb-1">Email</dt>
+                            <dd class="min-w-0">
+                                <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+                            </dd>
+                        </div>
+                        <div>
+                            <dt class="text-white/35 text-xs mb-1">Phone</dt>
+                            <dd>
+                                <a href="tel:+19133131125" class="text-white/80 hover:text-accent-red transition-colors">913-313-1125</a>
+                            </dd>
+                        </div>
+                        <div>
+                            <dt class="text-white/35 text-xs mb-1">Office</dt>
+                            <dd class="text-white/80">Fort Scott, KS 66701</dd>
+                        </div>
+                    </dl>
+                    <a href="/pages/forms/procurement.html" class="inline-flex mt-6 text-accent-red font-label-caps text-[11px] uppercase tracking-widest hover:text-white transition-colors items-center gap-2">
+                        Request a Quote
+                        <i data-lucide="arrow-right" class="text-sm"></i>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="border-t border-white/5 py-8">
-            <div class="page-container flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-[10px] font-label-caps text-white/30 uppercase tracking-widest">&copy; 2026 Code 3 First Aid. Professional Emergency Solutions.</p>
-                <div class="flex gap-6">
-                    <span class="text-[10px] font-label-caps text-white/30 uppercase tracking-widest">California Certified</span>
-                    <span class="text-[10px] font-label-caps text-white/30 uppercase tracking-widest">OSHA Compliant</span>
-                </div>
+        <div class="border-t border-white/10 bg-black/40">
+            <div class="page-container py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[10px] font-label-caps text-white/30 uppercase tracking-widest">
+                <p>&copy; 2026 Code 3 First Aid</p>
+                <p>MO · NE · KS · OK · OSHA Compliant</p>
             </div>
         </div>
     </footer>
 
-    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/main.js"></script><!-- Bootstrap: SEO, nav, page modules -->
 </body>
 </html>

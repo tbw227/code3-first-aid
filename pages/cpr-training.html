@@ -1,27 +1,29 @@
 <!DOCTYPE html>
+<!-- Code 3 First Aid - CPR Training (data-page="cpr-training") -->
 <html class="scroll-smooth" lang="en">
 <head>
+    <!-- Document meta, fonts, and styles -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPR &amp; First Aid Training | CODE 3 FIRST AID</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <style>.site-header { background-color: #1a1a1a; }</style>
     <script>document.documentElement.classList.add('js');</script>
     <link rel="stylesheet" href="/src/styles/main.css">
 </head>
 <body class="bg-white text-on-background font-body-md overflow-x-hidden" data-page="cpr-training">
 
+    <!-- Site header - nav links injected by site-nav.js -->
     <header class="site-header bg-obsidian sticky top-0 z-50 border-b border-white/10 shadow-lg transition-[border-color,box-shadow] duration-300">
         <div class="flex justify-between items-center w-full py-4 page-container gap-4">
             <a href="/index.html" class="flex items-center gap-3 shrink-0">
                 <img src="/images/brand/IMG_2594.png" alt="Code 3 First Aid" class="h-10 w-auto">
                 <span class="font-headline-md text-base md:text-headline-md font-bold text-white tracking-tighter hidden sm:block">CODE 3 FIRST AID</span>
             </a>
-            <nav class="hidden lg:flex gap-5 xl:gap-7 items-center" data-nav="main"></nav>
+            <nav class="hidden lg:flex gap-8 xl:gap-12 items-center" data-nav="main"></nav>
             <div class="flex items-center gap-3 shrink-0">
                 <button type="button" class="lg:hidden text-white p-2" data-mobile-nav-toggle aria-expanded="false" aria-label="Open menu">
-                    <span class="material-symbols-outlined text-2xl">menu</span>
+                    <i data-lucide="menu" class="text-2xl"></i>
                 </button>
                 <a href="/pages/forms/cpr-enrollment.html" class="bg-primary hover:bg-primary-container text-on-primary px-5 py-2 font-label-caps text-label-caps transition-all active:scale-95">Contact Us</a>
             </div>
@@ -31,7 +33,7 @@
 
     <main>
         <!-- Hero -->
-        <header class="cpr-hero relative min-h-[85vh] bg-zinc-100 flex items-center overflow-hidden" id="top">
+        <header class="cpr-hero relative min-h-[calc(85vh-25px)] bg-zinc-100 flex items-center overflow-hidden" id="top">
             <div class="absolute inset-0 z-0 bg-white">
                 <div class="cpr-hero__diagonal absolute inset-0 bg-obsidian hidden lg:block"></div>
                 <div class="absolute inset-0 bg-obsidian lg:hidden"></div>
@@ -54,7 +56,7 @@
                         <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
                             <a href="#curriculum" class="bg-primary hover:bg-red-700 text-white font-label-caps text-[11px] uppercase tracking-[0.2em] py-5 px-12 transition-all inline-flex items-center gap-3">
                                 Learn More
-                                <span class="material-symbols-outlined text-sm">trending_flat</span>
+                                <i data-lucide="arrow-right" class="text-sm"></i>
                             </a>
                             <a href="#certification" class="bg-transparent border border-white/30 hover:border-white text-white font-label-caps text-[11px] uppercase tracking-[0.2em] py-5 px-12 transition-all text-center">
                                 View Classes
@@ -88,22 +90,22 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-8 md:p-12 text-white">
                             <span class="text-[10px] font-label-caps uppercase tracking-[0.3em] text-primary mb-4 block">Professional Level</span>
-                            <h3 class="text-3xl md:text-4xl font-display-lg font-extrabold uppercase mb-4">BLS for Healthcare Providers</h3>
+                            <h3 class="text-3xl md:text-4xl font-display-lg font-extrabold uppercase mb-4">Healthcare Providers</h3>
                             <p class="text-white/60 max-w-md mb-8 text-sm">Professional-grade certification designed for medical professionals and first responders.</p>
                             <a href="/pages/forms/cpr-enrollment.html" class="inline-block bg-white text-obsidian py-4 px-10 text-[10px] font-label-caps uppercase tracking-widest hover:bg-primary hover:text-white transition-all">Details</a>
                         </div>
                     </article>
                     <article class="md:col-span-4 bg-surface-container-low p-8 md:p-12 flex flex-col justify-between group">
                         <div>
-                            <span class="material-symbols-outlined text-primary text-5xl mb-10 scale-x-[-1]">emergency_share</span>
+                            <i data-lucide="siren" class="text-primary text-5xl mb-10 scale-x-[-1]"></i>
                             <h3 class="text-2xl font-display-lg font-extrabold text-on-surface uppercase mb-6">Heartsaver<br/>CPR AED</h3>
-                            <p class="text-secondary text-sm leading-relaxed mb-8">Standard workplace training for lay rescuers. $120/person with a minimum of 10 people ($1,200.00 total).</p>
+                            <p class="text-secondary text-sm leading-relaxed mb-8">Standard workplace training for lay rescuers. $125/person with a minimum of 12 people ($1,200.00 total).</p>
                         </div>
                         <a href="/pages/forms/cpr-enrollment.html" class="inline-block border-2 border-obsidian text-obsidian py-4 px-8 text-[10px] font-label-caps uppercase tracking-widest hover:bg-obsidian hover:text-white transition-all text-center">Register Now</a>
                     </article>
                     <article class="md:col-span-4 bg-inverse-surface p-8 md:p-12 flex flex-col justify-between text-white border-t md:border-t-0 md:border-r border-white/10">
                         <div>
-                            <span class="material-symbols-outlined text-white/20 text-5xl mb-10">medical_services</span>
+                            <i data-lucide="briefcase-medical" class="text-white/20 text-5xl mb-10"></i>
                             <h3 class="text-2xl font-display-lg font-extrabold uppercase mb-6">Basic First Aid</h3>
                             <p class="text-white/40 text-sm leading-relaxed mb-8">Essential trauma and emergency care skills for daily preparedness.</p>
                         </div>
@@ -116,10 +118,10 @@
                         <div class="relative z-10 flex-1">
                             <h3 class="text-3xl md:text-4xl font-display-lg text-white font-extrabold uppercase mb-6 leading-tight">On-Site<br/>Corporate Training</h3>
                             <p class="text-white/80 mb-8 max-w-md text-sm leading-relaxed">We bring world-class certification to your facility. Customized schedules for teams of all sizes.</p>
-                            <a href="/pages/forms/cpr-enrollment.html" class="inline-block bg-obsidian text-white py-4 px-12 text-[10px] font-label-caps uppercase tracking-widest hover:bg-white hover:text-obsidian transition-all">Request Catalog</a>
+                            <a href="/pages/forms/cpr-enrollment.html" class="inline-block bg-obsidian text-white py-4 px-12 text-[10px] font-label-caps uppercase tracking-widest hover:bg-white hover:text-obsidian transition-all">Contact Us</a>
                         </div>
                         <div class="relative z-10 hidden md:block">
-                            <span class="material-symbols-outlined text-[180px] text-white/10 leading-none material-symbols-outlined--filled">groups</span>
+                            <i data-lucide="users" class="text-[180px] text-white/10 leading-none"></i>
                         </div>
                     </article>
                 </div>
@@ -155,7 +157,7 @@
                         <div class="space-y-12">
                             <div class="flex gap-8">
                                 <div class="w-16 h-16 bg-primary flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined text-white text-3xl">analytics</span>
+                                    <i data-lucide="chart-column" class="text-white text-3xl"></i>
                                 </div>
                                 <div>
                                     <h4 class="font-headline-md text-base uppercase font-bold tracking-widest mb-3">Biometric Feedback</h4>
@@ -164,7 +166,7 @@
                             </div>
                             <div class="flex gap-8 group">
                                 <div class="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-primary transition-colors">
-                                    <span class="material-symbols-outlined text-white/50 group-hover:text-primary text-3xl transition-colors">center_focus_strong</span>
+                                    <i data-lucide="scan" class="text-white/50 group-hover:text-primary text-3xl transition-colors"></i>
                                 </div>
                                 <div>
                                     <h4 class="font-headline-md text-base uppercase font-bold tracking-widest mb-3">Scenario Immersion</h4>
@@ -230,39 +232,69 @@
         </section>
     </main>
 
-    <footer class="bg-obsidian text-white pt-20 pb-8">
-        <div class="page-container grid grid-cols-1 md:grid-cols-4 gap-12 pb-16">
-            <div>
-                <div class="font-display-lg text-2xl font-black mb-4">CODE 3</div>
-                <p class="text-white/50 text-sm leading-relaxed max-w-xs mb-6">Professional emergency solutions and tactical safety training for industry leaders.</p>
-            </div>
-            <div>
-                <h4 class="font-label-caps text-xs uppercase tracking-widest mb-6 text-white/50">Services</h4>
-                <ul class="space-y-3 text-sm text-white/70" data-nav="footer-services"></ul>
-            </div>
-            <div>
-                <h4 class="font-label-caps text-xs uppercase tracking-widest mb-6 text-white/50">Quick Links</h4>
-                <ul class="space-y-3 text-sm text-white/70">
-                    <li><a class="hover:text-white" href="/index.html">Home</a></li>
-                    <li><a class="hover:text-white" href="/index.html#about">About Us</a></li>
-                    <li><a class="hover:text-white" href="/pages/forms/cpr-enrollment.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="bg-white/5 border border-white/10 p-8">
-                <h4 class="font-label-caps text-xs uppercase tracking-widest mb-4 text-accent-red">Contact</h4>
-                <a href="mailto:info@code3firstaid.com" class="text-xl font-bold text-white hover:text-accent-red transition-colors">info@code3firstaid.com</a>
-                <p class="text-white/50 text-sm mt-4">1-800-555-0199</p>
+    <!-- Footer - service links injected by site-nav.js -->
+    <footer class="bg-[#111] text-white border-t-4 border-stone-800">
+        <div class="page-container py-12 md:py-14">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 [&>*]:min-w-0">
+                <div class="lg:col-span-3">
+                    <a href="/index.html" class="inline-flex items-center gap-3 mb-4">
+                        <img src="/images/brand/IMG_2594.png" alt="" class="h-8 w-auto opacity-90">
+                        <span class="font-headline-md text-sm font-bold tracking-tighter uppercase">Code 3 First Aid</span>
+                    </a>
+                    <p class="text-white/45 text-sm leading-relaxed max-w-[16rem]">
+                        OSHA-aligned training and industrial safety supplies for Midwest workplaces.
+                    </p>
+                </div>
+                <div class="lg:col-span-5 grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-accent-red mb-4">Services</h3>
+                        <ul class="space-y-2.5 text-sm text-white/65" data-nav="footer-services"></ul>
+                    </div>
+                    <div>
+                        <h3 class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-accent-red mb-4">Explore</h3>
+                        <ul class="space-y-2.5 text-sm text-white/65">
+                            <li><a class="hover:text-white transition-colors" href="/index.html">Home</a></li>
+                            <li><a class="hover:text-white transition-colors" href="/pages/service-areas.html">Service Areas</a></li>
+                            <li><a class="hover:text-white transition-colors" href="/pages/forms/procurement.html">Contact</a></li>
+                            <li><a class="hover:text-white transition-colors" href="/pages/forms/procurement.html">Get a Quote</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="lg:col-span-4 lg:border-l lg:border-white/10 lg:pl-8">
+                    <h3 class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-accent-red mb-4">Get in touch</h3>
+                    <dl class="space-y-4 text-sm">
+                        <div>
+                            <dt class="text-white/35 text-xs mb-1">Email</dt>
+                            <dd class="min-w-0">
+                                <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+                            </dd>
+                        </div>
+                        <div>
+                            <dt class="text-white/35 text-xs mb-1">Phone</dt>
+                            <dd>
+                                <a href="tel:+19133131125" class="text-white/80 hover:text-accent-red transition-colors">913-313-1125</a>
+                            </dd>
+                        </div>
+                        <div>
+                            <dt class="text-white/35 text-xs mb-1">Office</dt>
+                            <dd class="text-white/80">Fort Scott, KS 66701</dd>
+                        </div>
+                    </dl>
+                    <a href="/pages/forms/procurement.html" class="inline-flex mt-6 text-accent-red font-label-caps text-[11px] uppercase tracking-widest hover:text-white transition-colors items-center gap-2">
+                        Request a Quote
+                        <i data-lucide="arrow-right" class="text-sm"></i>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="page-container border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between gap-4 text-[10px] font-label-caps text-white/30 uppercase tracking-widest">
-            <p>&copy; 2026 Code 3 First Aid. All rights reserved.</p>
-            <div class="flex gap-6">
-                <span>California Certified</span>
-                <span>OSHA Compliant</span>
+        <div class="border-t border-white/10 bg-black/40">
+            <div class="page-container py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[10px] font-label-caps text-white/30 uppercase tracking-widest">
+                <p>&copy; 2026 Code 3 First Aid</p>
+                <p>MO · NE · KS · OK · OSHA Compliant</p>
             </div>
         </div>
     </footer>
 
-    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/main.js"></script><!-- Bootstrap: SEO, nav, page modules -->
 </body>
 </html>

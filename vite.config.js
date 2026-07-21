@@ -1,3 +1,7 @@
+/**
+ * Vite build configuration.
+ * Multi-page app: each HTML file is a separate Rollup entry point.
+ */
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
@@ -14,6 +18,13 @@ export default defineConfig({
         cprEnrollment: resolve(__dirname, 'pages/forms/cpr-enrollment.html'),
         fireEnrollment: resolve(__dirname, 'pages/forms/fire-enrollment.html'),
         procurement: resolve(__dirname, 'pages/forms/procurement.html'),
+      },
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/gsap')) {
+            return 'gsap';
+          }
+        },
       },
     },
   },

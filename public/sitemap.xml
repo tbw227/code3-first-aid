@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Sitemap for code3firstaid.com — clean URLs (Vercel cleanUrls). Update when adding new pages -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://code3firstaid.com/</loc>
@@ -6,117 +7,117 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/fire-training.html</loc>
+    <loc>https://code3firstaid.com/pages/fire-training</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/cpr-training.html</loc>
+    <loc>https://code3firstaid.com/pages/cpr-training</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/ppe-training.html</loc>
+    <loc>https://code3firstaid.com/pages/ppe-training</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/safety-supplies.html</loc>
+    <loc>https://code3firstaid.com/pages/safety-supplies</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html</loc>
+    <loc>https://code3firstaid.com/pages/service-areas</loc>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#maryville-mo</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#maryville-mo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#st-joseph-mo</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#st-joseph-mo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#kansas-city-mo</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#kansas-city-mo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#sedalia-mo</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#sedalia-mo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#warrensburg-mo</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#warrensburg-mo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#springfield-mo</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#springfield-mo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#joplin-mo</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#joplin-mo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#omaha-ne</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#omaha-ne</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#lincoln-ne</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#lincoln-ne</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#wichita-ks</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#wichita-ks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#salina-ks</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#salina-ks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#fort-scott-ks</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#fort-scott-ks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#topeka-ks</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#topeka-ks</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#tulsa-ok</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#tulsa-ok</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/service-areas.html#oklahoma-city-ok</loc>
+    <loc>https://code3firstaid.com/pages/service-areas#oklahoma-city-ok</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/forms/cpr-enrollment.html</loc>
+    <loc>https://code3firstaid.com/pages/forms/cpr-enrollment</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/forms/fire-enrollment.html</loc>
+    <loc>https://code3firstaid.com/pages/forms/fire-enrollment</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://code3firstaid.com/pages/forms/procurement.html</loc>
+    <loc>https://code3firstaid.com/pages/forms/procurement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>

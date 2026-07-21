@@ -9,5 +9,6 @@
     "firstaid",
     "opsz",
     "wght"
-  ]
+  ],
+  "ignorePaths": ["node_modules", "dist", "package-lock.json"]
 }

@@ -1,51 +1,30 @@
+/**
+ * Runtime SEO injection — sets title, meta, Open Graph, Twitter cards, and JSON-LD.
+ * Runs as a side-effect import from main.js on every page.
+ */
 import {
   SITE,
   SERVICE_AREAS,
   PAGE_SEO,
   PATH_TO_PAGE,
+  normalizePagePath,
   getAllCityLabels,
 } from '../config/seo.js';
+import { setHeadTag } from './utils/dom.js';
 
-/**
- * @param {string} name
- * @param {string} content
- */
+/** @param {string} name @param {string} content */
 function setMeta(name, content) {
-  let el = document.querySelector(`meta[name="${name}"]`);
-  if (!el) {
-    el = document.createElement('meta');
-    el.setAttribute('name', name);
-    document.head.appendChild(el);
-  }
-  el.setAttribute('content', content);
+  setHeadTag({ tag: 'meta', id: `meta-${name}`, attrs: { name, content } });
 }
 
-/**
- * @param {string} property
- * @param {string} content
- */
+/** @param {string} property @param {string} content */
 function setOg(property, content) {
-  let el = document.querySelector(`meta[property="${property}"]`);
-  if (!el) {
-    el = document.createElement('meta');
-    el.setAttribute('property', property);
-    document.head.appendChild(el);
-  }
-  el.setAttribute('content', content);
+  setHeadTag({ tag: 'meta', id: `og-${property}`, attrs: { property, content } });
 }
 
-/**
- * @param {string} rel
- * @param {string} href
- */
+/** @param {string} rel @param {string} href */
 function setLink(rel, href) {
-  let el = document.querySelector(`link[rel="${rel}"]`);
-  if (!el) {
-    el = document.createElement('link');
-    el.setAttribute('rel', rel);
-    document.head.appendChild(el);
-  }
-  el.setAttribute('href', href);
+  setHeadTag({ tag: 'link', id: `link-${rel}`, attrs: { rel, href } });
 }
 
 /** @returns {object[]} */
@@ -62,9 +41,7 @@ function buildAreaServedSchema() {
   );
 }
 
-/**
- * @param {string} pageId
- */
+/** @param {string} pageId */
 function injectJsonLd(pageId) {
   const areaServed = buildAreaServedSchema();
   const cityKeywords = getAllCityLabels();
@@ -138,19 +115,22 @@ function injectJsonLd(pageId) {
     });
   }
 
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
+  const script = setHeadTag({
+    tag: 'script',
+    id: 'json-ld-seo',
+    attrs: { type: 'application/ld+json' },
+  });
+
   script.textContent = JSON.stringify({
     '@context': 'https://schema.org',
     '@graph': graphs,
   });
-  document.head.appendChild(script);
 }
 
 function initSeoHead() {
-  const pageId = PATH_TO_PAGE[window.location.pathname] ?? 'home';
+  const pageId = PATH_TO_PAGE[normalizePagePath(window.location.pathname)] ?? 'home';
   const page = PAGE_SEO[pageId] ?? PAGE_SEO.home;
-  const canonicalUrl = `${SITE.url}${page.path === '/index.html' ? '/' : page.path}`;
+  const canonicalUrl = `${SITE.url}${page.path}`;
   const imageUrl = `${SITE.url}${SITE.image}`;
   const keywords = [...page.keywords, ...getAllCityLabels()].join(', ');
 
