@@ -3,6 +3,7 @@
  * Reads `data-page` on <body> and dynamically loads page-specific modules.
  */
 import './seo-head.js';
+import { initBackToTop } from './modules/back-to-top.js';
 import { initSiteNav } from './modules/site-nav.js';
 import { initStickyHeader } from './modules/sticky-header.js';
 import { initIcons } from './utils/icons.js';
@@ -10,6 +11,7 @@ import { initIcons } from './utils/icons.js';
 async function bootstrap() {
   initSiteNav();
   initStickyHeader();
+  initBackToTop();
   initIcons();
 
   const page = document.body.dataset.page ?? 'home';

@@ -51,21 +51,6 @@ export function initHomeAnimations() {
       ease: 'power3.out',
     });
 
-    gsap.fromTo(
-      '.collage-panel',
-      { y: 50, autoAlpha: 0, skewX: -15 },
-      {
-        y: 0,
-        autoAlpha: 1,
-        skewX: -15,
-        duration: 1,
-        stagger: 0.2,
-        delay: 0.4,
-        ease: 'power3.out',
-        clearProps: 'transform',
-      },
-    );
-
     animateFrom('.curriculum-card', {
       scrollTrigger: {
         trigger: '.curriculum-grid',
@@ -137,7 +122,6 @@ export function initHomeAnimations() {
     });
   }, [
     '.hero-content',
-    '.collage-panel',
     '.curriculum-card',
     '.mastery-content',
     '.cert-step',

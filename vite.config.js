@@ -4,8 +4,18 @@
  */
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
+import { injectSeoMetaPlugin } from './scripts/vite-plugin-seo.mjs';
+import { getLocationSlugs } from './src/config/seo.js';
+
+const locationInputs = Object.fromEntries(
+  getLocationSlugs().map((slug) => [
+    `location-${slug}`,
+    resolve(__dirname, `pages/locations/${slug}.html`),
+  ]),
+);
 
 export default defineConfig({
+  plugins: [injectSeoMetaPlugin()],
   build: {
     rollupOptions: {
       input: {
@@ -18,6 +28,7 @@ export default defineConfig({
         cprEnrollment: resolve(__dirname, 'pages/forms/cpr-enrollment.html'),
         fireEnrollment: resolve(__dirname, 'pages/forms/fire-enrollment.html'),
         procurement: resolve(__dirname, 'pages/forms/procurement.html'),
+        ...locationInputs,
       },
       output: {
         manualChunks(id) {

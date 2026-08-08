@@ -39,22 +39,22 @@ const STEPS = [
 const FEATURES = [
   {
     title: 'QR Asset Tracking',
-    image: '/images/supplies/aed-lifesaver-x3.png',
+    image: '/images/supplies/home-services-zoll-aed-plus.png',
     alt: 'AED and tracked safety assets',
   },
   {
     title: 'Inventory Reports',
-    image: '/images/supplies/pexels-andromeda99-18329661.jpg',
+    image: '/images/supplies/home-process-mobile-eyewash-station.jpg',
     alt: 'First aid inventory supplies',
   },
   {
     title: 'Inspection History',
-    image: '/images/supplies/antranias-fire-extinguisher-712975_1920.jpg',
+    image: '/images/supplies/home-process-fire-extinguisher.jpg',
     alt: 'Fire extinguisher inspection',
   },
   {
     title: 'Compliance Status',
-    image: '/images/training/vecteezy_cpr-training-session-group-learning-life-saving-skills-on_70592195.jpg',
+    image: '/images/training/cpr-training-manikin.jpg',
     alt: 'Workplace safety training',
   },
 ];

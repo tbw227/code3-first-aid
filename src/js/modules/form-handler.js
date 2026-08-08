@@ -71,6 +71,32 @@ function setButtonVisual(button, state) {
 /**
  * @param {HTMLFormElement} form
  */
+function ensureFormStatus(form) {
+  if (form.querySelector('[data-form-status]')) return;
+
+  const status = document.createElement('div');
+  status.dataset.formStatus = '';
+  status.className = 'sr-only';
+  status.setAttribute('role', 'status');
+  status.setAttribute('aria-live', 'polite');
+  status.setAttribute('aria-atomic', 'true');
+  form.append(status);
+}
+
+/**
+ * @param {HTMLFormElement} form
+ * @param {string} message
+ */
+function announceFormStatus(form, message) {
+  const status = form.querySelector('[data-form-status]');
+  if (status instanceof HTMLElement) {
+    status.textContent = message;
+  }
+}
+
+/**
+ * @param {HTMLFormElement} form
+ */
 function ensureHoneypot(form) {
   if (form.querySelector('[name="_honey"]')) return;
 
@@ -141,12 +167,14 @@ async function handleSubmit(form, button) {
   button.dataset.state = 'processing';
   button.disabled = true;
   setButtonVisual(button, 'processing');
+  announceFormStatus(form, 'Processing your request.');
 
   try {
     const payload = buildSubmissionPayload(form);
     if (!payload) {
       button.dataset.state = 'success';
       setButtonVisual(button, 'success');
+      announceFormStatus(form, 'Request sent successfully.');
       form.reset();
       await delay(3000);
       return;
@@ -156,12 +184,14 @@ async function handleSubmit(form, button) {
 
     button.dataset.state = 'success';
     setButtonVisual(button, 'success');
+    announceFormStatus(form, 'Request sent successfully.');
     form.reset();
 
     await delay(3000);
   } catch {
     button.dataset.state = 'error';
     setButtonVisual(button, 'error');
+    announceFormStatus(form, 'Unable to send your request. Please try again or email us directly.');
 
     await delay(4000);
   } finally {
@@ -178,7 +208,10 @@ export function initFormHandler() {
   document.documentElement.dataset.formHandlerBound = 'true';
 
   for (const form of document.querySelectorAll('[data-form]')) {
-    if (form instanceof HTMLFormElement) ensureHoneypot(form);
+    if (form instanceof HTMLFormElement) {
+      ensureHoneypot(form);
+      ensureFormStatus(form);
+    }
   }
 
   document.addEventListener('submit', (event) => {

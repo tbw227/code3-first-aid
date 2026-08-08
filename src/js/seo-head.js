@@ -1,16 +1,24 @@
 /**
- * Runtime SEO injection — sets title, meta, Open Graph, Twitter cards, and JSON-LD.
+ * Runtime SEO injection — title, meta, Open Graph, Twitter cards, and JSON-LD.
  * Runs as a side-effect import from main.js on every page.
+ * Reads `data-page` on <body> when present, otherwise resolves from the URL path.
  */
 import {
   SITE,
   SERVICE_AREAS,
   PAGE_SEO,
+  locationSeo,
   PATH_TO_PAGE,
   normalizePagePath,
   getAllCityLabels,
+  getBreadcrumbs,
+  resolvePageSeo,
+  isLocationPage,
 } from '../config/seo.js';
 import { setHeadTag } from './utils/dom.js';
+
+/** 75-mile service radius in meters for schema.org GeoCircle. */
+const SERVICE_RADIUS_METERS = Math.round(75 * 1609.344);
 
 /** @param {string} name @param {string} content */
 function setMeta(name, content) {
@@ -22,9 +30,15 @@ function setOg(property, content) {
   setHeadTag({ tag: 'meta', id: `og-${property}`, attrs: { property, content } });
 }
 
-/** @param {string} rel @param {string} href */
-function setLink(rel, href) {
-  setHeadTag({ tag: 'link', id: `link-${rel}`, attrs: { rel, href } });
+/** @param {string} rel @param {string} href @param {Record<string, string>} [extra] */
+function setLink(rel, href, extra = {}) {
+  setHeadTag({ tag: 'link', id: `link-${rel}-${href}`, attrs: { rel, href, ...extra } });
+}
+
+function injectPerformanceHints() {
+  setLink('preconnect', 'https://fonts.googleapis.com');
+  setLink('preconnect', 'https://fonts.gstatic.com', { crossorigin: '' });
+  setLink('dns-prefetch', 'https://fonts.googleapis.com');
 }
 
 /** @returns {object[]} */
@@ -41,21 +55,131 @@ function buildAreaServedSchema() {
   );
 }
 
-/** @param {string} pageId */
-function injectJsonLd(pageId) {
+/**
+ * @param {string} pageId
+ * @param {{ path: string, title: string, description: string, schemaType: string }} page
+ * @param {string} canonicalUrl
+ */
+function buildPageSchema(pageId, page, canonicalUrl) {
+  const base = {
+    '@context': 'https://schema.org',
+    '@type': page.schemaType,
+    '@id': `${canonicalUrl}#webpage`,
+    name: page.title,
+    description: page.description,
+    url: canonicalUrl,
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    about: { '@id': `${SITE.url}/#organization` },
+    inLanguage: 'en-US',
+  };
+
+  if (page.schemaType === 'Service' && !isLocationPage(pageId)) {
+    return {
+      ...base,
+      '@type': 'Service',
+      provider: { '@id': `${SITE.url}/#organization` },
+      areaServed: buildAreaServedSchema(),
+      serviceType: page.title,
+    };
+  }
+
+  return base;
+}
+
+/**
+ * @param {string} slug
+ * @param {import('../config/seo.js').LocationSeoEntry} location
+ * @param {string} canonicalUrl
+ */
+function buildLocationServiceSchema(slug, location, canonicalUrl) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${canonicalUrl}#service`,
+    name: `${location.primaryService} in ${location.city}, ${location.stateCode}`,
+    description: location.description,
+    url: canonicalUrl,
+    provider: { '@id': `${SITE.url}/#organization` },
+    serviceType: [
+      'First Aid Kit Restocking',
+      'Fire Extinguisher Sales and Service',
+      'PPE Supplies',
+      'Safety Training',
+    ],
+    areaServed: {
+      '@type': 'GeoCircle',
+      geoMidpoint: {
+        '@type': 'GeoCoordinates',
+        latitude: location.lat,
+        longitude: location.lng,
+      },
+      geoRadius: SERVICE_RADIUS_METERS,
+    },
+  };
+}
+
+/**
+ * @param {import('../config/seo.js').LocationSeoEntry} location
+ * @param {string} canonicalUrl
+ */
+function buildFaqSchema(location, canonicalUrl) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${canonicalUrl}#faq`,
+    mainEntity: location.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
+  };
+}
+
+/**
+ * @param {string} pageId
+ * @param {string} canonicalUrl
+ */
+function buildBreadcrumbSchema(pageId, canonicalUrl) {
+  const crumbs = getBreadcrumbs(pageId);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${canonicalUrl}#breadcrumb`,
+    itemListElement: crumbs.map((crumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: crumb.name,
+      item: `${SITE.url}${crumb.path}`,
+    })),
+  };
+}
+
+/** @param {string} pageId @param {{ path: string, title: string, description: string, schemaType: string }} page */
+function injectJsonLd(pageId, page) {
   const areaServed = buildAreaServedSchema();
   const cityKeywords = getAllCityLabels();
+  const canonicalUrl = `${SITE.url}${page.path}`;
 
   const organization = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${SITE.url}/#organization`,
     name: SITE.name,
+    legalName: SITE.legalName,
     url: SITE.url,
     email: SITE.email,
     telephone: SITE.phone,
-    logo: `${SITE.url}${SITE.image}`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE.url}${SITE.logo}`,
+    },
+    image: `${SITE.url}${SITE.ogImage}`,
+    description: SITE.description,
     areaServed,
+    ...(SITE.sameAs.length ? { sameAs: SITE.sameAs } : {}),
     knowsAbout: [
       'CPR training',
       'First aid certification',
@@ -65,54 +189,40 @@ function injectJsonLd(pageId) {
     ],
   };
 
-  const localBusiness = {
+  const website = {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    '@id': `${SITE.url}/#local-business`,
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
     name: SITE.name,
     url: SITE.url,
-    email: SITE.email,
-    telephone: SITE.phone,
-    image: `${SITE.url}${SITE.image}`,
-    description: SITE.description,
-    areaServed,
-    serviceType: [
-      'CPR Training',
-      'First Aid Training',
-      'Fire Extinguisher Training',
-      'PPE Training',
-      'Safety Equipment Supply',
-    ],
+    publisher: { '@id': `${SITE.url}/#organization` },
+    inLanguage: 'en-US',
   };
 
   /** @type {object[]} */
-  const graphs = [organization, localBusiness];
+  const graphs = [organization, website, buildBreadcrumbSchema(pageId, canonicalUrl)];
 
-  if (pageId === 'home' || pageId === 'service-areas') {
-    graphs.push({
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      '@id': `${SITE.url}/#website`,
-      name: SITE.name,
-      url: SITE.url,
-      publisher: { '@id': `${SITE.url}/#organization` },
-      inLanguage: 'en-US',
-    });
-  }
+  if (isLocationPage(pageId)) {
+    const location = locationSeo[pageId];
+    graphs.push(buildLocationServiceSchema(pageId, location, canonicalUrl));
+    graphs.push(buildFaqSchema(location, canonicalUrl));
+  } else {
+    graphs.push(buildPageSchema(pageId, page, canonicalUrl));
 
-  if (pageId === 'service-areas') {
-    graphs.push({
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      name: 'Code 3 First Aid service areas',
-      description: `On-site safety training and supplies in ${cityKeywords.join(', ')}.`,
-      numberOfItems: cityKeywords.length,
-      itemListElement: cityKeywords.map((label, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        name: label,
-      })),
-    });
+    if (pageId === 'service-areas') {
+      graphs.push({
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Code 3 First Aid service areas',
+        description: `On-site safety training and supplies in ${cityKeywords.join(', ')}.`,
+        numberOfItems: cityKeywords.length,
+        itemListElement: cityKeywords.map((label, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: label,
+        })),
+      });
+    }
   }
 
   const script = setHeadTag({
@@ -127,38 +237,56 @@ function injectJsonLd(pageId) {
   });
 }
 
+/** @returns {string} */
+function resolvePageId() {
+  const dataPage = document.body?.dataset?.page;
+  if (dataPage && (PAGE_SEO[dataPage] || locationSeo[dataPage])) {
+    return dataPage;
+  }
+  return PATH_TO_PAGE[normalizePagePath(window.location.pathname)] ?? 'home';
+}
+
 function initSeoHead() {
-  const pageId = PATH_TO_PAGE[normalizePagePath(window.location.pathname)] ?? 'home';
-  const page = PAGE_SEO[pageId] ?? PAGE_SEO.home;
+  const pageId = resolvePageId();
+  const page = resolvePageSeo(pageId);
   const canonicalUrl = `${SITE.url}${page.path}`;
-  const imageUrl = `${SITE.url}${SITE.image}`;
-  const keywords = [...page.keywords, ...getAllCityLabels()].join(', ');
+  const imageUrl = `${SITE.url}${SITE.ogImage}`;
+
+  injectPerformanceHints();
 
   document.title = page.title;
 
-  setMeta('description', page.description);
-  setMeta('keywords', keywords);
-  setMeta('robots', 'index, follow');
-  setMeta('author', SITE.name);
-  setMeta('geo.region', 'US-MO');
-  setMeta('geo.placename', getAllCityLabels().join('; '));
+  if (!document.querySelector('meta[name="description"]')) {
+    setMeta('description', page.description);
+    setMeta('keywords', [...page.keywords, ...getAllCityLabels()].join(', '));
+    setMeta('robots', 'index, follow');
+    setMeta('author', SITE.name);
+    setMeta('geo.region', 'US-MO');
+    setMeta('geo.placename', getAllCityLabels().join('; '));
+    setMeta('theme-color', '#1a1a1a');
 
-  setLink('canonical', canonicalUrl);
+    setLink('canonical', canonicalUrl);
 
-  setOg('og:type', 'website');
-  setOg('og:site_name', SITE.name);
-  setOg('og:title', page.title);
-  setOg('og:description', page.description);
-  setOg('og:url', canonicalUrl);
-  setOg('og:image', imageUrl);
-  setOg('og:locale', SITE.locale);
+    setOg('type', 'website');
+    setOg('site_name', SITE.name);
+    setOg('title', page.title);
+    setOg('description', page.description);
+    setOg('url', canonicalUrl);
+    setOg('image', imageUrl);
+    setOg('locale', SITE.locale);
 
-  setMeta('twitter:card', 'summary_large_image');
-  setMeta('twitter:title', page.title);
-  setMeta('twitter:description', page.description);
-  setMeta('twitter:image', imageUrl);
+    setMeta('twitter:card', 'summary_large_image');
+    setMeta('twitter:title', page.title);
+    setMeta('twitter:description', page.description);
+    setMeta('twitter:image', imageUrl);
+  } else {
+    setMeta('keywords', [...page.keywords, ...getAllCityLabels()].join(', '));
+    setMeta('robots', 'index, follow');
+    setMeta('author', SITE.name);
+    setMeta('theme-color', '#1a1a1a');
+  }
 
-  injectJsonLd(pageId);
+  injectJsonLd(pageId, page);
 }
 
 initSeoHead();

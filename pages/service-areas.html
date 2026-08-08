@@ -5,19 +5,21 @@
     <!-- Document meta, fonts, and styles -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Areas | Code 3 First Aid</title>
+    <title>Workplace Safety Supplies &amp; Training Service Areas | Code 3 First Aid</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
     <style>.site-header { background-color: #1a1a1a; }</style>
     <script>document.documentElement.classList.add('js');</script>
     <link rel="stylesheet" href="/src/styles/main.css">
 </head>
-<body class="bg-white text-on-background font-body-md overflow-x-hidden" data-page="service-areas">
+<body class="bg-[#f6faff] text-on-background font-body-md overflow-x-hidden" data-page="service-areas">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Site header - nav links injected by site-nav.js -->
     <header class="site-header bg-obsidian sticky top-0 z-50 border-b border-white/10 shadow-lg transition-[border-color,box-shadow] duration-300">
         <div class="flex justify-between items-center w-full py-4 page-container gap-4">
             <a href="/index.html" class="flex items-center gap-3 shrink-0">
-                <img src="/images/brand/IMG_2594.png" alt="Code 3 First Aid" class="h-10 w-auto">
+                <img src="/images/brand/code_3_first_aid_logo_1.png" alt="Code 3 First Aid" class="h-10 w-auto">
                 <span class="font-headline-md text-base md:text-headline-md font-bold text-white tracking-tighter hidden sm:block">CODE 3 FIRST AID</span>
             </a>
             <nav class="hidden lg:flex gap-8 xl:gap-12 items-center" data-nav="main"></nav>
@@ -31,7 +33,15 @@
         <div class="mobile-nav lg:hidden" data-mobile-nav aria-hidden="true"></div>
     </header>
 
-    <main>
+    <main id="main-content">
+        <nav class="page-container pt-6 text-sm text-secondary" aria-label="Breadcrumb">
+            <ol class="flex flex-wrap items-center gap-2 list-none p-0 m-0">
+                <li><a href="/index.html" class="hover:text-primary">Home</a></li>
+                <li aria-hidden="true">/</li>
+                <li class="text-on-background font-medium">Service Areas</li>
+            </ol>
+        </nav>
+
         <header class="bg-obsidian text-white section-y relative overflow-hidden">
             <div class="absolute inset-0 from-obsidian via-obsidian to-primary/20 pointer-events-none"></div>
             <div class="page-container relative z-10 max-w-4xl">
@@ -40,113 +50,170 @@
                     Midwest Coverage
                 </p>
                 <h1 class="font-display-lg text-4xl md:text-6xl font-extrabold uppercase leading-[0.95] mb-8">
-                    On-Site Safety Training &amp; Supplies Near You
+                    Workplace Safety Supplies &amp; Training Service Areas
                 </h1>
                 <p class="font-body-lg text-white/70 text-lg leading-relaxed max-w-3xl">
-                    Code 3 First Aid brings OSHA-aligned CPR, fire extinguisher, and PPE training to workplaces across Missouri, Nebraska, Kansas, and Oklahoma — plus industrial safety supplies shipped region-wide.
+                    Code 3 First Aid delivers first aid supplies, fire extinguishers, PPE, and on-site safety training across Missouri, Nebraska, Kansas, and Oklahoma.
                 </p>
             </div>
         </header>
 
-        <section class="section-y bg-white" id="missouri">
+        <section class="section-y bg-white">
+            <div class="page-container max-w-4xl">
+                <h2 class="font-display-lg text-2xl md:text-3xl font-extrabold uppercase mb-6">Regional Coverage</h2>
+                <p class="text-secondary text-lg leading-relaxed mb-4">
+                    Code 3 First Aid is a mobile safety equipment supplier and training company — we come to your workplace rather than requiring visits to a retail storefront. Our service-area model covers 15 cities across four states, with on-site delivery and training available within 75 miles of each hub city.
+                </p>
+                <p class="text-secondary text-lg leading-relaxed">
+                    Whether you need ANSI-compliant first aid kit restocking, fire extinguisher inspection and replacement, PPE supply programs, or OSHA-aligned CPR and fire training, we serve employers from northwest Missouri and eastern Nebraska through south-central Kansas and the Oklahoma City and Tulsa metros.
+                </p>
+            </div>
+        </section>
+
+        <section class="section-y bg-[#f6faff]" id="missouri">
             <div class="page-container">
                 <div class="mb-12 max-w-3xl">
                     <h2 class="font-display-lg text-3xl md:text-4xl font-extrabold uppercase mb-4">Missouri</h2>
                     <p class="text-secondary">Mobile training teams serving employers from northwest Missouri through the Ozarks.</p>
                 </div>
                 <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0 m-0">
-                    <li class="border border-outline-variant/30 p-6" id="maryville-mo">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Maryville, MO</h3>
-                        <p class="text-secondary text-sm leading-relaxed">CPR, first aid, and fire training for agriculture, healthcare, and campus workplaces in Nodaway County.</p>
+                    <li class="bg-white border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/maryville-mo.html" class="hover:text-primary">Maryville, MO</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">CPR, first aid, and fire training for agriculture, healthcare, and campus workplaces in Nodaway County.</p>
+                        <a href="/pages/locations/maryville-mo.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Maryville →</a>
                     </li>
-                    <li class="border border-outline-variant/30 p-6" id="st-joseph-mo">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">St. Joseph, MO</h3>
-                        <p class="text-secondary text-sm leading-relaxed">On-site certification for manufacturing, logistics, and municipal teams along the Missouri River corridor.</p>
+                    <li class="bg-white border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/st-joseph-mo.html" class="hover:text-primary">St. Joseph, MO</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">On-site certification for manufacturing, logistics, and municipal teams along the Missouri River corridor.</p>
+                        <a href="/pages/locations/st-joseph-mo.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View St. Joseph →</a>
                     </li>
-                    <li class="border border-outline-variant/30 p-6" id="kansas-city-mo">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Kansas City, MO</h3>
-                        <p class="text-secondary text-sm leading-relaxed">Corporate CPR, PPE compliance, and fire extinguisher programs for metro employers and job sites.</p>
+                    <li class="bg-white border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/kansas-city-mo.html" class="hover:text-primary">Kansas City, MO</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">Corporate CPR, PPE compliance, and fire extinguisher programs for metro employers and job sites.</p>
+                        <a href="/pages/locations/kansas-city-mo.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Kansas City →</a>
                     </li>
-                    <li class="border border-outline-variant/30 p-6" id="sedalia-mo">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Sedalia, MO</h3>
-                        <p class="text-secondary text-sm leading-relaxed">Hands-on safety training for central Missouri industrial, retail, and event venues.</p>
+                    <li class="bg-white border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/sedalia-mo.html" class="hover:text-primary">Sedalia, MO</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">Hands-on safety training for central Missouri industrial, retail, and event venues.</p>
+                        <a href="/pages/locations/sedalia-mo.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Sedalia →</a>
                     </li>
-                    <li class="border border-outline-variant/30 p-6" id="warrensburg-mo">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Warrensburg, MO</h3>
-                        <p class="text-secondary text-sm leading-relaxed">AHA-aligned CPR and workplace first aid classes for Johnson County businesses and institutions.</p>
+                    <li class="bg-white border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/warrensburg-mo.html" class="hover:text-primary">Warrensburg, MO</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">AHA-aligned CPR and workplace first aid classes for Johnson County businesses and institutions.</p>
+                        <a href="/pages/locations/warrensburg-mo.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Warrensburg →</a>
                     </li>
-                    <li class="border border-outline-variant/30 p-6" id="springfield-mo">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Springfield, MO</h3>
-                        <p class="text-secondary text-sm leading-relaxed">Fire safety drills, PPE training, and trauma kit restocking for southwest Missouri facilities.</p>
+                    <li class="bg-white border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/springfield-mo.html" class="hover:text-primary">Springfield, MO</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">Fire safety drills, PPE training, and trauma kit restocking for southwest Missouri facilities.</p>
+                        <a href="/pages/locations/springfield-mo.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Springfield →</a>
                     </li>
-                    <li class="border border-outline-variant/30 p-6 sm:col-span-2 lg:col-span-1" id="joplin-mo">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Joplin, MO</h3>
-                        <p class="text-secondary text-sm leading-relaxed">Emergency preparedness training and safety equipment for the Four-State area and I-44 corridor.</p>
+                    <li class="bg-white border border-outline-variant/30 p-6 sm:col-span-2 lg:col-span-1 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/joplin-mo.html" class="hover:text-primary">Joplin, MO</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">Emergency preparedness training and safety equipment for the Four-State area and I-44 corridor.</p>
+                        <a href="/pages/locations/joplin-mo.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Joplin →</a>
                     </li>
                 </ul>
             </div>
         </section>
 
-        <section class="section-y bg-surface-container-low" id="nebraska">
+        <section class="section-y bg-white" id="nebraska">
             <div class="page-container">
                 <div class="mb-12 max-w-3xl">
                     <h2 class="font-display-lg text-3xl md:text-4xl font-extrabold uppercase mb-4">Nebraska</h2>
                     <p class="text-secondary">Training programs delivered to eastern Nebraska employers and healthcare systems.</p>
                 </div>
                 <ul class="grid grid-cols-1 sm:grid-cols-2 gap-6 list-none p-0 m-0">
-                    <li class="bg-white border border-outline-variant/30 p-6" id="omaha-ne">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Omaha, NE</h3>
-                        <p class="text-secondary text-sm leading-relaxed">OSHA fire extinguisher training, CPR certification, and ANSI-compliant first aid supplies for metro workplaces.</p>
+                    <li class="border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/omaha-ne.html" class="hover:text-primary">Omaha, NE</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">OSHA fire extinguisher training, CPR certification, and ANSI-compliant first aid supplies for metro workplaces.</p>
+                        <a href="/pages/locations/omaha-ne.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Omaha →</a>
                     </li>
-                    <li class="bg-white border border-outline-variant/30 p-6" id="lincoln-ne">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Lincoln, NE</h3>
-                        <p class="text-secondary text-sm leading-relaxed">On-site PPE and first aid training for state agencies, universities, and Lincoln-area industry.</p>
+                    <li class="border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/lincoln-ne.html" class="hover:text-primary">Lincoln, NE</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">On-site PPE and first aid training for state agencies, universities, and Lincoln-area industry.</p>
+                        <a href="/pages/locations/lincoln-ne.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Lincoln →</a>
                     </li>
                 </ul>
             </div>
         </section>
 
-        <section class="section-y bg-white" id="kansas">
+        <section class="section-y bg-[#f6faff]" id="kansas">
             <div class="page-container">
                 <div class="mb-12 max-w-3xl">
                     <h2 class="font-display-lg text-3xl md:text-4xl font-extrabold uppercase mb-4">Kansas</h2>
                     <p class="text-secondary">Safety training and equipment support across eastern and south-central Kansas.</p>
                 </div>
                 <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 list-none p-0 m-0">
-                    <li class="border border-outline-variant/30 p-6" id="wichita-ks">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Wichita, KS</h3>
-                        <p class="text-secondary text-sm leading-relaxed">Aviation, manufacturing, and healthcare teams rely on our mobile CPR and fire training units.</p>
+                    <li class="bg-white border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/wichita-ks.html" class="hover:text-primary">Wichita, KS</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">Aviation, manufacturing, and healthcare teams rely on our mobile CPR and fire training units.</p>
+                        <a href="/pages/locations/wichita-ks.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Wichita →</a>
                     </li>
-                    <li class="border border-outline-variant/30 p-6" id="salina-ks">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Salina, KS</h3>
-                        <p class="text-secondary text-sm leading-relaxed">Workplace safety classes and industrial first aid kit programs for central Kansas employers.</p>
+                    <li class="bg-white border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/salina-ks.html" class="hover:text-primary">Salina, KS</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">Workplace safety classes and industrial first aid kit programs for central Kansas employers.</p>
+                        <a href="/pages/locations/salina-ks.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Salina →</a>
                     </li>
-                    <li class="border border-outline-variant/30 p-6" id="fort-scott-ks">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Fort Scott, KS</h3>
-                        <p class="text-secondary text-sm leading-relaxed">Rural and regional employers receive on-site CPR, first aid, and fire safety certification.</p>
+                    <li class="bg-white border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/fort-scott-ks.html" class="hover:text-primary">Fort Scott, KS</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">Rural and regional employers receive on-site CPR, first aid, and fire safety certification.</p>
+                        <a href="/pages/locations/fort-scott-ks.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Fort Scott →</a>
                     </li>
-                    <li class="border border-outline-variant/30 p-6" id="topeka-ks">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Topeka, KS</h3>
-                        <p class="text-secondary text-sm leading-relaxed">Government, education, and private-sector PPE and emergency response training in the capital region.</p>
+                    <li class="bg-white border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/topeka-ks.html" class="hover:text-primary">Topeka, KS</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">Government, education, and private-sector PPE and emergency response training in the capital region.</p>
+                        <a href="/pages/locations/topeka-ks.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Topeka →</a>
                     </li>
                 </ul>
             </div>
         </section>
 
-        <section class="section-y bg-surface-container-low" id="oklahoma">
+        <section class="section-y bg-white" id="oklahoma">
             <div class="page-container">
                 <div class="mb-12 max-w-3xl">
                     <h2 class="font-display-lg text-3xl md:text-4xl font-extrabold uppercase mb-4">Oklahoma</h2>
                     <p class="text-secondary">Mobile training coverage for Oklahoma's largest metro markets.</p>
                 </div>
                 <ul class="grid grid-cols-1 sm:grid-cols-2 gap-6 list-none p-0 m-0">
-                    <li class="bg-white border border-outline-variant/30 p-6" id="tulsa-ok">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Tulsa, OK</h3>
-                        <p class="text-secondary text-sm leading-relaxed">Fire extinguisher simulations, CPR classes, and safety supply restocking for northeast Oklahoma industry.</p>
+                    <li class="border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/tulsa-ok.html" class="hover:text-primary">Tulsa, OK</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">Fire extinguisher simulations, CPR classes, and safety supply restocking for northeast Oklahoma industry.</p>
+                        <a href="/pages/locations/tulsa-ok.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Tulsa →</a>
                     </li>
-                    <li class="bg-white border border-outline-variant/30 p-6" id="oklahoma-city-ok">
-                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">Oklahoma City, OK</h3>
-                        <p class="text-secondary text-sm leading-relaxed">Corporate group training and OSHA-aligned certification for OKC metro employers and contractors.</p>
+                    <li class="border border-outline-variant/30 p-6 hover:border-primary/40 transition-colors">
+                        <h3 class="font-headline-md text-lg uppercase font-bold mb-2">
+                            <a href="/pages/locations/oklahoma-city-ok.html" class="hover:text-primary">Oklahoma City, OK</a>
+                        </h3>
+                        <p class="text-secondary text-sm leading-relaxed mb-4">Corporate group training and OSHA-aligned certification for OKC metro employers and contractors.</p>
+                        <a href="/pages/locations/oklahoma-city-ok.html" class="text-primary text-sm font-label-caps uppercase tracking-widest hover:underline">View Oklahoma City →</a>
                     </li>
                 </ul>
             </div>
@@ -170,7 +237,7 @@
                 <!-- Brand -->
                 <div class="lg:col-span-3">
                     <a href="/index.html" class="inline-flex items-center gap-3 mb-4">
-                        <img src="/images/brand/IMG_2594.png" alt="" class="h-8 w-auto opacity-90">
+                        <img src="/images/brand/code_3_first_aid_logo_1.png" alt="" class="h-8 w-auto opacity-90">
                         <span class="font-headline-md text-sm font-bold tracking-tighter uppercase">Code 3 First Aid</span>
                     </a>
                     <p class="text-white/45 text-sm leading-relaxed max-w-[16rem]">

@@ -2,7 +2,7 @@
  * Site navigation — builds header, mobile drawer, and footer service links from navigation.js.
  * Uses DOM APIs, event delegation, and ResizeObserver for header height sync.
  */
-import { FOOTER_SERVICE_LINKS, NAV_LINKS } from '../config/navigation.js';
+import { FOOTER_SERVICE_LINKS, NAV_LINKS, isServiceAreaPage } from '../config/navigation.js';
 import { createLink } from '../utils/dom.js';
 import { observeSiteHeaderHeight } from '../utils/header-height.js';
 import { createIconEl, initIcons, setIcon } from '../utils/icons.js';
@@ -34,8 +34,20 @@ let mobilePanel = null;
 /** @type {HTMLElement | null} */
 let mobileToggle = null;
 
+function childMatchesPage(child, page) {
+  if (child.href && (child.id === page || child.id === `${page}-hub`)) {
+    return true;
+  }
+
+  return Boolean(child.children?.some((nested) => childMatchesPage(nested, page)));
+}
+
 function isChildActive(item, page) {
-  return Boolean(item.children?.some((child) => child.id === page));
+  if (item.id === 'service-areas' && isServiceAreaPage(page)) {
+    return true;
+  }
+
+  return Boolean(item.children?.some((child) => childMatchesPage(child, page)));
 }
 
 function getNavLinksForPage(page) {
@@ -68,6 +80,73 @@ function buildNavLink({ href, label, className = '', active = false }) {
 }
 
 /**
+ * @param {HTMLElement} container
+ * @param {object} child
+ * @param {string} page
+ * @param {'desktop' | 'mobile'} variant
+ */
+function appendNavChild(container, child, page, variant) {
+  if (child.children) {
+    const hasActiveChild = child.children.some((nested) => childMatchesPage(nested, page));
+    const prefix = variant === 'desktop' ? 'nav-dropdown' : 'mobile-nav';
+
+    const subgroup = document.createElement('div');
+    subgroup.className = `${prefix}__subgroup${hasActiveChild ? ' is-open' : ''}`;
+    subgroup.dataset.navSubgroup = '';
+
+    const trigger = document.createElement('button');
+    trigger.type = 'button';
+    trigger.className = `${prefix}__subgroup-trigger`;
+    trigger.dataset.navSubgroupTrigger = '';
+    trigger.setAttribute('aria-expanded', hasActiveChild ? 'true' : 'false');
+    trigger.append(
+      document.createTextNode(child.label),
+      createIcon('chevron-down', `${prefix}__subgroup-chevron`),
+    );
+
+    const subpanel = document.createElement('div');
+    subpanel.className = `${prefix}__subgroup-panel${hasActiveChild ? ' is-open' : ''}`;
+    subpanel.dataset.navSubgroupPanel = '';
+
+    for (const nested of child.children) {
+      subpanel.append(
+        buildNavLink({
+          href: nested.href,
+          label: nested.label,
+          className:
+            variant === 'desktop'
+              ? `nav-dropdown__link nav-dropdown__link--nested${nested.id === page ? ' is-active' : ''}`
+              : nested.id === page
+                ? 'is-active'
+                : '',
+          active: nested.id === page,
+        }),
+      );
+    }
+
+    subgroup.append(trigger, subpanel);
+    container.append(subgroup);
+    return;
+  }
+
+  if (!child.href) return;
+
+  container.append(
+    buildNavLink({
+      href: child.href,
+      label: child.label,
+      className:
+        variant === 'desktop'
+          ? `nav-dropdown__link${child.id === page ? ' is-active' : ''}`
+          : child.id === page
+            ? 'is-active'
+            : '',
+      active: child.id === page,
+    }),
+  );
+}
+
+/**
  * @param {object} item
  * @param {string} page
  * @param {{ default: string, active: string }} styles
@@ -89,19 +168,12 @@ function buildDropdownElement(item, page, styles) {
   trigger.append(document.createTextNode(item.label), createIcon('chevron-down', 'nav-dropdown__chevron'));
 
   const panel = document.createElement('div');
-  panel.className = 'nav-dropdown__panel';
+  panel.className = `nav-dropdown__panel${item.id === 'service-areas' ? ' nav-dropdown__panel--nested' : ''}`;
   panel.dataset.navDropdownPanel = '';
   panel.setAttribute('role', 'menu');
 
   for (const child of item.children) {
-    panel.append(
-      buildNavLink({
-        href: child.href,
-        label: child.label,
-        className: `nav-dropdown__link${child.id === page ? ' is-active' : ''}`,
-        active: child.id === page,
-      }),
-    );
+    appendNavChild(panel, child, page, 'desktop');
   }
 
   dropdown.append(trigger, panel);
@@ -157,14 +229,7 @@ function buildMobileNavElement(page) {
       groupPanel.dataset.mobileNavGroupPanel = '';
 
       for (const child of item.children) {
-        groupPanel.append(
-          buildNavLink({
-            href: child.href,
-            label: child.label,
-            className: child.id === page ? 'is-active' : '',
-            active: child.id === page,
-          }),
-        );
+        appendNavChild(groupPanel, child, page, 'mobile');
       }
 
       group.append(trigger, groupPanel);
@@ -220,11 +285,28 @@ function openMobileNav() {
   setIcon(mobileToggle, 'x', 'text-2xl');
 }
 
+function closeAllSubgroups(container = document) {
+  container.querySelectorAll('[data-nav-subgroup]').forEach((subgroup) => {
+    subgroup.classList.remove('is-open');
+    subgroup.querySelector('[data-nav-subgroup-panel]')?.classList.remove('is-open');
+    subgroup.querySelector('[data-nav-subgroup-trigger]')?.setAttribute('aria-expanded', 'false');
+  });
+}
+
+function blurDropdownFocus(dropdown) {
+  const focused = dropdown.querySelector(':focus');
+  if (focused instanceof HTMLElement) {
+    focused.blur();
+  }
+}
+
 function closeAllDropdowns(except = null) {
   document.querySelectorAll('[data-nav-dropdown]').forEach((dropdown) => {
     if (except && dropdown === except) return;
     dropdown.classList.remove('is-open');
     dropdown.querySelector('[data-nav-dropdown-trigger]')?.setAttribute('aria-expanded', 'false');
+    closeAllSubgroups(dropdown);
+    blurDropdownFocus(dropdown);
   });
 }
 
@@ -253,6 +335,8 @@ function bindDropdownHover(nav) {
     dropdown.addEventListener('mouseleave', () => {
       dropdown.classList.remove('is-open');
       trigger.setAttribute('aria-expanded', 'false');
+      closeAllSubgroups(dropdown);
+      blurDropdownFocus(dropdown);
     });
   });
 }
@@ -281,6 +365,11 @@ function bindNavDelegation() {
       return;
     }
 
+    if (target.closest('[data-nav-dropdown-panel] a')) {
+      closeAllDropdowns();
+      return;
+    }
+
     const accordionTrigger = target.closest('[data-mobile-nav-group-trigger]');
     if (accordionTrigger) {
       const group = accordionTrigger.closest('[data-mobile-nav-group]');
@@ -289,6 +378,28 @@ function bindNavDelegation() {
         const open = groupPanel.classList.toggle('is-open');
         accordionTrigger.setAttribute('aria-expanded', String(open));
         group.classList.toggle('is-open', open);
+      }
+      return;
+    }
+
+    const subgroupTrigger = target.closest('[data-nav-subgroup-trigger]');
+    if (subgroupTrigger) {
+      event.stopPropagation();
+      const subgroup = subgroupTrigger.closest('[data-nav-subgroup]');
+      const subpanel = subgroup?.querySelector('[data-nav-subgroup-panel]');
+      const dropdown = subgroup?.closest('[data-nav-dropdown]');
+      if (subgroup && subpanel) {
+        const willOpen = !subpanel.classList.contains('is-open');
+        if (dropdown) {
+          closeAllSubgroups(dropdown);
+        }
+        if (willOpen) {
+          subpanel.classList.add('is-open');
+          subgroup.classList.add('is-open');
+          subgroupTrigger.setAttribute('aria-expanded', 'true');
+        } else {
+          subgroupTrigger.blur();
+        }
       }
       return;
     }
@@ -306,9 +417,14 @@ function bindNavDelegation() {
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && mobilePanel?.classList.contains('is-open')) {
+    if (event.key !== 'Escape') return;
+
+    if (mobilePanel?.classList.contains('is-open')) {
       closeMobileNav();
+      return;
     }
+
+    closeAllDropdowns();
   });
 
   window.matchMedia('(min-width: 1024px)').addEventListener('change', (event) => {

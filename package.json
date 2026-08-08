@@ -5,8 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "node scripts/generate-location-pages.mjs && node scripts/generate-sitemap.mjs && vite build",
+    "locations": "node scripts/generate-location-pages.mjs",
+    "preview": "vite preview",
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "verify": "node scripts/verify-site.mjs",
+    "verify:jsonld": "node scripts/verify-jsonld.mjs"
   },
   "dependencies": {
     "gsap": "^3.12.7",

@@ -11,6 +11,102 @@
  */
 
 /* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background-color: #e63946;
+  color: #ffffff;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0 0 0.25rem 0.25rem;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.scroll-smooth {
+    scroll-behavior: auto;
+  }
+}
+
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  background-color: #e63946;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease,
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background-color: #c1121f;
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.back-to-top__icon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
    Lucide icons
    ========================================================================== */
 
@@ -146,8 +242,7 @@
 }
 
 .nav-dropdown.is-open .nav-dropdown__panel,
-.nav-dropdown:hover .nav-dropdown__panel,
-.nav-dropdown:focus-within .nav-dropdown__panel {
+.nav-dropdown:hover .nav-dropdown__panel {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -173,6 +268,124 @@
 .nav-dropdown__link.is-active {
   color: #db313f;
   background-color: rgba(255, 255, 255, 0.04);
+}
+
+.nav-dropdown__heading {
+  position: relative;
+  z-index: 1;
+  padding: 0.65rem 1.15rem 0.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #db313f;
+  pointer-events: none;
+}
+
+.nav-dropdown__heading:not(:first-child) {
+  margin-top: 0.35rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-dropdown__panel--nested {
+  min-width: 15rem;
+}
+
+.nav-dropdown__subgroup,
+.mobile-nav__subgroup {
+  position: relative;
+}
+
+.nav-dropdown__subgroup-trigger,
+.mobile-nav__subgroup-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.7rem 1.15rem;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-dropdown__subgroup-trigger:hover,
+.mobile-nav__subgroup-trigger:hover,
+.nav-dropdown__subgroup.is-open > .nav-dropdown__subgroup-trigger,
+.mobile-nav__subgroup.is-open > .mobile-nav__subgroup-trigger {
+  color: #db313f;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.nav-dropdown__subgroup-chevron,
+.mobile-nav__subgroup-chevron {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown__subgroup.is-open .nav-dropdown__subgroup-chevron,
+.mobile-nav__subgroup.is-open .mobile-nav__subgroup-chevron,
+.nav-dropdown__subgroup-trigger[aria-expanded="true"] .nav-dropdown__subgroup-chevron,
+.mobile-nav__subgroup-trigger[aria-expanded="true"] .mobile-nav__subgroup-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown__subgroup-panel,
+.mobile-nav__subgroup-panel {
+  display: none;
+}
+
+.nav-dropdown__subgroup-panel.is-open,
+.mobile-nav__subgroup-panel.is-open {
+  display: block;
+}
+
+.nav-dropdown__link--nested {
+  padding-left: 1.75rem;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  white-space: normal;
+}
+
+.mobile-nav__subgroup-panel {
+  padding-left: 0.5rem;
+}
+
+.mobile-nav__subgroup-panel a {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-left: 0.75rem;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.mobile-nav__subgroup-panel a:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav__subgroup-trigger {
+  padding: 0.75rem 0.25rem;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.mobile-nav__subgroup:not(:first-child) .mobile-nav__subgroup-trigger {
+  margin-top: 0.35rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* ==========================================================================
@@ -276,13 +489,13 @@ html::-webkit-scrollbar {
   inset: 0;
   background:
     linear-gradient(108deg, transparent 52%, rgba(255, 255, 255, 0.55) 52%, rgba(255, 255, 255, 0.2) 100%),
-    url('/images/backgrounds/fabric-textured-background.jpg') center/cover no-repeat;
+    url('/images/backgrounds/cpr-training-hero-texture.jpg') center/cover no-repeat;
 }
 
 .hero-split__dark {
   position: absolute;
   inset: 0;
-  background: url('/images/backgrounds/pexels-adrien-olichon-1257089-2387793.jpg') center/cover no-repeat;
+  background: url('/images/backgrounds/safety-supplies-hero-background.jpg') center/cover no-repeat;
   -webkit-mask-image: linear-gradient(108deg, black 52%, transparent 52%);
   mask-image: linear-gradient(108deg, black 52%, transparent 52%);
 }
@@ -313,13 +526,6 @@ html::-webkit-scrollbar {
   border: 10px solid #ffffff;
   box-shadow: -15px 15px 30px rgba(0, 0, 0, 0.18);
   overflow: hidden;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.collage-panel:hover {
-  transform: skewX(-15deg) translateY(-8px);
-  box-shadow: -20px 25px 40px rgba(0, 0, 0, 0.25);
-  z-index: 10 !important;
 }
 
 .collage-img {
@@ -331,16 +537,15 @@ html::-webkit-scrollbar {
   background-position: center;
   background-repeat: no-repeat;
   transform: skewX(15deg);
-  transition: transform 0.6s ease;
 }
 
 .panel-1 { left: calc(50% - 180px); top: 90px; z-index: 1; }
 .panel-2 { left: calc(50% - 40px); top: 20px; z-index: 3; }
 .panel-3 { left: calc(50% + 410px); top: -30px; z-index: 2; }
 
-.panel-1 .collage-img { background-image: url('/images/brand/Copilot_20260721_131914.png'); }
-.panel-2 .collage-img { background-image: url('/images/supplies/Copilot_20260721_125234.png'); }
-.panel-3 .collage-img { background-image: url('/images/supplies/Copilot_20260721_132922.png'); }
+.panel-1 .collage-img { background-image: url('/images/brand/home-hero-collage-panel-1.png'); }
+.panel-2 .collage-img { background-image: url('/images/supplies/home-hero-collage-panel-2.png'); }
+.panel-3 .collage-img { background-image: url('/images/supplies/home-hero-collage-panel-3.png'); }
 
 body[data-page="home"] .hero-split__layout {
   display: flex;
@@ -488,7 +693,7 @@ body[data-page="cpr-training"] .cpr-hero__diagonal {
 }
 
 body[data-page="cpr-training"] .cpr-hero__texture {
-  background-image: url('/images/backgrounds/fabric-textured-background.jpg');
+  background-image: url('/images/backgrounds/cpr-training-hero-texture.jpg');
   background-size: cover;
   opacity: 0.15;
   mix-blend-mode: overlay;
@@ -508,7 +713,7 @@ body[data-page="cpr-training"] .cpr-skew-card {
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   flex-shrink: 0;
   overflow: hidden;
-  background-image: url('/images/training/81133406_l.jpg');
+  background-image: url('/images/training/cpr-training-certification-path.jpg');
   background-repeat: no-repeat;
   background-size: var(--cpr-gallery-w) 450px;
   background-position: left bottom;
@@ -529,10 +734,6 @@ body[data-page="cpr-training"] .cpr-skew-card:nth-child(3) {
 body[data-page="cpr-training"] .cpr-skew-card:hover {
   transform: skewX(-12deg) translateY(-6px);
   box-shadow: -20px 24px 48px rgba(0, 0, 0, 0.35);
-}
-
-.collage-panel:hover .collage-img {
-  transform: skewX(15deg) scale(1.05);
 }
 
 /* ==========================================================================
@@ -637,7 +838,7 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
 .cta-banner {
   background:
     linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-    url('/images/training/IMG_3626.jpeg') center/cover no-repeat;
+    url('/images/training/cpr-training-hero.jpeg') center/cover no-repeat;
 }
 
 /* ==========================================================================
@@ -735,12 +936,31 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
   border-bottom: none;
 }
 
+.mobile-nav__group-heading {
+  padding: 0.75rem 0.25rem 0.35rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #db313f;
+}
+
+.mobile-nav__group-heading:not(:first-child) {
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .mobile-nav__links a:hover,
 .mobile-nav__links a.is-active,
 .mobile-nav__group-trigger:hover,
 .mobile-nav__group-trigger.is-active,
 .mobile-nav__group-panel a:hover,
-.mobile-nav__group-panel a.is-active {
+.mobile-nav__group-panel a.is-active,
+.mobile-nav__subgroup-trigger:hover,
+.mobile-nav__subgroup-panel a:hover,
+.mobile-nav__subgroup-panel a.is-active {
   color: #db313f;
 }
 
@@ -840,7 +1060,7 @@ body[data-page="fire-enrollment"] .form-glass {
   .hero-split__light {
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
-      url('/images/backgrounds/fabric-textured-background.jpg') center/cover no-repeat;
+      url('/images/backgrounds/cpr-training-hero-texture.jpg') center/cover no-repeat;
   }
 
   .hero-split__overlay {
@@ -969,10 +1189,6 @@ body[data-page="fire-enrollment"] .form-glass {
     height: clamp(280px, 46cqi, 720px);
     border-width: 12px;
     box-shadow: -20px 20px 40px rgba(0, 0, 0, 0.2);
-  }
-
-  body[data-page="home"] .collage-panel:hover {
-    box-shadow: -25px 30px 50px rgba(0, 0, 0, 0.28);
   }
 
   body[data-page="cpr-training"] .cpr-hero__content {
@@ -1112,16 +1328,8 @@ body[data-page="fire-enrollment"] .form-glass {
     transform: skewX(-10deg);
   }
 
-  .collage-panel:hover {
-    transform: skewX(-10deg) translateY(-8px);
-  }
-
   .collage-img {
     transform: skewX(10deg);
-  }
-
-  .collage-panel:hover .collage-img {
-    transform: skewX(10deg) scale(1.05);
   }
 
   .panel-1 { left: calc(50% - 100px); top: 30px; }

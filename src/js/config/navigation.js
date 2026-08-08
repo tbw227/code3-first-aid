@@ -2,6 +2,7 @@
  * Central navigation config — single source of truth for header, mobile drawer, and footer links.
  * Consumed by src/js/modules/site-nav.js.
  */
+import { SERVICE_AREAS } from '../../config/seo.js';
 
 /** @param {ReadonlyArray<object>} items */
 function deepFreeze(items) {
@@ -13,6 +14,19 @@ function deepFreeze(items) {
       }),
     ),
   );
+}
+
+/** @returns {ReadonlyArray<{ id: string, label: string, href?: string, children?: ReadonlyArray<{ id: string, label: string, href: string }> }>} */
+function buildServiceAreaChildren() {
+  return SERVICE_AREAS.map(({ state, stateCode, cities }) => ({
+    id: `state-${stateCode.toLowerCase()}`,
+    label: state,
+    children: cities.map(({ name, slug }) => ({
+      id: slug,
+      label: name,
+      href: `/pages/locations/${slug}.html`,
+    })),
+  }));
 }
 
 /** Top-level nav items; `children` renders as a desktop dropdown / mobile accordion. */
@@ -28,20 +42,38 @@ const NAV_LINKS_RAW = [
     ],
   },
   { id: 'safety-supplies', label: 'Safety Supplies', href: '/pages/safety-supplies.html' },
-  { id: 'service-areas', label: 'Service Areas', href: '/pages/service-areas.html' },
+  {
+    id: 'service-areas',
+    label: 'Service Areas',
+    href: '/pages/service-areas.html',
+    children: [
+      { id: 'service-areas-hub', label: 'All Service Areas', href: '/pages/service-areas.html' },
+      ...buildServiceAreaChildren(),
+    ],
+  },
 ];
 
 export const NAV_LINKS = deepFreeze(NAV_LINKS_RAW);
 
-/** Flatten nav tree for footer (excludes Home). */
+/**
+ * Flatten nav tree for footer (excludes Home). A parent with its own href links
+ * to itself rather than expanding, keeping the city list out of the footer.
+ */
 function deriveFooterLinks(links) {
   return links.flatMap((item) => {
     if (item.id === 'home') return [];
-    if (item.children) {
-      return item.children.map(({ label, href }) => ({ label, href }));
+    if (item.children && !item.href) {
+      return item.children
+        .filter((child) => !child.heading)
+        .map(({ label, href }) => ({ label, href }));
     }
     return [{ label: item.label, href: item.href }];
   });
 }
 
 export const FOOTER_SERVICE_LINKS = Object.freeze(deriveFooterLinks(NAV_LINKS));
+
+/** @param {string} pageId @returns {boolean} */
+export function isServiceAreaPage(pageId) {
+  return pageId === 'service-areas' || pageId.endsWith('-mo') || pageId.endsWith('-ne') || pageId.endsWith('-ks') || pageId.endsWith('-ok');
+}
