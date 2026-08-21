@@ -1,8 +1,62 @@
 /**
- * Styles entry point — custom CSS first, then Tailwind layers.
- * Custom rules live in custom.css (base styles → footer → forms → media queries).
+ * Styles entry point.
+ *
+ * Partials live in base/, layout/, components/, pages/, and catalog/. Vite
+ * inlines these imports at build time, so the output is still one stylesheet.
+ *
+ * Two ordering rules matter:
+ *   1. Every partial is imported before the @tailwind directives, so Tailwind
+ *      utilities beat custom rules at equal specificity. Moving the directives
+ *      above the imports would silently invert that across the whole site.
+ *   2. The import order below is the cascade order and matches the order these
+ *      sections had in the single custom.css file. Later files win ties, so
+ *      keep new partials in the group they belong to rather than appending.
  */
-@import './custom.css';
+
+/* Foundations: element defaults, accessibility, icons, shared surfaces. */
+@import './base/base.css';
+@import './components/back-to-top.css';
+@import './base/icons.css';
+
+/* Chrome that appears on every page. */
+@import './components/site-header.css';
+@import './components/nav-dropdown.css';
+
+/* Layout primitives, then the pages that build on them. */
+@import './layout/page-utilities.css';
+@import './base/glass.css';
+@import './pages/home-hero.css';
+@import './layout/hero.css';
+@import './pages/cpr-training.css';
+@import './layout/hero-overlay.css';
+@import './pages/safety-supplies.css';
+@import './pages/curriculum-grid.css';
+
+@import './components/mobile-nav.css';
+@import './components/footer.css';
+@import './components/forms.css';
+
+/* Breakpoints for the sections above; keep after them so overrides land. */
+@import './layout/breakpoints.css';
+@import './pages/home-process.css';
+
+/* Catalog: shared pieces first, then per-category and product detail styles. */
+@import './catalog/root.css';
+@import './catalog/hub-overrides.css';
+@import './catalog/layout.css';
+@import './catalog/sidebar.css';
+@import './catalog/hero.css';
+@import './catalog/toolbar.css';
+@import './catalog/grid.css';
+@import './catalog/product-card.css';
+@import './catalog/category-card.css';
+@import './catalog/sections.css';
+@import './catalog/legacy-product-hero.css';
+@import './catalog/hub.css';
+@import './catalog/eye-care.css';
+@import './catalog/fire-protection.css';
+@import './catalog/industrial-ppe.css';
+@import './catalog/product-detail.css';
 
 @tailwind base;
 @tailwind components;

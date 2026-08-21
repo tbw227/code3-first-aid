@@ -1,0 +1,331 @@
+/**
+ * Bulk Medical Supplies hub UI: hero, sticky toolbar, pagination
+ */
+
+/* --- BEGIN: Bulk Medical Supplies hub — shared UI (.catalog-hero--hub, .catalog-sticky-toolbar, etc.)
+     Page: pages/catalog.html | complements .catalog-page-root--hub overrides above --- */
+
+/* hub hero (.catalog-hero--hub) — same bg image + overlay treatment as category heroes */
+.catalog-hero--hub {
+  padding-top: 5rem;
+  padding-bottom: 4rem;
+  background-color: #1a1a1a;
+}
+
+.catalog-hero__dots {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  background-image: radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+.catalog-hero__content--wide {
+  max-width: none;
+}
+
+.catalog-hero__breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.catalog-hero__breadcrumbs a:hover {
+  color: #db313f;
+}
+
+.catalog-hero__crumb-current {
+  color: #b7102a;
+}
+
+.catalog-hero__title--display {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.05;
+}
+
+.catalog-hero__desc--wide {
+  max-width: 42rem;
+  color: #dbe4ed;
+}
+
+/* hub sticky toolbar (.catalog-sticky-toolbar) */
+.catalog-sticky-toolbar {
+  position: sticky;
+  top: 4.5rem;
+  z-index: 40;
+  border-bottom: 1px solid #e4bebc;
+  background: rgba(246, 250, 255, 0.82);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.catalog-sticky-toolbar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.catalog-sticky-toolbar__left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.catalog-sticky-toolbar__filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #8f6f6e;
+  background: transparent;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.catalog-sticky-toolbar__filter:hover {
+  background: #e6eff8;
+}
+
+.catalog-sticky-toolbar__icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.catalog-sticky-toolbar__count {
+  font-size: 0.875rem;
+  color: #5f5e5e;
+}
+
+.catalog-sticky-toolbar__sort {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.catalog-sticky-toolbar__sort-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5f5e5e;
+}
+
+.catalog-sticky-toolbar__select {
+  border: none;
+  background: transparent;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* hub glass product cards (.catalog-card--glass) — base styles; hub overrides above tweak sizing */
+.catalog-card--glass {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(20, 29, 35, 0.1);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.catalog-card--glass:hover {
+  border-color: #b7102a;
+  transform: translateY(-4px);
+}
+
+.catalog-card--glass .catalog-card__media {
+  background: #e6eff8;
+}
+
+.catalog-card__badge--corner {
+  top: auto;
+  right: 0.5rem;
+  left: auto;
+}
+
+.catalog-card__image--cover {
+  object-fit: cover;
+}
+
+.catalog-card--glass .catalog-card__cta {
+  margin-top: auto;
+}
+
+.catalog-card--glass .catalog-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* hub grid section background (.catalog-grid-section--hub) */
+.catalog-grid-section--hub {
+  background: #f6faff;
+}
+
+/* hub info section (.catalog-info--hub) */
+.catalog-info--hub {
+  background: #e6eff8;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  padding-bottom: 6rem;
+}
+
+.catalog-info__title--accent {
+  padding-left: 1.5rem;
+  border-left: 8px solid #b7102a;
+}
+
+.catalog-info__panel--plain {
+  border: none;
+  background: transparent;
+}
+
+.catalog-info__panel--cta {
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
+}
+
+.catalog-info__watermark {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 7rem;
+  height: 7rem;
+  opacity: 0.1;
+}
+
+.catalog-info__list--rich {
+  display: grid;
+  gap: 1.5rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.catalog-info__item--rich {
+  display: flex;
+  gap: 1rem;
+}
+
+.catalog-info__icon {
+  flex-shrink: 0;
+  color: #b7102a;
+}
+
+.catalog-info__icon i {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.catalog-info__item--rich strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 1.125rem;
+}
+
+.catalog-info__item--rich span {
+  color: #5f5e5e;
+  line-height: 1.6;
+}
+
+.catalog-info__bullets--rich {
+  display: grid;
+  gap: 1rem;
+  padding-left: 0;
+  list-style: none;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.catalog-info__bullets--rich li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.catalog-info__bullet {
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #b7102a;
+}
+
+/* hub FAQ section (.catalog-faq-section--hub) */
+.catalog-faq-section--hub {
+  background: #f6faff;
+}
+
+.catalog-faq--bordered {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e4bebc;
+  background: transparent;
+  border-radius: 0;
+}
+
+.catalog-faq--bordered .catalog-faq__q {
+  font-size: 1.25rem;
+}
+
+/* hub pagination (.catalog-pagination__*) — hub-specific sizing */
+.catalog-pagination__link {
+  min-width: 2.5rem;
+  height: 2.5rem;
+}
+
+.catalog-pagination__next {
+  padding: 0 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.catalog-pagination__prev {
+  padding: 0 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.catalog-pagination button.catalog-pagination__link {
+  appearance: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.catalog-pagination__link.is-disabled,
+.catalog-pagination button.catalog-pagination__link:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: not-allowed;
+  background: transparent;
+  border-color: rgba(20, 29, 35, 0.12);
+  color: inherit;
+}
+
+.catalog-pagination__link.is-disabled:hover,
+.catalog-pagination button.catalog-pagination__link:disabled:hover {
+  background: transparent;
+  border-color: rgba(20, 29, 35, 0.12);
+  color: inherit;
+}
+/* --- END: Bulk Medical Supplies hub — shared UI --- */

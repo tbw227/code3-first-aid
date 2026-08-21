@@ -1,0 +1,133 @@
+/**
+ * Category sidebar
+ */
+
+/* --- BEGIN: shared category sidebar (.catalog-sidebar)
+     HTML: renderCatalogSidebar() in components.js — matches All Products sidebar --- */
+.catalog-sidebar {
+  padding-block: 0;
+}
+
+@media (max-width: 1023px) {
+  .catalog-sidebar {
+    padding-inline: 0.75rem;
+  }
+}
+
+.catalog-sidebar__heading {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-headline, 'Montserrat', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #737373;
+}
+
+.catalog-sidebar__nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.25rem;
+  scrollbar-width: thin;
+}
+
+.catalog-sidebar__link {
+  display: block;
+  flex-shrink: 0;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #404040;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.catalog-sidebar__link:hover {
+  border-color: #d4d4d4;
+  background-color: #fafafa;
+  color: #171717;
+}
+
+.catalog-sidebar__link.is-active {
+  border-color: var(--color-primary, #c41e3a);
+  background-color: var(--color-primary, #c41e3a);
+  color: #ffffff;
+}
+
+.catalog-sidebar__quote {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .catalog-sidebar {
+    position: sticky;
+    top: 5.75rem;
+    padding-block: 0;
+    padding-inline: 1rem;
+    padding-top: 3.25rem;
+  }
+
+  .catalog-sidebar__heading {
+    font-size: 0.625rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .catalog-sidebar__nav {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0.125rem;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .catalog-sidebar__link {
+    border: none;
+    border-left: 3px solid transparent;
+    border-radius: 0;
+    padding: 0.4375rem 0 0.4375rem 0.875rem;
+    font-size: 0.75rem;
+    white-space: normal;
+  }
+
+  .catalog-sidebar__link:hover {
+    background-color: #f5f5f5;
+    border-left-color: #d4d4d4;
+  }
+
+  .catalog-sidebar__link.is-active {
+    background-color: #fef2f2;
+    border-left-color: var(--color-primary, #c41e3a);
+    color: var(--color-primary, #c41e3a);
+  }
+
+  .catalog-sidebar__quote {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.25rem;
+    padding: 0.625rem 1rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 0;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #171717;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .catalog-sidebar__quote:hover {
+    border-color: #171717;
+    background-color: #fafafa;
+  }
+}
+/* --- END: shared category sidebar (.catalog-sidebar) --- */

@@ -1,0 +1,611 @@
+/**
+ * Fire Protection category
+ */
+
+/* --- BEGIN: Fire Protection category (pages/catalog/fire-protection.html)
+     JS: layout-fire-protection.js | layout: fire-protection --- */
+
+/* fire shared glass utility (.catalog-fire-glass) */
+.catalog-fire-glass {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: border-color 0.3s ease, transform 0.3s ease, opacity 0.7s ease;
+}
+
+/* fire hero (.catalog-fire-hero) — centered; height matched to First Aid Kits (.catalog-hero) */
+.catalog-fire-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0 5rem;
+  color: #ffffff;
+  background: #141d23;
+}
+
+.catalog-fire-hero__inner.page-container {
+  max-width: 72rem;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.catalog-fire-hero__watermark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Montserrat, sans-serif;
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(183, 16, 42, 0.3);
+  transform: rotate(12deg) translateX(5rem);
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  opacity: 0.1;
+}
+
+.catalog-fire-hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.catalog-fire-hero__content {
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.catalog-fire-hero__back {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #e5e2e1;
+  transition: color 0.15s ease;
+}
+
+.catalog-fire-hero__back:hover {
+  color: #ffffff;
+}
+
+.catalog-fire-hero__back-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.catalog-fire-hero__breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(229, 226, 225, 0.65);
+}
+
+.catalog-fire-hero__breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.catalog-fire-hero__breadcrumbs a:hover {
+  color: #ffffff;
+}
+
+.catalog-fire-hero__crumb-current {
+  color: #b7102a;
+}
+
+.catalog-fire-hero__eyebrow {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.catalog-fire-hero__eyebrow-line {
+  width: 3rem;
+  height: 2px;
+  background: #b7102a;
+}
+
+.catalog-fire-hero__eyebrow-text {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b7102a;
+}
+
+.catalog-fire-hero__title {
+  margin: 0 0 1.5rem;
+  font-family: Montserrat, sans-serif;
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.catalog-fire-hero__accent {
+  color: #b7102a;
+}
+
+.catalog-fire-hero__suffix {
+  color: #ffffff;
+}
+
+.catalog-fire-hero__desc {
+  max-width: 36rem;
+  margin: 0 auto 2.5rem;
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: #e5e2e1;
+}
+
+.catalog-fire-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.catalog-fire-hero__badge {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.catalog-fire-hero__badge-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #b7102a;
+  fill: #b7102a;
+}
+
+.catalog-fire-hero__badge-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.catalog-fire-hero__diagonal {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6rem;
+  background: #f6faff;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+
+/* fire product catalog section (.catalog-fire-catalog) — grid header & view toggle */
+.catalog-fire-catalog {
+  background: #f6faff;
+}
+
+.catalog-fire-catalog__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .catalog-fire-catalog__header {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.catalog-fire-catalog__title {
+  margin: 0 0 0.5rem;
+  font-family: Montserrat, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #141d23;
+}
+
+.catalog-fire-catalog__subtitle {
+  margin: 0;
+  color: #5f5e5e;
+}
+
+.catalog-fire-view-toggle {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: #e6eff8;
+  border-radius: 0;
+}
+
+.catalog-fire-view-toggle__btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5f5e5e;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.catalog-fire-view-toggle__btn.is-active {
+  color: #ffffff;
+  background: #141d23;
+}
+
+.catalog-fire-view-toggle__btn:hover:not(.is-active) {
+  color: #141d23;
+}
+
+/* fire product grid (.catalog-fire-grid) & product cards (.catalog-fire-card) */
+.catalog-fire-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+}
+
+@media (min-width: 480px) {
+  .catalog-fire-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .catalog-fire-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.catalog-fire-grid--list {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.catalog-fire-grid--list .catalog-fire-card {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.catalog-fire-grid--list .catalog-fire-card__media {
+  margin-bottom: 0;
+}
+
+.catalog-fire-grid--list .catalog-fire-card__cta {
+  grid-column: 1 / -1;
+}
+
+.catalog-fire-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(20, 29, 35, 0.08);
+}
+
+.catalog-fire-card:hover {
+  border-color: #b7102a;
+  transform: translateY(-4px);
+}
+
+.catalog-fire-card--featured {
+  border-color: rgba(183, 16, 42, 0.2);
+}
+
+.catalog-fire-card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  background: #e0e9f2;
+  border-radius: 0;
+}
+
+.catalog-fire-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.catalog-fire-card:hover .catalog-fire-card__image {
+  transform: scale(1.05);
+}
+
+.catalog-fire-card__badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
+  padding: 0.25rem 0.75rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.catalog-fire-card__badge--dark {
+  background: #141d23;
+}
+
+.catalog-fire-card__badge--primary {
+  background: #b7102a;
+}
+
+.catalog-fire-card__body {
+  flex: 1 1 auto;
+  margin-bottom: 1rem;
+}
+
+.catalog-fire-card__title {
+  margin: 0 0 0.5rem;
+  font-family: Montserrat, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #141d23;
+}
+
+.catalog-fire-card__desc {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #5f5e5e;
+}
+
+.catalog-fire-card__cta {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+  background: #141d23;
+  transition: background-color 0.3s ease;
+}
+
+.catalog-fire-card:hover .catalog-fire-card__cta {
+  background: #b7102a;
+}
+
+/* fire procurement CTA card (.catalog-fire-procurement) — last tile in product grid */
+.catalog-fire-procurement {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  padding: 2rem;
+  overflow: hidden;
+  border-radius: 0;
+  background: #141d23;
+  border-color: #141d23;
+}
+
+.catalog-fire-procurement__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(183, 16, 42, 0.35), transparent 70%);
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.catalog-fire-procurement__title {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 1rem;
+  font-family: Montserrat, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.catalog-fire-procurement__text {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 2rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #e5e2e1;
+}
+
+.catalog-fire-procurement__link {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #b7102a;
+  transition: transform 0.3s ease;
+}
+
+.catalog-fire-procurement:hover .catalog-fire-procurement__link {
+  transform: translateX(0.5rem);
+}
+
+.catalog-fire-procurement__link-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* fire solutions bento section (.catalog-fire-solutions) */
+.catalog-fire-solutions {
+  background: #ecf5fe;
+}
+
+.catalog-fire-solutions__header {
+  margin-bottom: 3rem;
+}
+
+.catalog-fire-solutions__title {
+  margin: 0 0 1rem;
+  font-family: Montserrat, sans-serif;
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #141d23;
+}
+
+.catalog-fire-solutions__subtitle {
+  max-width: 42rem;
+  margin: 0;
+  color: #5f5e5e;
+}
+
+.catalog-fire-solutions__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  grid-auto-rows: minmax(280px, auto);
+}
+
+@media (min-width: 768px) {
+  .catalog-fire-solutions__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.catalog-fire-solutions__tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 280px;
+  padding: 2.5rem;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+@media (min-width: 768px) {
+  .catalog-fire-solutions__tile--wide {
+    grid-column: span 2;
+  }
+}
+
+.catalog-fire-solutions__tile--dark {
+  background: #141d23;
+  border-color: #141d23;
+}
+
+.catalog-fire-solutions__tile--primary {
+  background: #b7102a;
+  border-color: #b7102a;
+}
+
+.catalog-fire-solutions__tile--glass-image {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(20, 29, 35, 0.08);
+}
+
+.catalog-fire-solutions__tile-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  transition: transform 0.7s ease;
+}
+
+.catalog-fire-solutions__tile--glass-image:hover .catalog-fire-solutions__tile-bg {
+  transform: scale(1.1);
+}
+
+.catalog-fire-solutions__tile--glass-image:last-of-type .catalog-fire-solutions__tile-bg {
+  opacity: 0.1;
+}
+
+.catalog-fire-solutions__tile-content {
+  position: relative;
+  z-index: 1;
+}
+
+.catalog-fire-solutions__tile-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: 1rem;
+  color: #b7102a;
+}
+
+.catalog-fire-solutions__tile--dark .catalog-fire-solutions__tile-icon,
+.catalog-fire-solutions__tile--primary .catalog-fire-solutions__tile-icon {
+  color: #ffffff;
+}
+
+.catalog-fire-solutions__tile-title {
+  margin: 0 0 0.5rem;
+  font-family: Montserrat, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #141d23;
+}
+
+.catalog-fire-solutions__tile--dark .catalog-fire-solutions__tile-title,
+.catalog-fire-solutions__tile--primary .catalog-fire-solutions__tile-title {
+  color: #ffffff;
+}
+
+.catalog-fire-solutions__tile-text {
+  max-width: 28rem;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #5f5e5e;
+}
+
+.catalog-fire-solutions__tile--dark .catalog-fire-solutions__tile-text {
+  color: #e5e2e1;
+}
+
+.catalog-fire-solutions__tile--primary .catalog-fire-solutions__tile-text {
+  color: rgba(255, 255, 255, 0.8);
+}
+/* --- END: Fire Protection category --- */

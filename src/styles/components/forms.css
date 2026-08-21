@@ -1,0 +1,67 @@
+/**
+ * Form pages
+ */
+
+/* ==========================================================================
+   Form pages
+   ========================================================================== */
+
+.form-glass {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body[data-page="fire-enrollment"] .form-glass {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-field:has(:focus-visible) label {
+  color: #b7102a;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #b7102a;
+  box-shadow: 0 0 0 1px #b7102a;
+}
+
+[data-form] button[type="submit"][data-state="success"] {
+  background-color: #15803d !important;
+}
+
+[data-form] button[type="submit"][data-state="processing"],
+[data-form] button[type="submit"][data-state="success"] {
+  cursor: wait;
+}
+
+.form-hero-mask {
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+}
+
+.form-venue-card:has(input:checked) {
+  border-color: #b7102a;
+}
+
+.form-venue-card:has(input:checked) .form-venue-card__content {
+  color: #b7102a;
+}
+
+@keyframes form-spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: form-spin 1s linear infinite;
+}

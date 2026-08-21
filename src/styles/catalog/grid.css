@@ -1,0 +1,30 @@
+/**
+ * Product grid containers
+ */
+
+/* --- BEGIN: shared product grid container (.catalog-grid, .catalog-category-grid)
+     Matches All Products hub: 2 cols from 480px, 4 cols from 768px --- */
+.catalog-grid,
+.catalog-category-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (min-width: 480px) {
+  .catalog-grid,
+  .catalog-category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .catalog-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .catalog-category-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+/* --- END: shared product grid container --- */

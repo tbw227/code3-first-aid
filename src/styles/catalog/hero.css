@@ -1,0 +1,76 @@
+/**
+ * Default category hero
+ */
+
+/* --- BEGIN: shared category hero (.catalog-hero) — default category pages --- */
+.catalog-hero {
+  position: relative;
+  padding: 4rem 0 5rem;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.catalog-hero__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.catalog-hero__bg-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.35;
+}
+
+.catalog-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.catalog-hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 48rem;
+}
+
+.catalog-hero__eyebrow {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-left: 4px solid #db313f;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #db313f;
+}
+
+.catalog-hero__title {
+  margin-bottom: 1rem;
+  font-family: Montserrat, sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.catalog-hero__desc {
+  max-width: 38rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
+}
+/* --- END: shared category hero (.catalog-hero) --- */
+
+.catalog-section-title {
+  margin-bottom: 2rem;
+  font-family: Montserrat, sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}

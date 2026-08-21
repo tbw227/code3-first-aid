@@ -1,0 +1,27 @@
+/**
+ * Glassmorphism surface utility
+ */
+
+/* ==========================================================================
+   Glassmorphism
+   ========================================================================== */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(230, 57, 70, 0.45);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.glass-card-dark {
+  background: rgba(41, 49, 56, 0.35);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}

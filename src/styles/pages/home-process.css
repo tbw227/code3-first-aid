@@ -1,0 +1,408 @@
+/**
+ * Homepage "How It Works" process section
+ */
+
+/* ==========================================================================
+   How It Works (process section)
+   One scale drives icons/type/spacing; equal-width step cards at every size.
+   ========================================================================== */
+
+.process-section {
+  /* Master scale: fluid between phone and desktop */
+  --process-scale: clamp(0.68, 0.55 + 0.45vw, 1);
+  --process-space: calc(1rem * var(--process-scale));
+  --process-icon: calc(4.75rem * var(--process-scale));
+  --process-svg: calc(2.35rem * var(--process-scale));
+  --process-title: calc(0.875rem * var(--process-scale));
+  --process-text: calc(0.8125rem * var(--process-scale));
+  --process-arrow: calc(1.15rem * var(--process-scale));
+  --process-cols: 6;
+  --process-row-gap: calc(1.35rem * var(--process-scale));
+  --process-col-gap: calc(0.35rem * var(--process-scale));
+  --process-pad-x: clamp(1rem, 4vw, 4rem);
+  --process-pad-y: clamp(1.5rem, 3.5vw, 2.75rem);
+  --process-layout-gap: clamp(1.5rem, 3vw, 3rem);
+  --process-media-w: clamp(8.5rem, 18vw, 18.75rem);
+  --process-media-gap: calc(1rem * var(--process-scale));
+  --process-media-offset: calc(1.5rem * var(--process-scale));
+  --process-media-pad: clamp(0rem, 2vw, 2.5rem);
+  --process-show-arrows: 1;
+  --process-icon-mb: calc(0.85rem * var(--process-scale));
+  --process-heading-mb: calc(0.55rem * var(--process-scale));
+  --process-text-mt: calc(0.35rem * var(--process-scale));
+  --process-heading-min-h: 2.5em;
+  --process-text-lh: 1.35;
+  --process-text-lines: 3;
+  --process-text-min-h: calc(var(--process-text-lines) * var(--process-text-lh) * 1em);
+
+  padding-block: var(--process-pad-y);
+  overflow-x: clip;
+}
+
+.process-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: var(--process-layout-gap);
+  width: 100%;
+  padding-inline: var(--process-pad-x);
+}
+
+.process-copy {
+  min-width: 0;
+}
+
+.process-header {
+  margin-bottom: calc(1.15rem * var(--process-scale));
+}
+
+.process-media {
+  display: grid;
+  grid-template-columns: repeat(2, var(--process-media-w));
+  gap: var(--process-media-gap);
+  align-items: start;
+  padding-inline-end: var(--process-media-pad);
+}
+
+.process-media__frame {
+  width: var(--process-media-w);
+  aspect-ratio: 300 / 432;
+  overflow: hidden;
+}
+
+.process-media__frame--offset {
+  margin-top: var(--process-media-offset);
+}
+
+.process-media__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(1);
+  transition: filter 0.7s ease;
+}
+
+.process-media__img:hover {
+  filter: grayscale(0);
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(var(--process-cols), minmax(0, 1fr));
+  column-gap: var(--process-col-gap);
+  row-gap: var(--process-row-gap);
+  align-items: start;
+}
+
+.process-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+  padding-inline: calc(0.15rem * var(--process-scale));
+}
+
+.process-step__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--process-icon);
+  height: var(--process-icon);
+  border-radius: 9999px;
+  background-color: #e63946;
+  margin: 0 0 var(--process-icon-mb);
+  transition:
+    width 0.35s ease,
+    height 0.35s ease,
+    margin 0.35s ease;
+}
+
+.process-step__svg {
+  width: var(--process-svg);
+  height: var(--process-svg);
+  filter: brightness(0) invert(1);
+  transition:
+    width 0.35s ease,
+    height 0.35s ease;
+}
+
+.process-step__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 11.5ch;
+  margin-inline: auto;
+}
+
+.process-step__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: calc(0.35rem * var(--process-scale));
+  width: 100%;
+  margin: 0 0 var(--process-heading-mb);
+  min-height: var(--process-heading-min-h);
+  font-size: var(--process-title);
+  line-height: 1.25;
+  text-align: left;
+  transition:
+    font-size 0.35s ease,
+    gap 0.35s ease,
+    margin 0.35s ease,
+    min-height 0.35s ease;
+}
+
+.process-step__number {
+  flex-shrink: 0;
+  color: #e63946;
+  font-family: "JetBrains Mono", monospace;
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.process-step__title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.process-step__text {
+  display: -webkit-box;
+  width: 100%;
+  min-height: var(--process-text-min-h);
+  margin: var(--process-text-mt) 0 0;
+  overflow: hidden;
+  font-size: var(--process-text);
+  line-height: var(--process-text-lh);
+  letter-spacing: 0.01em;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--process-text-lines);
+  transition:
+    font-size 0.35s ease,
+    margin 0.35s ease,
+    min-height 0.35s ease;
+}
+
+/* Arrow sits between equal-width cards (desktop row only) */
+.process-step__arrow {
+  position: absolute;
+  top: calc(var(--process-icon) / 2);
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--process-arrow);
+  height: var(--process-arrow);
+  transform: translate(50%, -50%);
+  color: #e63946;
+  opacity: var(--process-show-arrows);
+  pointer-events: none;
+  transition:
+    width 0.35s ease,
+    height 0.35s ease,
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.process-step__arrow .lucide {
+  width: 100%;
+  height: 100%;
+  stroke-width: 2.25;
+}
+
+.process-step--last .process-step__arrow {
+  display: none;
+}
+
+.trust-bar {
+  padding-block: 1rem;
+  background-color: rgb(20 29 35 / 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.trust-bar__inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: center;
+}
+
+.trust-bar__item {
+  min-width: 0;
+}
+
+.trust-bar__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  filter: invert(16%) sepia(84%) saturate(4500%) hue-rotate(340deg) brightness(90%) contrast(95%);
+}
+
+/* Desktop trust bar: single row, fixed height from 1066px up */
+@media (min-width: 1066px) {
+  .trust-bar {
+    padding-block: 1rem;
+    min-height: 3.25rem;
+  }
+
+  .trust-bar__inner {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .trust-bar__item span {
+    white-space: nowrap;
+  }
+}
+
+.process-dashboard {
+  width: 100%;
+  max-width: 20rem;
+}
+
+.process-dashboard__image {
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  background-color: #e6eff8;
+}
+
+.process-feature {
+  padding: 0.625rem;
+  background-color: #ffffff;
+}
+
+.process-feature__image {
+  display: block;
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 0.375rem;
+  object-fit: cover;
+  object-position: center;
+  background-color: #dbe4ed;
+}
+
+/* lg and below: stack copy + media; 3 equal cards; no arrows */
+@media (max-width: 1023px) {
+  .process-section {
+    --process-scale: clamp(0.78, 0.55 + 0.55vw, 0.92);
+    --process-cols: 3;
+    --process-show-arrows: 0;
+    --process-col-gap: calc(1rem * var(--process-scale));
+    --process-row-gap: calc(1.5rem * var(--process-scale));
+    --process-media-w: min(42vw, 11.5rem);
+    --process-media-pad: 0;
+    --process-media-offset: calc(1.15rem * var(--process-scale));
+  }
+
+  .process-layout {
+    grid-template-columns: 1fr;
+    row-gap: var(--process-layout-gap);
+  }
+
+  .process-media {
+    justify-content: center;
+    margin-inline: auto;
+    padding-inline-end: 0;
+  }
+
+  .process-step__body {
+    max-width: 16ch;
+  }
+
+  .process-step__arrow {
+    display: none;
+  }
+}
+
+/* md: bump scale + keep 3 equal columns */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .process-section {
+    --process-scale: 0.92;
+    --process-col-gap: 1.15rem;
+    --process-row-gap: 1.65rem;
+  }
+}
+
+/* sm: 2 equal columns; scale icons/text down */
+@media (max-width: 767px) {
+  .process-section {
+    --process-scale: clamp(0.72, 0.5 + 0.7vw, 0.82);
+    --process-cols: 2;
+    --process-col-gap: calc(0.85rem * var(--process-scale));
+    --process-row-gap: calc(1.35rem * var(--process-scale));
+    --process-media-w: min(40vw, 9.75rem);
+  }
+
+  .process-step__body {
+    max-width: 14ch;
+  }
+}
+
+/* phone: slightly tighter equal 2-col */
+@media (max-width: 639px) {
+  .process-section {
+    --process-scale: 0.7;
+    --process-col-gap: 0.75rem;
+    --process-row-gap: 1.15rem;
+    --process-media-w: min(42vw, 8.75rem);
+  }
+}
+
+/* xl+: lock the desktop composition you already liked */
+@media (min-width: 1280px) {
+  .process-section {
+    --process-scale: 1;
+    --process-cols: 6;
+    --process-show-arrows: 1;
+    --process-col-gap: 0.15rem;
+    --process-row-gap: 0;
+    --process-media-w: 18.75rem; /* 300px */
+    --process-media-pad: clamp(1rem, 2vw, 2rem);
+    --process-media-offset: 1.5rem;
+    --process-pad-x: clamp(2rem, 5vw, 4rem);
+    --process-layout-gap: 3rem;
+    --process-heading-min-h: 2.65em;
+  }
+
+  .process-step__body {
+    max-width: 8.5rem;
+  }
+}
+
+/* Side-by-side: offset extra media padding so the block reads centered */
+@media (min-width: 1024px) {
+  .process-layout {
+    padding-inline-start: calc(var(--process-pad-x) + var(--process-media-pad) / 2);
+  }
+}
+
+/* Between lg and xl: side-by-side, but 3×2 cards (no cramped 6-across) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .process-section {
+    --process-scale: 0.88;
+    --process-cols: 3;
+    --process-show-arrows: 0;
+    --process-col-gap: 0.85rem;
+    --process-row-gap: 1.35rem;
+    --process-media-w: clamp(9.5rem, 14vw, 12rem);
+    --process-media-pad: clamp(0.5rem, 1.5vw, 1.25rem);
+    --process-layout-gap: 2rem;
+  }
+
+  .process-step__arrow {
+    display: none;
+  }
+
+  .process-step__body {
+    max-width: 12ch;
+  }
+}

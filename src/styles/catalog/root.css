@@ -1,0 +1,14 @@
+/**
+ * Catalog page root shared by hub, category, and product pages
+ */
+
+/* ==========================================================================
+   Product catalog
+   Tip: search "BEGIN:" or "END:" to jump between sections.
+   Pages: catalog.html (hub), catalog/*.html (categories), catalog/products/*.html
+   ========================================================================== */
+
+/* --- BEGIN: catalog page root (.catalog-page-root) — JS mount point on all catalog pages --- */
+.catalog-page-root {
+  min-height: 12rem;
+}

@@ -1,0 +1,15 @@
+/**
+ * Lucide icon sizing
+ */
+
+/* ==========================================================================
+   Lucide icons
+   ========================================================================== */
+
+.lucide {
+  width: 1em;
+  height: 1em;
+  stroke: currentColor;
+  flex-shrink: 0;
+  vertical-align: middle;
+}

@@ -1,0 +1,100 @@
+/**
+ * Product cards
+ */
+
+/* --- BEGIN: shared product cards (.catalog-card)
+     Used on hub, bandages, first-aid-kits, etc. --- */
+.catalog-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(20, 29, 35, 0.08);
+  background: #ffffff;
+}
+
+.catalog-card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.catalog-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.catalog-card:hover .catalog-card__image {
+  transform: scale(1.04);
+}
+
+.catalog-card__badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
+  background: #b7102a;
+  color: #ffffff;
+  padding: 0.25rem 0.5rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.catalog-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.catalog-card__title {
+  font-family: Montserrat, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.catalog-card__desc {
+  flex: 1;
+  font-size: 0.875rem;
+  color: #5f5e5e;
+  line-height: 1.5;
+}
+
+.catalog-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #737576;
+}
+
+.catalog-card__stock {
+  color: #b7102a;
+}
+
+.catalog-card__cta {
+  display: block;
+  padding: 0.75rem 1rem;
+  background: #1a1a1a;
+  color: #ffffff;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease;
+}
+
+.catalog-card__cta:hover {
+  background: #b7102a;
+}
+/* --- END: shared product cards (.catalog-card) --- */

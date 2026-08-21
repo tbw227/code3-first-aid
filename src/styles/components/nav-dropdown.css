@@ -1,0 +1,211 @@
+/**
+ * Desktop nav dropdowns and nested subgroups
+ */
+
+/* ==========================================================================
+   Desktop Training dropdown
+   ========================================================================== */
+
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+
+.nav-dropdown__chevron {
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown.is-open .nav-dropdown__chevron {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown__panel {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0.35rem);
+  min-width: 13.5rem;
+  padding: 1.25rem 0 0.5rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  z-index: 60;
+}
+
+.nav-dropdown__panel::before {
+  content: '';
+  position: absolute;
+  top: 0.75rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  z-index: -1;
+}
+
+.nav-dropdown.is-open .nav-dropdown__panel,
+.nav-dropdown:hover .nav-dropdown__panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown__link {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 0.7rem 1.15rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-dropdown__link:hover,
+.nav-dropdown__link.is-active {
+  color: #db313f;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.nav-dropdown__heading {
+  position: relative;
+  z-index: 1;
+  padding: 0.65rem 1.15rem 0.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #db313f;
+  pointer-events: none;
+}
+
+.nav-dropdown__heading:not(:first-child) {
+  margin-top: 0.35rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-dropdown__panel--nested {
+  min-width: 15rem;
+}
+
+.nav-dropdown__subgroup,
+.mobile-nav__subgroup {
+  position: relative;
+}
+
+.nav-dropdown__subgroup-trigger,
+.mobile-nav__subgroup-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.7rem 1.15rem;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-dropdown__subgroup-trigger:hover,
+.mobile-nav__subgroup-trigger:hover,
+.nav-dropdown__subgroup.is-open > .nav-dropdown__subgroup-trigger,
+.mobile-nav__subgroup.is-open > .mobile-nav__subgroup-trigger {
+  color: #db313f;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.nav-dropdown__subgroup-chevron,
+.mobile-nav__subgroup-chevron {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown__subgroup.is-open .nav-dropdown__subgroup-chevron,
+.mobile-nav__subgroup.is-open .mobile-nav__subgroup-chevron,
+.nav-dropdown__subgroup-trigger[aria-expanded="true"] .nav-dropdown__subgroup-chevron,
+.mobile-nav__subgroup-trigger[aria-expanded="true"] .mobile-nav__subgroup-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown__subgroup-panel,
+.mobile-nav__subgroup-panel {
+  display: none;
+}
+
+.nav-dropdown__subgroup-panel.is-open,
+.mobile-nav__subgroup-panel.is-open {
+  display: block;
+}
+
+.nav-dropdown__link--nested {
+  padding-left: 1.75rem;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  white-space: normal;
+}
+
+.mobile-nav__subgroup-panel {
+  padding-left: 0.5rem;
+}
+
+.mobile-nav__subgroup-panel a {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-left: 0.75rem;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.mobile-nav__subgroup-panel a:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav__subgroup-trigger {
+  padding: 0.75rem 0.25rem;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.mobile-nav__subgroup:not(:first-child) .mobile-nav__subgroup-trigger {
+  margin-top: 0.35rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}

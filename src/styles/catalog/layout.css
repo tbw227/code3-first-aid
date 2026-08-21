@@ -1,0 +1,67 @@
+/**
+ * Catalog layout container and main column
+ */
+
+/* --- BEGIN: shared catalog layout container (.catalog-layout, .catalog-layout__main)
+     Used on hub + category pages with sidebar — matches All Products geometry --- */
+.catalog-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem 1rem;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+  padding-block: 0;
+}
+
+.catalog-layout__main {
+  min-width: 0;
+}
+
+/* Category product sections — same top spacing as All Products grid */
+.catalog-layout__main > .catalog-grid-section.section-y,
+.catalog-layout__main > .catalog-eye-grid-section.section-y,
+.catalog-layout__main > .catalog-ppe-catalog.section-y,
+.catalog-layout__main > .catalog-fire-catalog.section-y {
+  padding-block: 2.5rem 1.25rem;
+}
+
+.catalog-layout__main .page-container {
+  max-width: none;
+  width: 100%;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+@media (max-width: 1023px) {
+  .catalog-layout__main .page-container {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .catalog-layout {
+    width: 100%;
+    max-width: calc(14.5rem + 1.25rem + 86rem);
+    margin-inline: auto;
+    grid-template-columns: 14.5rem minmax(0, 1fr);
+    align-items: start;
+    gap: 1.25rem 1.25rem;
+    padding-inline: 0.75rem;
+    padding-block: 0 0.5rem;
+  }
+
+  .catalog-layout--product {
+    padding-block: 1.5rem 2rem;
+  }
+
+  .catalog-layout__main .page-container {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 0;
+  }
+}
+
+/* --- END: shared catalog layout container (.catalog-layout) --- */

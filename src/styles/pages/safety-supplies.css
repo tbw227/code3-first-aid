@@ -1,0 +1,62 @@
+/**
+ * Safety supplies page, including the restock facility section
+ */
+
+/* ==========================================================================
+   Supplies page
+   ========================================================================== */
+
+.diagonal-mask {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+}
+
+.supplies-hero__texture {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.04) 2px,
+      rgba(255, 255, 255, 0.04) 4px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.04) 2px,
+      rgba(255, 255, 255, 0.04) 4px
+    );
+}
+
+/* ==========================================================================
+   Restock facility section
+   ========================================================================== */
+
+.restock-banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.restock-banner__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.1;
+  filter: grayscale(100%);
+  pointer-events: none;
+}
+
+.restock-banner__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.restock-banner__content {
+  position: relative;
+  z-index: 10;
+}
+
+.pass-rate-card {
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+}

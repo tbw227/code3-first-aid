@@ -1,0 +1,72 @@
+/**
+ * CPR training page
+ */
+
+/* ==========================================================================
+   CPR training page
+   ========================================================================== */
+
+body[data-page="cpr-training"] .cpr-hero__diagonal {
+  clip-path: polygon(0 0, 55% 0, 45% 100%, 0% 100%);
+}
+
+body[data-page="cpr-training"] .cpr-hero__texture {
+  background-image: url('/images/backgrounds/cpr-training-hero-texture.webp');
+  background-size: cover;
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+}
+
+body[data-page="cpr-training"] .cpr-hero__gallery {
+  --cpr-gallery-w: calc(12rem + 1rem + 14rem + 1rem + 12rem);
+  transform: translateX(150px);
+  min-height: 450px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+body[data-page="cpr-training"] .cpr-hero > .max-w-container-max {
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  body[data-page="cpr-training"] .cpr-hero > .max-w-container-max {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  body[data-page="cpr-training"] .cpr-hero > .max-w-container-max {
+    padding-inline-start: 2rem;
+    padding-inline-end: 4rem;
+  }
+}
+
+body[data-page="cpr-training"] .cpr-skew-card {
+  position: relative;
+  transform: skewX(-12deg);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-image: url('/images/training/cpr-training-certification-path.webp');
+  background-repeat: no-repeat;
+  background-size: var(--cpr-gallery-w) 450px;
+  background-position: left bottom;
+}
+
+body[data-page="cpr-training"] .cpr-skew-card:nth-child(1) {
+  background-position: left bottom;
+}
+
+body[data-page="cpr-training"] .cpr-skew-card:nth-child(2) {
+  background-position: calc(-12rem - 1rem) bottom;
+}
+
+body[data-page="cpr-training"] .cpr-skew-card:nth-child(3) {
+  background-position: calc(-12rem - 1rem - 14rem - 1rem) bottom;
+}
+
+body[data-page="cpr-training"] .cpr-skew-card:hover {
+  transform: skewX(-12deg) translateY(-6px);
+  box-shadow: -20px 24px 48px rgba(0, 0, 0, 0.35);
+}

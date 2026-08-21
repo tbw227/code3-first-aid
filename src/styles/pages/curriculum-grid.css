@@ -1,0 +1,29 @@
+/**
+ * Bento curriculum grid (training pages)
+ */
+
+/* ==========================================================================
+   Bento curriculum grid
+   ========================================================================== */
+
+.curriculum-bento {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "bls"
+    "heartsaver"
+    "firstaid"
+    "corporate";
+}
+
+.curriculum-bento__bls { grid-area: bls; min-height: 320px; }
+.curriculum-bento__heartsaver { grid-area: heartsaver; min-height: 280px; }
+.curriculum-bento__firstaid { grid-area: firstaid; min-height: 220px; }
+.curriculum-bento__corporate { grid-area: corporate; min-height: 280px; }
+
+.cta-banner {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+    url('/images/training/cpr-training-hero.webp') center/cover no-repeat;
+}

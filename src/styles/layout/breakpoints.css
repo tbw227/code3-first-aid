@@ -1,0 +1,343 @@
+/**
+ * Shared media and container queries for header, hero, and collage
+ */
+
+/* ==========================================================================
+   Media & container queries
+   ========================================================================== */
+
+/* --- max-width: 639px --- */
+
+@media (max-width: 639px) {
+  .site-header > div:first-of-type > div:last-child > a {
+    padding-inline: 0.75rem;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* --- max-width: 768px --- */
+
+@media (max-width: 768px) {
+  .hero-split__dark {
+    -webkit-mask-image: none;
+    mask-image: none;
+    opacity: 0.35;
+  }
+
+  .hero-split__light {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+      url('/images/backgrounds/cpr-training-hero-texture.webp') center/cover no-repeat;
+  }
+
+  .hero-split__overlay {
+    background: linear-gradient(180deg, rgba(26, 26, 26, 0.9) 0%, rgba(26, 26, 26, 0.6) 100%);
+  }
+}
+
+/* --- min-width: 768px --- */
+
+@media (min-width: 768px) {
+  .page-container {
+    padding-inline: 2rem;
+  }
+
+  body[data-page="home"] .hero-image-collage {
+    height: clamp(340px, 52cqi, 500px);
+  }
+
+  body[data-page="home"] .collage-panel {
+    width: clamp(130px, 21cqi, 320px);
+    height: clamp(210px, 38cqi, 600px);
+  }
+
+  body[data-page="home"] .hero-split__content {
+    padding-inline: 2rem;
+  }
+}
+
+/* --- min-width: 640px and max-width: 1023px --- */
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .site-header > div:first-of-type > a:first-child {
+    padding-inline-start: clamp(1rem, 4vw, 2rem);
+  }
+
+  .site-header > div:first-of-type > div:last-child {
+    padding-inline-end: clamp(1rem, 3vw, 1.75rem);
+  }
+}
+
+/* --- min-width: 1024px --- */
+
+@media (min-width: 1024px) {
+  .site-header > div:first-of-type.page-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    max-width: none;
+    padding-inline: 0;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  .site-header > div:first-of-type > a:first-child {
+    grid-column: 1;
+    justify-self: start;
+    flex-shrink: 0;
+    padding-inline-start: clamp(1.5rem, 5vw, 100px);
+    transform: translateX(40px); /* add this — desktop only */
+  }
+
+  .site-header [data-nav="main"] {
+    grid-column: 2;
+    justify-self: center;
+    flex-shrink: 0;
+  }
+
+  .site-header > div:first-of-type > div:last-child {
+    grid-column: 3;
+    justify-self: end;
+    padding-inline-end: clamp(1rem, 3.5vw, 45px);
+    transform: translateX(-120px); /* add this — desktop only */
+  }
+
+  body[data-page="home"] .hero-split__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: calc(82vh - 5rem);
+    max-width: none;
+    padding-top: clamp(5.5rem, 11vh, 8.5rem);
+    padding-bottom: clamp(4.5rem, 8vh, 6.5rem);
+    column-gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  body[data-page="home"] .hero-split__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: none;
+    width: 100%;
+    padding-inline: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  body[data-page="home"] .hero-content-wrapper {
+    justify-content: flex-start;
+  }
+
+  body[data-page="home"] .hero-content {
+    align-items: flex-start;
+    text-align: left;
+    max-width: none;
+    margin-inline: 0;
+    margin-left: 75px;
+    padding-left: clamp(1.5rem, 3vw, 3.5rem);
+    gap: clamp(2rem, 3vw, 3rem);
+  }
+
+  body[data-page="home"] .hero-content > a {
+    margin-left: 165px;
+    margin-top: 0.5rem;
+  }
+
+  body[data-page="home"] .hero-image-collage {
+    width: 100%;
+    height: clamp(520px, 62vh, 760px);
+    min-height: 520px;
+    margin-top: 0;
+    flex: none;
+    transform: translate(-25px, -55px);
+    column-gap: clamp(2rem, 3vw, 3rem);
+    padding-inline: clamp(1rem, 2vw, 2rem);
+  }
+
+  body[data-page="home"] .collage-panel {
+    width: clamp(180px, 26cqi, 400px);
+    height: clamp(280px, 46cqi, 720px);
+    border-width: 12px;
+    box-shadow: -20px 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  body[data-page="cpr-training"] .cpr-hero__content {
+    transform: translateX(0);
+  }
+}
+
+/* --- min-width: 1024px and max-width: 1598px (hero collage fits without clipping) --- */
+
+@media (min-width: 1024px) and (max-width: 1598px) {
+  body[data-page="home"] .hero-split__layout {
+    padding-inline-start: clamp(1rem, 2.5vw, 2rem);
+    padding-inline-end: clamp(1.5rem, 4vw, 3rem);
+    transform: translateX(clamp(-12px, -0.75vw, 0px));
+  }
+
+  body[data-page="home"] .hero-split__content {
+    padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  body[data-page="home"] .hero-content {
+    margin-left: clamp(1.5rem, 3vw, 3rem);
+    padding-left: clamp(1rem, 2vw, 2rem);
+  }
+
+  body[data-page="home"] .hero-content > a {
+    margin-left: clamp(2.5rem, 7vw, 96px);
+  }
+
+  body[data-page="home"] .hero-image-collage {
+    transform: translate(clamp(-36px, -2.5vw, -18px), -55px);
+    padding-inline: clamp(0.5rem, 1.5vw, 1.25rem);
+  }
+
+  body[data-page="home"] .collage-panel {
+    width: clamp(160px, 22cqi, 330px);
+    height: clamp(250px, 39cqi, 600px);
+  }
+
+  body[data-page="home"] .panel-2 {
+    margin-right: -22px;
+  }
+
+  body[data-page="home"] .panel-3 {
+    margin-left: clamp(0.5rem, 1.5vw, 24px);
+  }
+}
+
+/* --- min-width: 1024px and max-width: 1279px --- */
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .site-header [data-nav="main"] {
+    gap: 1.25rem;
+  }
+
+  .site-header [data-nav="main"] a,
+  .site-header [data-nav="main"] .nav-dropdown__trigger {
+    font-size: 12px;
+  }
+}
+
+/* --- min-width: 1280px --- */
+
+@media (min-width: 1280px) {
+  .site-header [data-nav="main"] {
+    gap: 3rem;
+  }
+}
+
+/* --- @container hero --- */
+
+@container hero (min-width: 640px) {
+  .hero-layout {
+    flex-direction: row;
+    align-items: center;
+    min-height: calc(100vh - 7rem);
+  }
+
+  .hero-layout__content,
+  .hero-content-wrapper {
+    width: 50%;
+    flex-shrink: 0;
+    min-height: calc(100vh - 7rem);
+  }
+
+  .hero-layout__visual,
+  .hero-image-collage {
+    position: relative;
+    width: 50%;
+    flex-shrink: 0;
+    height: clamp(320px, 42cqi, 520px);
+    max-width: none;
+    margin: 0;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@container hero (max-width: 639px) {
+  .hero-layout__visual,
+  .hero-image-collage {
+    position: relative;
+    width: 100%;
+    margin-top: 2rem;
+    transform: none;
+  }
+}
+
+/* --- @container section (bento grids) --- */
+
+@container section (min-width: 640px) {
+  .curriculum-bento {
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-areas:
+      "bls heartsaver"
+      "firstaid corporate";
+  }
+
+  body[data-page="home"] .curriculum-bento {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, minmax(280px, 1fr));
+  }
+
+  body[data-page="home"] .curriculum-bento > article {
+    min-height: 280px;
+    height: 100%;
+  }
+}
+
+/* --- @container collage --- */
+
+@container collage (max-width: 520px) {
+  .collage-panel {
+    border-width: 6px;
+    transform: skewX(-10deg);
+  }
+
+  .collage-img {
+    transform: skewX(10deg);
+  }
+
+  .panel-1 { left: calc(50% - 100px); top: 30px; }
+  .panel-2 { left: calc(50% - 5px); top: 10px; }
+  .panel-3 { left: calc(50% + 90px); top: 40px; }
+
+  body[data-page="home"] .panel-1,
+  body[data-page="home"] .panel-2,
+  body[data-page="home"] .panel-3 {
+    left: auto;
+    top: auto;
+  }
+}
+
+@container collage (min-width: 521px) and (max-width: 720px) {
+  .collage-panel {
+    border-width: 6px;
+  }
+
+  .panel-1 { left: calc(50% - 140px); top: 40px; }
+  .panel-2 { left: calc(50% - 20px); top: 20px; }
+  .panel-3 { left: calc(50% + 100px); top: 50px; }
+
+  body[data-page="home"] .panel-1,
+  body[data-page="home"] .panel-2,
+  body[data-page="home"] .panel-3 {
+    left: auto;
+    top: auto;
+  }
+}
+
+@container collage (min-width: 721px) {
+  .panel-1 { left: calc(50% - 200px); top: 70px; }
+  .panel-2 { left: calc(50% - 50px); top: 10px; }
+  .panel-3 { left: calc(50% + 120px); top: -20px; }
+
+  body[data-page="home"] .panel-1,
+  body[data-page="home"] .panel-2,
+  body[data-page="home"] .panel-3 {
+    left: auto;
+    top: auto;
+  }
+}

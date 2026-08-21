@@ -1,0 +1,161 @@
+/**
+ * Catalog feature, info, and FAQ sections
+ */
+
+/* --- BEGIN: shared catalog sections — features, info, FAQ (.catalog-features, .catalog-info, .catalog-faq) --- */
+.catalog-features {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.catalog-features__grid {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .catalog-features__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.catalog-features__heading {
+  margin-bottom: 1.5rem;
+  font-family: Montserrat, sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.catalog-features__list {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.catalog-feature {
+  display: flex;
+  gap: 1rem;
+}
+
+.catalog-feature__dot {
+  flex-shrink: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-top: 0.35rem;
+  border-radius: 9999px;
+  background: #e63946;
+}
+
+.catalog-feature__title {
+  margin-bottom: 0.25rem;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+}
+
+.catalog-feature__text {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.catalog-features__cta {
+  display: inline-block;
+  background: #b7102a;
+  color: #ffffff;
+  padding: 0.875rem 1.5rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.catalog-features__visual img {
+  width: 100%;
+  max-height: 28rem;
+  object-fit: contain;
+}
+
+.catalog-info__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .catalog-info__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.catalog-info__panel {
+  padding: 2rem;
+  background: #ffffff;
+  border: 1px solid rgba(20, 29, 35, 0.08);
+}
+
+.catalog-info__panel--dark {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.catalog-info__title {
+  margin-bottom: 1rem;
+  padding-left: 0.75rem;
+  border-left: 4px solid #b7102a;
+  font-family: Montserrat, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.catalog-info__list,
+.catalog-info__bullets {
+  display: grid;
+  gap: 0.75rem;
+  padding-left: 1.25rem;
+}
+
+.catalog-info__text {
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.catalog-faq-section__title {
+  margin-bottom: 2rem;
+  font-family: Montserrat, sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.catalog-faq-section__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .catalog-faq-section__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.catalog-faq {
+  padding: 1.5rem;
+  background: #ffffff;
+  border: 1px solid rgba(20, 29, 35, 0.08);
+}
+
+.catalog-faq__q {
+  margin-bottom: 0.75rem;
+  font-family: Montserrat, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.catalog-faq__a {
+  color: #5f5e5e;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
