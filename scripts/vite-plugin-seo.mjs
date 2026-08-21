@@ -1,8 +1,9 @@
 /**
  * Vite plugin — injects static SEO meta tags into each HTML entry from src/config/seo.js.
  */
-import { relative, normalize, basename } from 'node:path';
-import { PAGE_SEO, SITE, locationSeo, resolvePageSeo } from '../src/config/seo.js';
+import { relative, normalize } from 'node:path';
+import { PATH_TO_PAGE, SITE, normalizePagePath, resolvePageSeo } from '../src/config/seo.js';
+import { buildJsonLdGraph } from '../src/config/structured-data.js';
 
 /** @param {string} value */
 function escapeAttr(value) {
@@ -12,30 +13,24 @@ function escapeAttr(value) {
     .replace(/</g, '&lt;');
 }
 
-/** @param {string} filename Absolute path to the HTML file being transformed. */
+/**
+ * Map an HTML entry file to its PAGE_SEO / catalog page id via the same
+ * path table the runtime uses, so build and runtime cannot drift.
+ * @param {string} filename Absolute path to the HTML file being transformed.
+ */
 function resolvePageId(filename) {
   const rel = normalize(relative(process.cwd(), filename)).replace(/\\/g, '/');
+  const urlPath = normalizePagePath(`/${rel}`);
+  return PATH_TO_PAGE[urlPath] ?? 'home';
+}
 
-  if (rel.startsWith('pages/locations/') && rel.endsWith('.html')) {
-    const slug = basename(rel, '.html');
-    if (locationSeo[slug]) {
-      return slug;
-    }
-  }
-
-  /** @type {Record<string, string>} */
-  const fileToPage = {
-    'index.html': 'home',
-    'pages/fire-training.html': 'fire-training',
-    'pages/cpr-training.html': 'cpr-training',
-    'pages/ppe-training.html': 'ppe-training',
-    'pages/safety-supplies.html': 'safety-supplies',
-    'pages/service-areas.html': 'service-areas',
-    'pages/forms/cpr-enrollment.html': 'cpr-enrollment',
-    'pages/forms/fire-enrollment.html': 'fire-enrollment',
-    'pages/forms/procurement.html': 'procurement',
-  };
-  return fileToPage[rel] ?? 'home';
+/**
+ * Serialize JSON-LD for embedding in HTML. `<` is escaped so a string value can
+ * never terminate the script element early.
+ * @param {object} graph
+ */
+function serializeJsonLd(graph) {
+  return JSON.stringify(graph).replace(/</g, '\\u003c');
 }
 
 /** @param {string} pageId */
@@ -60,6 +55,7 @@ function buildSeoBlock(pageId) {
     `<meta name="twitter:title" content="${escapeAttr(page.title)}">`,
     `<meta name="twitter:description" content="${escapeAttr(page.description)}">`,
     `<meta name="twitter:image" content="${image}">`,
+    `<script type="application/ld+json">${serializeJsonLd(buildJsonLdGraph(pageId))}</script>`,
   ]
     .map((line) => `    ${line}`)
     .join('\n');

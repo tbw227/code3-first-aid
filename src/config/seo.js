@@ -3,6 +3,14 @@
  * Consumed by src/js/seo-head.js at runtime and scripts/generate-sitemap.mjs at build.
  */
 import { LOCATION_CONTENT } from './location-content.js';
+import {
+  CATALOG_CATEGORIES,
+  CATALOG_PRODUCTS,
+  getCategoryPath,
+  getProductPath,
+  getCategorySlugs,
+  getProductSlugs,
+} from './catalog.js';
 
 /** Global site constants used in meta tags and JSON-LD. */
 /** @type {const} */
@@ -234,6 +242,17 @@ export const PAGE_SEO = {
     priority: 0.9,
     changefreq: 'monthly',
   },
+  catalog: {
+    path: '/pages/catalog',
+    title: 'Bulk Medical Supplies Catalog | Code 3 First Aid',
+    description:
+      'Browse industrial first aid kits, fire safety equipment, eyewash stations, AEDs, and PPE. Request quotes for bulk medical supplies across the Midwest.',
+    keywords: ['product catalog', 'bulk medical supplies', 'safety equipment', 'industrial PPE'],
+    breadcrumb: 'Product Catalog',
+    schemaType: 'CollectionPage',
+    priority: 0.92,
+    changefreq: 'weekly',
+  },
   'service-areas': {
     path: '/pages/service-areas',
     title: 'Workplace Safety Supplies & Training Service Areas | Code 3 First Aid',
@@ -294,6 +313,28 @@ export const LOCATION_SITEMAP_ENTRIES = getLocationSlugs().map((slug) => ({
 }));
 
 /**
+ * Catalog category and product URLs for sitemap.
+ * The hub itself (/pages/catalog) comes from PAGE_SEO.catalog — listing it here
+ * too would emit a duplicate <loc>.
+ */
+export const CATALOG_SITEMAP_ENTRIES = [
+  ...getCategorySlugs()
+    .filter((slug) => getCategoryPath(slug) !== PAGE_SEO.catalog.path)
+    .map((slug) => ({
+      path: getCategoryPath(slug),
+      priority: 0.85,
+      changefreq: 'weekly',
+    })),
+  ...getProductSlugs()
+    .filter((slug) => CATALOG_PRODUCTS[slug].hasDetailPage)
+    .map((slug) => ({
+      path: getProductPath(slug),
+      priority: 0.8,
+      changefreq: 'monthly',
+    })),
+];
+
+/**
  * Maps normalized URL paths to PAGE_SEO keys for runtime head injection.
  * @type {Record<string, string>}
  */
@@ -303,11 +344,24 @@ export const PATH_TO_PAGE = {
   '/pages/cpr-training': 'cpr-training',
   '/pages/ppe-training': 'ppe-training',
   '/pages/safety-supplies': 'safety-supplies',
+  '/pages/catalog': 'catalog',
   '/pages/service-areas': 'service-areas',
   '/pages/forms/cpr-enrollment': 'cpr-enrollment',
   '/pages/forms/fire-enrollment': 'fire-enrollment',
   '/pages/forms/procurement': 'procurement',
   ...Object.fromEntries(getLocationSlugs().map((slug) => [getLocationPath(slug), slug])),
+  // The hub category shares /pages/catalog with PAGE_SEO.catalog; keep the
+  // literal entry above so build and runtime resolve it the same way.
+  ...Object.fromEntries(
+    getCategorySlugs()
+      .filter((slug) => getCategoryPath(slug) !== '/pages/catalog')
+      .map((slug) => [getCategoryPath(slug), `catalog-${slug}`]),
+  ),
+  ...Object.fromEntries(
+    getProductSlugs()
+      .filter((slug) => CATALOG_PRODUCTS[slug].hasDetailPage)
+      .map((slug) => [getProductPath(slug), `catalog-${slug}`]),
+  ),
 };
 
 /**
@@ -345,6 +399,41 @@ export function getBreadcrumbs(pageId) {
   if (!page || pageId === 'home') {
     return [{ name: 'Home', path: '/' }];
   }
+
+  if (pageId.startsWith('catalog-')) {
+    const slug = pageId.replace('catalog-', '');
+    const category = CATALOG_CATEGORIES[slug];
+    if (category) {
+      return [
+        { name: 'Home', path: '/' },
+        { name: 'Safety Supplies', path: '/pages/safety-supplies' },
+        { name: 'Catalog', path: '/pages/catalog' },
+        { name: category.title, path: getCategoryPath(slug) },
+      ];
+    }
+    const product = CATALOG_PRODUCTS[slug];
+    if (product) {
+      const productCategory = CATALOG_CATEGORIES[product.categorySlug];
+      return [
+        { name: 'Home', path: '/' },
+        { name: 'Safety Supplies', path: '/pages/safety-supplies' },
+        { name: 'Catalog', path: '/pages/catalog' },
+        ...(productCategory
+          ? [{ name: productCategory.title, path: getCategoryPath(product.categorySlug) }]
+          : []),
+        { name: product.name, path: getProductPath(slug) },
+      ];
+    }
+  }
+
+  if (pageId === 'catalog') {
+    return [
+      { name: 'Home', path: '/' },
+      { name: 'Safety Supplies', path: '/pages/safety-supplies' },
+      { name: 'Catalog', path: '/pages/catalog' },
+    ];
+  }
+
   return [
     { name: 'Home', path: '/' },
     { name: page.breadcrumb, path: page.path },
@@ -366,6 +455,30 @@ export function resolvePageSeo(pageId) {
       keywords: [...location.keywords],
       schemaType: 'Service',
     };
+  }
+
+  if (pageId.startsWith('catalog-')) {
+    const slug = pageId.replace('catalog-', '');
+    const category = CATALOG_CATEGORIES[slug];
+    if (category) {
+      return {
+        path: getCategoryPath(slug),
+        title: category.seoTitle,
+        description: category.seoDescription,
+        keywords: [...category.keywords],
+        schemaType: 'CollectionPage',
+      };
+    }
+    const product = CATALOG_PRODUCTS[slug];
+    if (product) {
+      return {
+        path: getProductPath(slug),
+        title: product.seoTitle,
+        description: product.seoDescription,
+        keywords: [product.name, product.sku],
+        schemaType: 'Product',
+      };
+    }
   }
   const page = PAGE_SEO[pageId] ?? PAGE_SEO.home;
   return {
