@@ -501,13 +501,13 @@ html::-webkit-scrollbar {
   inset: 0;
   background:
     linear-gradient(108deg, transparent 52%, rgba(255, 255, 255, 0.55) 52%, rgba(255, 255, 255, 0.2) 100%),
-    url('/images/backgrounds/cpr-training-hero-texture.jpg') center/cover no-repeat;
+    url('/images/backgrounds/cpr-training-hero-texture.webp') center/cover no-repeat;
 }
 
 .hero-split__dark {
   position: absolute;
   inset: 0;
-  background: url('/images/backgrounds/safety-supplies-hero-background.jpg') center/cover no-repeat;
+  background: url('/images/backgrounds/safety-supplies-hero-background.webp') center/cover no-repeat;
   -webkit-mask-image: linear-gradient(108deg, black 52%, transparent 52%);
   mask-image: linear-gradient(108deg, black 52%, transparent 52%);
 }
@@ -555,9 +555,9 @@ html::-webkit-scrollbar {
 .panel-2 { left: calc(50% - 40px); top: 20px; z-index: 3; }
 .panel-3 { left: calc(50% + 410px); top: -30px; z-index: 2; }
 
-.panel-1 .collage-img { background-image: url('/images/brand/home-hero-collage-panel-1.png'); }
-.panel-2 .collage-img { background-image: url('/images/supplies/home-hero-collage-panel-2.png'); }
-.panel-3 .collage-img { background-image: url('/images/supplies/home-hero-collage-panel-3.png'); }
+.panel-1 .collage-img { background-image: url('/images/brand/home-hero-collage-panel-1.webp'); }
+.panel-2 .collage-img { background-image: url('/images/supplies/home-hero-collage-panel-2.webp'); }
+.panel-3 .collage-img { background-image: url('/images/supplies/home-hero-collage-panel-3.webp'); }
 
 body[data-page="home"] .hero-split__layout {
   display: flex;
@@ -705,7 +705,7 @@ body[data-page="cpr-training"] .cpr-hero__diagonal {
 }
 
 body[data-page="cpr-training"] .cpr-hero__texture {
-  background-image: url('/images/backgrounds/cpr-training-hero-texture.jpg');
+  background-image: url('/images/backgrounds/cpr-training-hero-texture.webp');
   background-size: cover;
   opacity: 0.15;
   mix-blend-mode: overlay;
@@ -742,7 +742,7 @@ body[data-page="cpr-training"] .cpr-skew-card {
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   flex-shrink: 0;
   overflow: hidden;
-  background-image: url('/images/training/cpr-training-certification-path.jpg');
+  background-image: url('/images/training/cpr-training-certification-path.webp');
   background-repeat: no-repeat;
   background-size: var(--cpr-gallery-w) 450px;
   background-position: left bottom;
@@ -867,7 +867,7 @@ body[data-page="cpr-training"] .cpr-skew-card:hover {
 .cta-banner {
   background:
     linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-    url('/images/training/cpr-training-hero.jpeg') center/cover no-repeat;
+    url('/images/training/cpr-training-hero.webp') center/cover no-repeat;
 }
 
 /* ==========================================================================
@@ -1089,7 +1089,7 @@ body[data-page="fire-enrollment"] .form-glass {
   .hero-split__light {
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
-      url('/images/backgrounds/cpr-training-hero-texture.jpg') center/cover no-repeat;
+      url('/images/backgrounds/cpr-training-hero-texture.webp') center/cover no-repeat;
   }
 
   .hero-split__overlay {

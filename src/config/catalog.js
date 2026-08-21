@@ -192,7 +192,7 @@ export const CATALOG_CATEGORIES = {
     headlineAccent: '',
     description:
       'Industrial-grade replenishment for first responders, facilities, and emergency kits. Precision-curated, OSHA-compliant essentials.',
-    heroImage: '/images/backgrounds/safety-supplies-hero-background.jpg',
+    heroImage: '/images/backgrounds/safety-supplies-hero-background.webp',
     isHub: true,
     navLabel: 'All Products',
     hubProductOrder: [
@@ -296,7 +296,7 @@ export const CATALOG_CATEGORIES = {
     headlineAccent: 'Protection.',
     description:
       'OSHA-compliant first aid cabinets, trauma kits, and wall stations engineered for manufacturing, warehousing, and high-traffic commercial facilities.',
-    heroImage: '/images/supplies/home-services-first-aid-cabinet.png',
+    heroImage: '/images/supplies/home-services-first-aid-cabinet.webp',
     cardVariant: 'outline',
     treatmentPacks: [
       {
@@ -352,7 +352,7 @@ export const CATALOG_CATEGORIES = {
     headlineSuffix: 'Systems',
     description:
       'Industrial-grade fire suppression and life safety equipment engineered for high-risk environments. Precision manufacturing meets uncompromising safety standards.',
-    heroImage: '/images/supplies/home-services-fire-extinguisher.png',
+    heroImage: '/images/supplies/home-services-fire-extinguisher.webp',
     layout: 'fire-protection',
     productGridTitle: 'Fire Suppression Inventory',
     productGridSubtitle: 'Showing all available commercial-grade suppression units',
@@ -538,7 +538,7 @@ export const CATALOG_CATEGORIES = {
     headlineAccent: 'Dressings',
     description:
       'Metal-detectable and heavy-duty adhesive bandages engineered for food processing, fabrication, and high-wear environments.',
-    heroImage: '/images/supplies/safety-supplies-first-aid-kit.png',
+    heroImage: '/images/supplies/safety-supplies-first-aid-kit.webp',
     features: {
       title: 'Engineered for the Modern Workforce',
       items: [
@@ -815,7 +815,7 @@ export const CATALOG_PRODUCTS = {
     name: 'Blood Stopper Cabinet',
     sku: 'BS-CAB-01',
     description: 'Wall-mounted trauma station with bleeding control supplies for high-risk fabrication and assembly areas.',
-    image: '/images/supplies/safety-supplies-trauma-kit.png',
+    image: '/images/supplies/safety-supplies-trauma-kit.webp',
     filterTag: 'cabinet',
     inStock: true,
     seoTitle: 'Blood Stopper Cabinet | Code 3 First Aid',
@@ -839,7 +839,7 @@ export const CATALOG_PRODUCTS = {
     name: 'Industrial Trauma Kit',
     sku: 'TK-400-X',
     description: 'OSHA and ANSI compliant trauma bag engineered for high-risk industrial environments and fabrication workshops.',
-    image: '/images/supplies/safety-supplies-trauma-kit.png',
+    image: '/images/supplies/safety-supplies-trauma-kit.webp',
     badge: 'Top Rated',
     filterTag: 'trauma',
     inStock: true,
@@ -939,7 +939,7 @@ export const CATALOG_PRODUCTS = {
         name: 'Bleeding Control Station',
         price: 245,
         category: 'Cabinets',
-        image: '/images/supplies/safety-supplies-trauma-kit.png',
+        image: '/images/supplies/safety-supplies-trauma-kit.webp',
       },
       {
         slug: 'bleeding-control-pack',
@@ -1438,7 +1438,7 @@ export const CATALOG_PRODUCTS = {
     name: 'Slim Eyewash Station (Double)',
     sku: 'EW-SLIM-2',
     description: 'Space-saving dual-station unit for corridors, labs, and battery manufacturing lines.',
-    image: '/images/supplies/home-services-mobile-eyewash-station.png',
+    image: '/images/supplies/home-services-mobile-eyewash-station.webp',
     badge: 'In Stock',
     filterTag: 'station',
     inStock: true,
@@ -1676,7 +1676,7 @@ export const CATALOG_PRODUCTS = {
     name: 'Knuckle LG',
     sku: 'BD-KNU-LG',
     description: 'Heavy-duty knuckle bandage shaped for fingers and high-flex work zones.',
-    image: '/images/supplies/safety-supplies-first-aid-kit.png',
+    image: '/images/supplies/safety-supplies-first-aid-kit.webp',
     badge: 'Heavy Duty',
     filterTag: 'heavy-duty',
     inStock: true,

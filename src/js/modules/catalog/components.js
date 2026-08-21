@@ -219,7 +219,7 @@ export function renderFeatureSection(category) {
   const statsGrid = stats
     ? `<div class="catalog-stats">${stats}</div>`
     : `<div class="catalog-features__visual" aria-hidden="true">
-        <img src="${escapeHtml(category.heroImage ?? '/images/supplies/safety-supplies-first-aid-kit.png')}" alt="">
+        <img src="${escapeHtml(category.heroImage ?? '/images/supplies/safety-supplies-first-aid-kit.webp')}" alt="">
       </div>`;
 
   return `
@@ -410,7 +410,7 @@ export function renderCategoryCards(categories) {
       (category) => `
         <a href="/pages/catalog/${category.slug}.html" class="catalog-category-card">
           <div class="catalog-category-card__media">
-            <img src="${escapeHtml(category.heroImage ?? '/images/supplies/safety-supplies-first-aid-kit.png')}" alt="">
+            <img src="${escapeHtml(category.heroImage ?? '/images/supplies/safety-supplies-first-aid-kit.webp')}" alt="">
           </div>
           <div class="catalog-category-card__body">
             <h3 class="catalog-category-card__title">${escapeHtml(category.title)}</h3>

@@ -10,8 +10,10 @@
     "catalog": "node scripts/generate-catalog-pages.mjs",
     "preview": "vite preview",
     "sitemap": "node scripts/generate-sitemap.mjs",
+    "images": "node scripts/optimize-images.mjs",
     "verify": "node scripts/verify-site.mjs",
-    "verify:jsonld": "node scripts/verify-jsonld.mjs"
+    "verify:jsonld": "node scripts/verify-jsonld.mjs",
+    "check:images": "node scripts/check-images.mjs"
   },
   "dependencies": {
     "gsap": "^3.12.7",
@@ -20,6 +22,7 @@
   "devDependencies": {
     "autoprefixer": "^10.5.4",
     "postcss": "^8.5.26",
+    "sharp": "^0.35.3",
     "tailwindcss": "^3.4.17",
     "vite": "^7.3.6"
   }

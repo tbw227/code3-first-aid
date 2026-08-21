@@ -25,7 +25,7 @@ export const SITE = {
     'OSHA-aligned CPR, fire extinguisher, and PPE training plus industrial safety supplies for workplaces across Missouri, Nebraska, Kansas, and Oklahoma.',
   locale: 'en_US',
   logo: '/images/brand/code_3_first_aid_logo_1.png',
-  /** Default Open Graph / Twitter Card image (absolute path on site). */
+  /** PNG rather than WebP: some social and messaging scrapers still reject WebP. */
   ogImage: '/images/brand/code_3_first_aid_logo_1.png',
   address: {
     addressLocality: 'Fort Scott',
