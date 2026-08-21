@@ -1,0 +1,189 @@
+/**
+ * Generates catalog hub, category, and product pages from src/config/catalog.js
+ */
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import {
+  CATALOG_CATEGORIES,
+  CATALOG_PRODUCTS,
+  getCategorySlugs,
+  getProductSlugs,
+} from '../src/config/catalog.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const pagesDir = resolve(__dirname, '../pages');
+const catalogDir = resolve(pagesDir, 'catalog');
+const productsDir = resolve(catalogDir, 'products');
+
+/** @param {string} text */
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/**
+ * @param {{
+ *   dataPage: string,
+ *   title: string,
+ *   catalogCategory?: string,
+ *   catalogProduct?: string,
+ *   rootMarkup: string,
+ * }} options
+ */
+function buildShell({ dataPage, title, catalogCategory, catalogProduct, rootMarkup }) {
+  const categoryAttr = catalogCategory ? ` data-catalog-category="${catalogCategory}"` : '';
+  const productAttr = catalogProduct ? ` data-catalog-product="${catalogProduct}"` : '';
+
+  return `<!DOCTYPE html>
+<!-- Code 3 First Aid - ${escapeHtml(title)} (data-page="${dataPage}") -->
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${escapeHtml(title)}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+    <style>.site-header { background-color: #1a1a1a; }</style>
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body class="bg-white text-on-surface font-body-md overflow-x-hidden" data-page="${dataPage}"${categoryAttr}${productAttr}>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header bg-obsidian sticky top-0 z-50 border-b border-white/10 shadow-lg transition-[border-color,box-shadow] duration-300">
+        <div class="flex justify-between items-center w-full py-4 page-container gap-4">
+            <a href="/index.html" class="flex items-center gap-3 shrink-0">
+                <img src="/images/brand/code_3_first_aid_logo_1.png" alt="Code 3 First Aid" class="h-10 w-auto">
+                <span class="font-headline-md text-base md:text-headline-md font-bold text-white tracking-tighter hidden sm:block">CODE 3 FIRST AID</span>
+            </a>
+            <nav class="hidden lg:flex gap-8 xl:gap-12 items-center" data-nav="main"></nav>
+            <div class="flex items-center gap-3 shrink-0">
+                <button type="button" class="lg:hidden text-white p-2" data-mobile-nav-toggle aria-expanded="false" aria-label="Open menu">
+                    <i data-lucide="menu" class="text-2xl"></i>
+                </button>
+                <a href="/pages/forms/procurement.html" class="bg-primary hover:bg-primary-container text-on-primary px-5 py-2 font-label-caps text-label-caps transition-all active:scale-95">Contact Us</a>
+            </div>
+        </div>
+        <div class="mobile-nav lg:hidden" data-mobile-nav aria-hidden="true"></div>
+    </header>
+
+    <main id="main-content">
+        <nav class="page-container pt-6 text-sm text-secondary catalog-breadcrumbs" aria-label="Breadcrumb">
+            <ol class="flex flex-wrap items-center gap-2 list-none p-0 m-0">
+                <li><a href="/index.html" class="hover:text-primary">Home</a></li>
+                <li aria-hidden="true">/</li>
+                <li><a href="/pages/safety-supplies.html" class="hover:text-primary">Safety Supplies</a></li>
+                <li aria-hidden="true">/</li>
+                <li><a href="/pages/catalog.html" class="hover:text-primary">Catalog</a></li>
+            </ol>
+        </nav>
+        ${rootMarkup}
+    </main>
+
+    <footer class="bg-[#111] text-white border-t-4 border-stone-800">
+        <div class="page-container py-12 md:py-14">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 [&>*]:min-w-0">
+                <div class="lg:col-span-3">
+                    <a href="/index.html" class="inline-flex items-center gap-3 mb-4">
+                        <img src="/images/brand/code_3_first_aid_logo_1.png" alt="" class="h-8 w-auto opacity-90">
+                        <span class="font-headline-md text-sm font-bold tracking-tighter uppercase">Code 3 First Aid</span>
+                    </a>
+                    <p class="text-white/45 text-sm leading-relaxed max-w-[16rem]">
+                        OSHA-aligned training and industrial safety supplies for Midwest workplaces.
+                    </p>
+                </div>
+                <div class="lg:col-span-5 grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-accent-red mb-4">Services</h3>
+                        <ul class="space-y-2.5 text-sm text-white/65" data-nav="footer-services"></ul>
+                    </div>
+                    <div>
+                        <h3 class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-accent-red mb-4">Explore</h3>
+                        <ul class="space-y-2.5 text-sm text-white/65">
+                            <li><a class="hover:text-white transition-colors" href="/pages/catalog.html">Product Catalog</a></li>
+                            <li><a class="hover:text-white transition-colors" href="/pages/service-areas.html">Service Areas</a></li>
+                            <li><a class="hover:text-white transition-colors" href="/pages/forms/procurement.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="lg:col-span-4 lg:border-l lg:border-white/10 lg:pl-8">
+                    <h3 class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-accent-red mb-4">Get in touch</h3>
+                    <dl class="space-y-4 text-sm">
+                        <div>
+                            <dt class="text-white/35 text-xs mb-1">Email</dt>
+                            <dd class="min-w-0">
+                                <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+                            </dd>
+                        </div>
+                        <div>
+                            <dt class="text-white/35 text-xs mb-1">Phone</dt>
+                            <dd>
+                                <a href="tel:+19133131125" class="text-white/80 hover:text-accent-red transition-colors">913-313-1125</a>
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white/10 bg-black/40">
+            <div class="page-container py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[10px] font-label-caps text-white/30 uppercase tracking-widest">
+                <p>&copy; 2026 Code 3 First Aid</p>
+                <p>MO · NE · KS · OK · OSHA Compliant</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>`;
+}
+
+mkdirSync(catalogDir, { recursive: true });
+mkdirSync(productsDir, { recursive: true });
+
+const hub = CATALOG_CATEGORIES['bulk-medical-supplies'];
+writeFileSync(
+  resolve(pagesDir, 'catalog.html'),
+  buildShell({
+    dataPage: 'catalog',
+    title: hub.seoTitle,
+    rootMarkup: '<div data-catalog-root class="catalog-page-root"></div>',
+  }),
+  'utf8',
+);
+
+for (const slug of getCategorySlugs()) {
+  const category = CATALOG_CATEGORIES[slug];
+  writeFileSync(
+    resolve(catalogDir, `${slug}.html`),
+    buildShell({
+      dataPage: 'catalog-category',
+      title: category.seoTitle,
+      catalogCategory: slug,
+      rootMarkup: '<div data-catalog-root class="catalog-page-root"></div>',
+    }),
+    'utf8',
+  );
+}
+
+for (const slug of getProductSlugs()) {
+  const product = CATALOG_PRODUCTS[slug];
+  if (!product.hasDetailPage) continue;
+
+  writeFileSync(
+    resolve(productsDir, `${slug}.html`),
+    buildShell({
+      dataPage: 'catalog-product',
+      title: product.seoTitle,
+      catalogProduct: slug,
+      rootMarkup: '<div data-product-root class="catalog-page-root"></div>',
+    }),
+    'utf8',
+  );
+}
+
+console.log(`Wrote catalog hub, ${getCategorySlugs().length} category pages, and ${getProductSlugs().filter((s) => CATALOG_PRODUCTS[s].hasDetailPage).length} product pages.`);

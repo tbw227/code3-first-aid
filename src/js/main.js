@@ -29,6 +29,17 @@ async function bootstrap() {
       initProductAnimations();
       break;
     }
+    case 'catalog':
+    case 'catalog-category': {
+      const { initCatalogPage } = await import('./modules/catalog/init-category-page.js');
+      initCatalogPage();
+      break;
+    }
+    case 'catalog-product': {
+      const { initProductPage } = await import('./modules/catalog/init-product-page.js');
+      initProductPage();
+      break;
+    }
     case 'cpr-training': {
       const { initCprTrainingAnimations } = await import('./modules/scroll-animations.js');
       initCprTrainingAnimations();
