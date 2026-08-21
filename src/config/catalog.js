@@ -1685,6 +1685,17 @@ export const CATALOG_PRODUCTS = {
   },
 };
 
+/** Category backing the catalog hub at /pages/catalog.html. */
+export const HUB_CATEGORY_SLUG = 'bulk-medical-supplies';
+
+/** Products per page on the hub grid when a category sets no `hubPageSize`. */
+export const HUB_PAGE_SIZE_FALLBACK = 7;
+
+/** @param {CatalogCategory} [category] @returns {number} */
+export function getHubPageSize(category) {
+  return category?.hubPageSize ?? HUB_PAGE_SIZE_FALLBACK;
+}
+
 /** Display order for catalog sidebar navigation (hub first). */
 export const CATALOG_NAV_ORDER = [
   'bulk-medical-supplies',

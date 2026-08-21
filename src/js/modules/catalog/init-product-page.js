@@ -1,32 +1,24 @@
 /**
- * Product detail catalog pages — renders layout sections from config props.
+ * Product detail catalog pages.
+ *
+ * Like the category pages, the markup is baked in at build time; this module
+ * binds the gallery and swaps icon placeholders.
  */
-import { getCategoryBySlug, getProductBySlug } from '../../../config/catalog.js';
 import { initIcons } from '../../utils/icons.js';
-import { wrapWithCatalogSidebar } from './components.js';
-import { bindProductGallery, renderProductDetailPage } from './layout-product-detail.js';
+import { bindProductGallery } from './product-gallery.js';
 
-export function initProductPage() {
+export async function initProductPage() {
   const root = document.querySelector('[data-product-root]');
   const slug = document.body.dataset.catalogProduct;
   if (!root || !slug) return;
 
-  const product = getProductBySlug(slug);
-  if (!product) return;
-
-  const category = getCategoryBySlug(product.categorySlug);
-  if (!category) return;
-
-  const shellBreadcrumbs = document.querySelector('.catalog-breadcrumbs');
-  if (shellBreadcrumbs) {
-    shellBreadcrumbs.hidden = true;
+  // Only reached if the page was served without its generated markup; the
+  // builders stay in a chunk that production never downloads.
+  if (!root.firstElementChild) {
+    const { renderProductPageHtml } = await import('./render-page.js');
+    root.innerHTML = renderProductPageHtml(slug);
   }
 
-  root.innerHTML = wrapWithCatalogSidebar(
-    product.categorySlug,
-    renderProductDetailPage(product, category),
-    { variant: 'product' },
-  );
   bindProductGallery(root);
   initIcons(root);
 }

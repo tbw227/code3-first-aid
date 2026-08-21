@@ -4506,16 +4506,6 @@ body[data-page="fire-enrollment"] .form-glass {
   transition: border-color 0.3s ease, transform 0.3s ease, opacity 0.7s ease;
 }
 
-.catalog-fire-glass--hidden {
-  opacity: 0;
-  transform: translateY(2.5rem);
-}
-
-.catalog-fire-glass--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* fire hero (.catalog-fire-hero) — centered; height matched to First Aid Kits (.catalog-hero) */
 .catalog-fire-hero {
   position: relative;

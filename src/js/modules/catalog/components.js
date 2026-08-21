@@ -20,11 +20,16 @@ function formatPrice(value) {
 
 /**
  * @param {import('../../../config/catalog.js').CatalogProduct} product
- * @param {{ variant?: 'solid' | 'outline' }} [options]
+ * @param {{ variant?: 'solid' | 'outline', glass?: boolean, page?: number }} [options]
  */
 export function renderProductCard(product, options = {}) {
   const variant = options.variant ?? 'solid';
   const glass = options.glass ?? false;
+  // Paginated grids bake the page assignment in so cards past page one never
+  // paint before the pagination script runs.
+  const pageAttrs = options.page
+    ? ` data-catalog-page="${options.page}"${options.page > 1 ? ' hidden' : ''}`
+    : '';
   const href = product.hasDetailPage
     ? `/pages/catalog/products/${product.slug}.html`
     : '/pages/forms/procurement.html';
@@ -40,7 +45,7 @@ export function renderProductCard(product, options = {}) {
     : 'catalog-card__cta';
 
   return `
-    <article class="${cardClass}" data-filter-tag="${escapeHtml(product.filterTag ?? 'all')}" data-category="${escapeHtml(product.categorySlug)}">
+    <article class="${cardClass}" data-filter-tag="${escapeHtml(product.filterTag ?? 'all')}" data-category="${escapeHtml(product.categorySlug)}"${pageAttrs}>
       <a href="${href}" class="catalog-card__media">
         ${badge}
         <img

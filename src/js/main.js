@@ -32,12 +32,12 @@ async function bootstrap() {
     case 'catalog':
     case 'catalog-category': {
       const { initCatalogPage } = await import('./modules/catalog/init-category-page.js');
-      initCatalogPage();
+      await initCatalogPage();
       break;
     }
     case 'catalog-product': {
       const { initProductPage } = await import('./modules/catalog/init-product-page.js');
-      initProductPage();
+      await initProductPage();
       break;
     }
     case 'cpr-training': {

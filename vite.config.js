@@ -4,6 +4,7 @@
  */
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
+import { catalogPagesPlugin } from './scripts/vite-plugin-catalog.mjs';
 import { injectSeoMetaPlugin } from './scripts/vite-plugin-seo.mjs';
 import { getLocationSlugs } from './src/config/seo.js';
 import { getCategorySlugs, getProductSlugs, CATALOG_PRODUCTS } from './src/config/catalog.js';
@@ -32,7 +33,7 @@ const catalogProductInputs = Object.fromEntries(
 );
 
 export default defineConfig({
-  plugins: [injectSeoMetaPlugin()],
+  plugins: [catalogPagesPlugin(), injectSeoMetaPlugin()],
   build: {
     rollupOptions: {
       input: {

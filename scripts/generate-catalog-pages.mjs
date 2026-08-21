@@ -3,13 +3,18 @@
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   CATALOG_CATEGORIES,
   CATALOG_PRODUCTS,
   getCategorySlugs,
   getProductSlugs,
 } from '../src/config/catalog.js';
+import {
+  renderCategoryPageHtml,
+  renderHubPageHtml,
+  renderProductPageHtml,
+} from '../src/js/modules/catalog/render-page.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pagesDir = resolve(__dirname, '../pages');
@@ -72,15 +77,6 @@ function buildShell({ dataPage, title, catalogCategory, catalogProduct, rootMark
     </header>
 
     <main id="main-content">
-        <nav class="page-container pt-6 text-sm text-secondary catalog-breadcrumbs" aria-label="Breadcrumb">
-            <ol class="flex flex-wrap items-center gap-2 list-none p-0 m-0">
-                <li><a href="/index.html" class="hover:text-primary">Home</a></li>
-                <li aria-hidden="true">/</li>
-                <li><a href="/pages/safety-supplies.html" class="hover:text-primary">Safety Supplies</a></li>
-                <li aria-hidden="true">/</li>
-                <li><a href="/pages/catalog.html" class="hover:text-primary">Catalog</a></li>
-            </ol>
-        </nav>
         ${rootMarkup}
     </main>
 
@@ -142,48 +138,56 @@ function buildShell({ dataPage, title, catalogCategory, catalogProduct, rootMark
 </html>`;
 }
 
-mkdirSync(catalogDir, { recursive: true });
-mkdirSync(productsDir, { recursive: true });
+/** Writes the catalog hub, category, and product pages with their markup baked in. */
+export function generateCatalogPages() {
+  mkdirSync(catalogDir, { recursive: true });
+  mkdirSync(productsDir, { recursive: true });
 
-const hub = CATALOG_CATEGORIES['bulk-medical-supplies'];
-writeFileSync(
-  resolve(pagesDir, 'catalog.html'),
-  buildShell({
-    dataPage: 'catalog',
-    title: hub.seoTitle,
-    rootMarkup: '<div data-catalog-root class="catalog-page-root"></div>',
-  }),
-  'utf8',
-);
-
-for (const slug of getCategorySlugs()) {
-  const category = CATALOG_CATEGORIES[slug];
+  const hub = CATALOG_CATEGORIES['bulk-medical-supplies'];
   writeFileSync(
-    resolve(catalogDir, `${slug}.html`),
+    resolve(pagesDir, 'catalog.html'),
     buildShell({
-      dataPage: 'catalog-category',
-      title: category.seoTitle,
-      catalogCategory: slug,
-      rootMarkup: '<div data-catalog-root class="catalog-page-root"></div>',
+      dataPage: 'catalog',
+      title: hub.seoTitle,
+      rootMarkup: `<div data-catalog-root class="catalog-page-root catalog-page-root--hub">${renderHubPageHtml()}</div>`,
     }),
     'utf8',
   );
+
+  for (const slug of getCategorySlugs()) {
+    const category = CATALOG_CATEGORIES[slug];
+    writeFileSync(
+      resolve(catalogDir, `${slug}.html`),
+      buildShell({
+        dataPage: 'catalog-category',
+        title: category.seoTitle,
+        catalogCategory: slug,
+        rootMarkup: `<div data-catalog-root class="catalog-page-root">${renderCategoryPageHtml(slug)}</div>`,
+      }),
+      'utf8',
+    );
+  }
+
+  const productSlugs = getProductSlugs().filter((slug) => CATALOG_PRODUCTS[slug].hasDetailPage);
+
+  for (const slug of productSlugs) {
+    const product = CATALOG_PRODUCTS[slug];
+    writeFileSync(
+      resolve(productsDir, `${slug}.html`),
+      buildShell({
+        dataPage: 'catalog-product',
+        title: product.seoTitle,
+        catalogProduct: slug,
+        rootMarkup: `<div data-product-root class="catalog-page-root">${renderProductPageHtml(slug)}</div>`,
+      }),
+      'utf8',
+    );
+  }
+
+  return { categories: getCategorySlugs().length, products: productSlugs.length };
 }
 
-for (const slug of getProductSlugs()) {
-  const product = CATALOG_PRODUCTS[slug];
-  if (!product.hasDetailPage) continue;
-
-  writeFileSync(
-    resolve(productsDir, `${slug}.html`),
-    buildShell({
-      dataPage: 'catalog-product',
-      title: product.seoTitle,
-      catalogProduct: slug,
-      rootMarkup: '<div data-product-root class="catalog-page-root"></div>',
-    }),
-    'utf8',
-  );
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const { categories, products } = generateCatalogPages();
+  console.log(`Wrote catalog hub, ${categories} category pages, and ${products} product pages.`);
 }
-
-console.log(`Wrote catalog hub, ${getCategorySlugs().length} category pages, and ${getProductSlugs().filter((s) => CATALOG_PRODUCTS[s].hasDetailPage).length} product pages.`);

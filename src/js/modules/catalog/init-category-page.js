@@ -1,42 +1,17 @@
 /**
- * Category and hub catalog pages — reads data-catalog-category and renders UI from config.
+ * Category and hub catalog pages.
+ *
+ * The markup is baked into the HTML by scripts/generate-catalog-pages.mjs, so
+ * this module normally only binds behaviour. It falls back to rendering when the
+ * root is empty, which keeps hand-written or stale shells working.
  */
 import {
-  CATALOG_CATEGORIES,
+  HUB_CATEGORY_SLUG,
   getCategoryBySlug,
-  getProductsByCategory,
+  getHubPageSize,
 } from '../../../config/catalog.js';
 import { initIcons } from '../../utils/icons.js';
-import {
-  renderCatalogHubHero,
-  renderCategoryHero,
-  renderFaqSection,
-  renderFeatureSection,
-  renderFilterBar,
-  renderGridSectionHeader,
-  renderInfoSection,
-  renderPagination,
-  renderProductCard,
-  renderTreatmentPacksSection,
-  wrapWithCatalogSidebar,
-} from './components.js';
-import { initProductAnimations } from '../scroll-animations.js';
-import {
-  renderEyeCareBentoGrid,
-  renderEyeCareComplianceSection,
-  renderEyeCareCtaBanner,
-  renderEyeCareProductSection,
-} from './layout-eye-care.js';
-import {
-  renderPpeCtaSection,
-  renderPpeProductSections,
-} from './layout-industrial-ppe.js';
-import {
-  bindFireScrollReveal,
-  bindFireViewToggle,
-  renderFireProductSection,
-  renderFireSolutionsSection,
-} from './layout-fire-protection.js';
+import { bindFireViewToggle } from './fire-view-toggle.js';
 
 /** @param {HTMLElement} root */
 function bindFilters(root) {
@@ -78,84 +53,6 @@ function bindFilters(root) {
       }
     }
   });
-}
-
-/**
- * @param {string} categorySlug
- * @param {HTMLElement} root
- */
-function renderEyeCareCategoryPage(categorySlug, root) {
-  const category = getCategoryBySlug(categorySlug);
-  if (!category) return;
-
-  const products = getProductsByCategory(categorySlug);
-  const shellBreadcrumbs = document.querySelector('.catalog-breadcrumbs');
-  if (shellBreadcrumbs) {
-    shellBreadcrumbs.hidden = true;
-  }
-
-  root.innerHTML = `
-    ${renderCategoryHero(category)}
-    ${wrapWithCatalogSidebar(categorySlug, `
-      ${renderEyeCareProductSection(category, products)}
-    `)}
-    ${category.complianceSection ? renderEyeCareComplianceSection(category.complianceSection) : ''}
-    ${category.bentoGrid ? renderEyeCareBentoGrid(category.bentoGrid) : ''}
-    ${category.ctaBanner ? renderEyeCareCtaBanner(category.ctaBanner) : ''}
-  `;
-
-  initProductAnimations();
-  initIcons(root);
-}
-
-function renderIndustrialPpeCategoryPage(categorySlug, root) {
-  const category = getCategoryBySlug(categorySlug);
-  if (!category) return;
-
-  const products = getProductsByCategory(categorySlug);
-  const shellBreadcrumbs = document.querySelector('.catalog-breadcrumbs');
-  if (shellBreadcrumbs) {
-    shellBreadcrumbs.hidden = true;
-  }
-
-  root.innerHTML = `
-    ${renderCategoryHero(category)}
-    ${wrapWithCatalogSidebar(categorySlug, `
-      <section class="catalog-ppe-catalog section-y" id="catalog">
-        <div class="page-container">
-          ${renderPpeProductSections(products)}
-        </div>
-      </section>
-    `)}
-    ${category.ctaSection ? renderPpeCtaSection(category.ctaSection) : ''}
-  `;
-
-  initProductAnimations();
-  initIcons(root);
-}
-
-function renderFireProtectionCategoryPage(categorySlug, root) {
-  const category = getCategoryBySlug(categorySlug);
-  if (!category) return;
-
-  const products = getProductsByCategory(categorySlug);
-  const shellBreadcrumbs = document.querySelector('.catalog-breadcrumbs');
-  if (shellBreadcrumbs) {
-    shellBreadcrumbs.hidden = true;
-  }
-
-  root.innerHTML = `
-    ${renderCategoryHero(category)}
-    ${wrapWithCatalogSidebar(categorySlug, `
-      ${renderFireProductSection(category, products)}
-    `)}
-    ${category.solutionsSection ? renderFireSolutionsSection(category.solutionsSection) : ''}
-  `;
-
-  bindFireViewToggle(root);
-  bindFireScrollReveal(root);
-  initProductAnimations();
-  initIcons(root);
 }
 
 /** @param {HTMLElement} root @param {number} pageSize */
@@ -260,111 +157,34 @@ function bindCatalogPagination(root, pageSize) {
   showPage(1, false);
 }
 
-function renderCategoryPage(categorySlug, root) {
-  const category = getCategoryBySlug(categorySlug);
-  if (!category) return;
-
-  if (category.layout === 'eye-care') {
-    renderEyeCareCategoryPage(categorySlug, root);
-    return;
-  }
-
-  if (category.layout === 'industrial-ppe') {
-    renderIndustrialPpeCategoryPage(categorySlug, root);
-    return;
-  }
-
-  if (category.layout === 'fire-protection') {
-    renderFireProtectionCategoryPage(categorySlug, root);
-    return;
-  }
-
-  const products = getProductsByCategory(categorySlug);
-  const filters = category.filters;
-  const cardVariant = category.cardVariant ?? 'solid';
-  const shellBreadcrumbs = document.querySelector('.catalog-breadcrumbs');
-  if (shellBreadcrumbs) {
-    shellBreadcrumbs.hidden = true;
-  }
-
-  root.innerHTML = `
-    ${renderCategoryHero(category)}
-    ${wrapWithCatalogSidebar(categorySlug, `
-      <section class="catalog-grid-section section-y" id="catalog">
-        <div class="page-container">
-          ${renderGridSectionHeader(category)}
-          ${filters?.length ? renderFilterBar(filters, products.length) : ''}
-          <div class="catalog-grid" data-catalog-grid>
-            ${products.map((product) => renderProductCard(product, { variant: cardVariant })).join('')}
-          </div>
-        </div>
-      </section>
-    `)}
-    ${renderTreatmentPacksSection(category.treatmentPacks ?? [])}
-    ${renderFeatureSection(category)}
-    ${renderInfoSection(category)}
-    ${renderFaqSection(category.faqs ?? [])}
-    <section class="catalog-footer-cta section-y">
-      <div class="page-container text-center">
-        <h2 class="font-headline-lg text-3xl uppercase mb-4">Ready to equip your facility?</h2>
-        <p class="text-secondary mb-8 max-w-2xl mx-auto">Submit a procurement request for volume pricing, restocking schedules, and compliance documentation.</p>
-        <a href="/pages/forms/procurement.html" class="inline-block bg-primary text-white px-12 py-4 font-label-caps text-sm tracking-widest uppercase hover:bg-obsidian transition-colors">Request a Quote</a>
-      </div>
-    </section>
-  `;
-
-  if (filters?.length) {
-    bindFilters(root);
-  }
-  initProductAnimations();
-  initIcons(root);
-}
-
-/** @param {HTMLElement} root */
-function renderHubPage(root) {
-  const category = getCategoryBySlug('bulk-medical-supplies');
-  if (!category) return;
-
-  const products = getProductsByCategory('bulk-medical-supplies');
-  const pageSize = category.hubPageSize ?? 7;
-  const totalPages = Math.ceil(products.length / pageSize);
-  const shellBreadcrumbs = document.querySelector('.catalog-breadcrumbs');
-  if (shellBreadcrumbs) {
-    shellBreadcrumbs.hidden = true;
-  }
-
-  root.classList.add('catalog-page-root--hub');
-
-  root.innerHTML = `
-    ${renderCatalogHubHero(category)}
-    ${wrapWithCatalogSidebar('bulk-medical-supplies', `
-      <section class="catalog-grid-section catalog-grid-section--hub section-y" id="catalog">
-        <div class="page-container">
-          <div class="catalog-grid" data-catalog-grid>
-            ${products.map((product) => renderProductCard(product, { glass: true })).join('')}
-          </div>
-          ${renderPagination(totalPages)}
-        </div>
-      </section>
-    `)}
-    ${renderInfoSection(category, { hubStyle: true })}
-    ${renderFaqSection(category.faqs ?? [], { hubStyle: true })}
-  `;
-
-  bindCatalogPagination(root, pageSize);
-  initProductAnimations();
-  initIcons(root);
-}
-
-export function initCatalogPage() {
+export async function initCatalogPage() {
   const root = document.querySelector('[data-catalog-root]');
   if (!root) return;
 
   const categorySlug = document.body.dataset.catalogCategory;
-  if (categorySlug) {
-    renderCategoryPage(categorySlug, root);
-    return;
+  const category = getCategoryBySlug(categorySlug ?? HUB_CATEGORY_SLUG);
+  if (!category) return;
+
+  // Only reached if the page was served without its generated markup; the
+  // builders stay in a chunk that production never downloads.
+  if (!root.firstElementChild) {
+    const { renderCategoryPageHtml, renderHubPageHtml } = await import('./render-page.js');
+    root.innerHTML = categorySlug ? renderCategoryPageHtml(categorySlug) : renderHubPageHtml();
+    if (!categorySlug) {
+      root.classList.add('catalog-page-root--hub');
+    }
   }
 
-  renderHubPage(root);
+  if (categorySlug) {
+    if (category.filters?.length) {
+      bindFilters(root);
+    }
+    if (category.layout === 'fire-protection') {
+      bindFireViewToggle(root);
+    }
+  } else {
+    bindCatalogPagination(root, getHubPageSize(category));
+  }
+
+  initIcons(root);
 }
