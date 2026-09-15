@@ -49,9 +49,10 @@
     
     <div class="catalog-layout">
       
-    <aside class="catalog-sidebar" aria-label="Catalog categories">
-      <p class="catalog-sidebar__heading">Categories</p>
-      <nav class="catalog-sidebar__nav">
+    <div class="catalog-sidebar-rail">
+      <aside class="catalog-sidebar" aria-label="Catalog categories">
+        <p class="catalog-sidebar__heading">Categories</p>
+        <nav class="catalog-sidebar__nav">
         <a
           href="/pages/catalog.html"
           class="catalog-sidebar__link"
@@ -82,8 +83,9 @@
           class="catalog-sidebar__link"
           
         >Bandages &amp; Dressings</a></nav>
-      <a href="/pages/forms/procurement.html" class="catalog-sidebar__quote">Request a Quote</a>
-    </aside>
+        <a href="/pages/forms/procurement.html" class="catalog-sidebar__quote">Request a Quote</a>
+      </aside>
+    </div>
       <div class="catalog-layout__main">
       <section class="catalog-grid-section section-y" id="catalog">
         <div class="page-container">
@@ -100,9 +102,9 @@
             
     <article class="catalog-card product-card group" data-filter-tag="treatment" data-category="first-aid-kits">
       <a href="/pages/catalog/products/pathogen-treatment-pack.html" class="catalog-card__media">
-        <span class="catalog-card__badge">Critical Asset</span>
+        <span class="catalog-card__badge">Urgent Response</span>
         <img
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ4-ZSY8V4LlZn8WfDjeCUe9BSM8yuHeUh_y6TB64x-k1IDQpDuwzzrd1a5MTHkQaS6GppKgBFrNeKwb60ExmNgypZZUnTsBKRNk4jYzlfnNlxst9h-F__U4BrXlK7PeDiyiSZOX1DIFFCBqN4gZ5c7b75LkE6SVrU_NeHsyQ3TeewI0G51Zqh21urFVItGRmWTrFMUZaXNAN2oLAoaE4eb9cgMdgZYAUzgk82mUhdFkb79FwoptI"
+          src="/images/supplies/bloodborne_pathogen_treatment_pack_img.png"
           alt="Bloodborne Pathogen Treatment Pack"
           class="catalog-card__image"
           loading="lazy"
@@ -113,7 +115,7 @@
         <h3 class="catalog-card__title">
           <a href="/pages/catalog/products/pathogen-treatment-pack.html" class="hover:text-primary transition-colors">Bloodborne Pathogen Treatment Pack</a>
         </h3>
-        <p class="catalog-card__desc">Specialized response kit for biohazard cleanup and protection. Engineered for high-risk environments requiring immediate, sterile containment of infectious materials.</p>
+        <p class="catalog-card__desc">A critical response kit designed for the safe handling and disposal of potentially infectious blood and body fluids. Engineered to meet the highest safety standards for workplace environments.</p>
         <div class="catalog-card__meta"><span>SKU: 91169</span></div>
         <a href="/pages/catalog/products/pathogen-treatment-pack.html" class="catalog-card__cta catalog-card__cta--outline">Request a Quote →</a>
       </div>
@@ -249,7 +251,7 @@
       <a href="/pages/catalog/products/cpr-d-padz.html" class="catalog-card__media">
         <span class="catalog-card__badge">Premium Supply</span>
         <img
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa5X8zKgqpWGVdIjL9QSXmM2AEA1yOCQohvt51qjpdXucRp9oMnB9kloFGak9H81GxVD8QqJOo0UrMB4nV9LkE5t3iuOqdkDiYquat07xoSDMr6jeHy4ZozD4a-hQ-qA8YN-BKJFF1VMH9puQjcG2rjyzHb3XgkBE8X1HJVEP9BwsV9Yc40A2sMfsVuw_hdms5vKZZ9wc_VRof4O9yOt9MRrJvqhH1dMDmqJxDXa4kgheQHc57cNc"
+          src="/images/supplies/cpr-d-padz.png"
           alt="CPR-D Padz (5-yr shelf life)"
           class="catalog-card__image"
           loading="lazy"
@@ -379,7 +381,7 @@
                         OSHA-aligned training and industrial safety supplies for Midwest workplaces.
                     </p>
                 </div>
-                <div class="lg:col-span-5 grid grid-cols-2 gap-8">
+                <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div>
                         <h3 class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-accent-red mb-4">Services</h3>
                         <ul class="space-y-2.5 text-sm text-white/65" data-nav="footer-services"></ul>

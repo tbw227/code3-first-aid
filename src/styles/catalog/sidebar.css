@@ -67,6 +67,12 @@
 }
 
 @media (min-width: 1024px) {
+  /* Stretch to the grid row height so sticky sidebar stops with the products/grids column */
+  .catalog-sidebar-rail {
+    align-self: stretch;
+    min-height: 0;
+  }
+
   .catalog-sidebar {
     position: sticky;
     top: 5.75rem;

@@ -39,7 +39,7 @@ import {
   renderFireProductSection,
   renderFireSolutionsSection,
 } from './layout-fire-protection.js';
-import { renderProductDetailPage } from './layout-product-detail.js';
+import { renderProductDetailPage, splitProductDetailPage } from './layout-product-detail.js';
 
 const FOOTER_CTA = `
   <section class="catalog-footer-cta section-y">
@@ -179,9 +179,18 @@ export function renderProductPageHtml(slug) {
   const category = getCategoryBySlug(product.categorySlug);
   if (!category) return '';
 
-  return wrapWithCatalogSidebar(
-    product.categorySlug,
-    renderProductDetailPage(product, category),
-    { variant: 'product' },
-  );
+  const html = renderProductDetailPage(product, category);
+
+  // Keep the category sidebar sticky for the full nitrile page. Other layouts
+  // split below-fold sections out so they can run full-width.
+  if (product.detailLayout === 'nitrile-gloves') {
+    return wrapWithCatalogSidebar(product.categorySlug, html, { variant: 'product' });
+  }
+
+  const { hero, rest } = splitProductDetailPage(html);
+
+  return `
+    ${wrapWithCatalogSidebar(product.categorySlug, hero, { variant: 'product' })}
+    ${rest}
+  `;
 }

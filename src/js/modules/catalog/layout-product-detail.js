@@ -14,25 +14,16 @@ import {
   renderSpecColumns,
   renderComponentSpotlight,
   escapeHtml,
+  isDataSheetCta,
 } from './components.js';
-
-/** @param {number | undefined} value */
-function formatPrice(value) {
-  if (value == null) return '';
-  return `$${value.toFixed(2)}`;
-}
 
 /**
  * @param {import('../../../config/catalog.js').CatalogProduct} product
- * @param {{ tall?: boolean }} [options]
+ * @param {{ tall?: boolean, className?: string, forceThumbs?: boolean }} [options]
  */
 function renderGallery(product, options = {}) {
   const images = product.gallery?.length ? product.gallery : [product.image];
-  const badges = [
-    product.badge,
-    ...(product.heroBadges ?? []),
-    product.complianceBadge,
-  ].filter(Boolean);
+  const badges = [product.badge, ...(product.heroBadges ?? [])].filter(Boolean);
 
   const badgeHtml = badges
     .map(
@@ -42,22 +33,23 @@ function renderGallery(product, options = {}) {
     .join('');
 
   const thumbs = images
-    .slice(1)
-    .map(
-      (src, index) => `
-        <button type="button" class="pd-gallery__thumb${index === 0 ? ' is-active' : ''}" data-gallery-thumb="${escapeHtml(src)}">
-          <img src="${escapeHtml(src)}" alt="">
-        </button>`,
-    )
+    .map((src, index) => {
+      const imageNumber = index + 1;
+      const label = `View image ${imageNumber} of ${images.length} for ${product.name}`;
+      return `
+        <button type="button" class="pd-gallery__thumb${index === 0 ? ' is-active' : ''}" data-gallery-thumb="${escapeHtml(src)}" aria-label="${escapeHtml(label)}">
+          <img src="${escapeHtml(src)}" alt="" aria-hidden="true">
+        </button>`;
+    })
     .join('');
 
   return `
-    <div class="pd-gallery${options.tall ? ' pd-gallery--tall' : ''}" data-product-gallery>
+    <div class="pd-gallery${options.tall ? ' pd-gallery--tall' : ''}${options.className ? ` ${options.className}` : ''}" data-product-gallery>
       <div class="pd-gallery__main">
         ${badgeHtml ? `<div class="pd-gallery__badges">${badgeHtml}</div>` : ''}
         <img src="${escapeHtml(images[0])}" alt="${escapeHtml(product.name)}" data-gallery-main>
       </div>
-      ${thumbs ? `<div class="pd-gallery__thumbs">${thumbs}</div>` : ''}
+      ${images.length > 1 || options.forceThumbs ? `<div class="pd-gallery__thumbs">${thumbs}</div>` : ''}
     </div>`;
 }
 
@@ -65,11 +57,14 @@ function renderGallery(product, options = {}) {
 function renderQuoteActions(product) {
   const primary = product.primaryCtaLabel ?? 'Add to Quote';
   const secondary = product.secondaryCtaLabel ?? 'Request Bulk Quote';
+  const secondaryCta = !isDataSheetCta(secondary)
+    ? `<a href="/pages/forms/procurement.html" class="pd-actions__secondary">${escapeHtml(secondary)}</a>`
+    : '';
 
   return `
     <div class="pd-actions">
       <a href="/pages/forms/procurement.html" class="pd-actions__primary">${escapeHtml(primary)}</a>
-      <a href="/pages/forms/procurement.html" class="pd-actions__secondary">${escapeHtml(secondary)}</a>
+      ${secondaryCta}
     </div>`;
 }
 
@@ -106,7 +101,7 @@ function renderExtinguisherPage(product, category) {
             <strong>${escapeHtml(plan.title)}</strong>
             <span>${escapeHtml(plan.subtitle)}</span>
           </div>
-          ${plan.selected ? '<i data-lucide="circle-check"></i>' : plan.addon ? `<span class="pd-plan__addon">${escapeHtml(plan.addon)}</span>` : ''}
+          <i data-lucide="circle-check"></i>
         </div>`,
     )
     .join('');
@@ -119,7 +114,6 @@ function renderExtinguisherPage(product, category) {
           ${product.heroBadges?.[0] ? `<p class="pd-tagline pd-tagline--pill">${escapeHtml(product.heroBadges[0])}</p>` : ''}
           <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
           <div class="pd-meta-row">
-            ${product.price ? `<p class="product-hero__price">${formatPrice(product.price)}${product.compareAtPrice ? `<span class="product-hero__compare">${formatPrice(product.compareAtPrice)}</span>` : ''}${product.savePercent ? `<span class="pd-save-badge">Save ${product.savePercent}%</span>` : ''}</p>` : ''}
             <span class="product-hero__sku">SKU: ${escapeHtml(product.sku)}</span>
           </div>
           <p class="product-hero__desc">${escapeHtml(product.description)}</p>
@@ -134,7 +128,7 @@ function renderExtinguisherPage(product, category) {
             </li>`).join('')}</ul>` : ''}
           <div class="pd-actions">
             <a href="/pages/forms/procurement.html" class="pd-actions__primary pd-actions__primary--wide">${escapeHtml(product.primaryCtaLabel ?? 'Request Quantity Quote')}</a>
-            <a href="/pages/forms/procurement.html" class="pd-actions__secondary pd-actions__secondary--block">${escapeHtml(product.secondaryCtaLabel ?? 'Download Data Sheet (PDF)')}</a>
+            ${!isDataSheetCta(product.secondaryCtaLabel) && product.secondaryCtaLabel ? `<a href="/pages/forms/procurement.html" class="pd-actions__secondary pd-actions__secondary--block">${escapeHtml(product.secondaryCtaLabel)}</a>` : ''}
           </div>
           ${trust ? `<div class="pd-trust-row">${trust}</div>` : ''}
         </div>
@@ -159,7 +153,6 @@ function renderExtinguisherCompactPage(product, category) {
             <span class="pd-meta-tags__sku">SKU: ${escapeHtml(product.sku)}</span>
           </div>
           <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
-          ${product.price ? `<p class="pd-price-line">${formatPrice(product.price)} <span>${escapeHtml(product.priceNote ?? 'USD / Per Unit')}</span></p>` : ''}
           ${product.quoteDescription ? `<blockquote class="pd-quote-box">${escapeHtml(product.quoteDescription)}</blockquote>` : ''}
           ${renderQuickSpecs(product.quickSpecs)}
           ${renderQuoteActions(product)}
@@ -250,7 +243,6 @@ function renderFirstAidCabinetPage(product, category) {
             <span class="product-hero__sku">SKU: ${escapeHtml(product.sku)}</span>
             ${product.reviewCount ? `<span class="pd-reviews">${escapeHtml(String(product.reviewCount))} Reviews</span>` : ''}
           </div>
-          ${product.price ? `<div class="pd-price-box"><span class="pd-price-box__value">${formatPrice(product.price)}</span><span class="pd-price-box__note">${escapeHtml(product.priceNote ?? 'USD / Per Unit')}</span></div>` : ''}
           <p class="product-hero__desc">${escapeHtml(product.description)}</p>
           ${checklist ? `<ul class="pd-checklist">${checklist}</ul>` : ''}
           ${renderQuoteActions(product)}
@@ -336,7 +328,6 @@ function renderGasCagePage(product, category) {
         <div class="pd-hero__info">
           ${product.productEyebrow ? `<p class="pd-tagline">${escapeHtml(product.productEyebrow)}</p>` : ''}
           <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
-          ${product.price ? `<p class="pd-price-line">${formatPrice(product.price)}${product.compareAtPrice ? `<span class="product-hero__compare">${formatPrice(product.compareAtPrice)}</span>` : ''} <span>${escapeHtml(product.priceNote ?? 'USD + Shipping')}</span></p>` : ''}
           <p class="product-hero__desc">${escapeHtml(product.quoteDescription ?? product.description)}</p>
           ${renderQuickSpecs(product.quickSpecs)}
           ${renderQuoteActions(product)}
@@ -459,7 +450,6 @@ function renderEyewashPage(product, category) {
         <div class="pd-hero__info">
           ${product.tagline ? `<p class="pd-tagline">${escapeHtml(product.tagline)}</p>` : ''}
           <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
-          ${product.price ? `<p class="product-hero__price">${formatPrice(product.price)}${product.compareAtPrice ? `<span class="product-hero__compare">${formatPrice(product.compareAtPrice)}</span>` : ''}</p>` : ''}
           <div class="pd-quote-box pd-quote-box--plain">
             <p>${escapeHtml(product.description)}</p>
             ${checklist ? `<ul class="pd-checklist pd-checklist--compact">${checklist}</ul>` : ''}
@@ -468,7 +458,7 @@ function renderEyewashPage(product, category) {
             <div class="pd-qty" aria-label="Quantity"><span>1</span></div>
             <a href="/pages/forms/procurement.html" class="pd-actions__primary pd-actions__primary--wide">Add to Quote</a>
           </div>
-          <a href="/pages/forms/procurement.html" class="pd-actions__secondary pd-actions__secondary--block">Bulk Order Pricing</a>
+          <a href="/pages/forms/procurement.html" class="pd-actions__secondary pd-actions__secondary--block">Request Bulk Quote</a>
           ${renderQuickSpecs(product.quickSpecs)}
         </div>
       </div>
@@ -498,55 +488,73 @@ function renderEyewashPage(product, category) {
 
 /** @param {import('../../../config/catalog.js').CatalogProduct} product */
 function renderPathogenPage(product, category) {
-  const manifest = product.specManifest
-    ?.map(
-      (row) => `
-        <li><span>${escapeHtml(row.label)}</span><strong>${escapeHtml(row.value)}</strong></li>`,
-    )
-    .join('');
-
   const specs = product.pathogenSpecs
     ?.map(
       (item) => `
-        <article class="pd-pathogen-spec">
+        <article class="pd-pathogen-spec${item.accent ? ' pd-pathogen-spec--accent' : ''}">
           <i data-lucide="${escapeHtml(item.icon)}"></i>
           <h3>${escapeHtml(item.title)}</h3>
           <p>${escapeHtml(item.text)}</p>
+          ${item.footer ? `<p class="pd-pathogen-spec__footer">${escapeHtml(item.footer)}</p>` : ''}
         </article>`,
     )
     .join('');
 
+  const trust = product.trustBadges
+    ?.map(
+      (item) => `
+        <div class="pd-trust pd-trust--inline">
+          <i data-lucide="${escapeHtml(item.icon)}"></i>
+          <span>${escapeHtml(item.label)}</span>
+        </div>`,
+    )
+    .join('');
+
+  const rating =
+    product.reviewCount != null
+      ? `
+        <div class="pd-rating" aria-label="5 out of 5 stars">
+          <span class="pd-rating__stars" aria-hidden="true">
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+          </span>
+          <span class="pd-reviews">(${escapeHtml(String(product.reviewCount))} Reviews)</span>
+        </div>`
+      : '';
+
   const heroClass = product.darkHero ? ' pd-hero--dark' : '';
+  const subtitle = product.productSubtitle ?? product.complianceBadge;
 
   return `
     <section class="pd-hero section-y${heroClass}">
       <div class="page-container pd-hero__grid pd-hero__grid--wide">
         ${renderGallery(product, { tall: true })}
         <div class="pd-hero__info">
-          ${product.complianceBadge ? `<p class="pd-tagline">${escapeHtml(product.complianceBadge)}</p>` : ''}
+          ${subtitle ? `<p class="pd-tagline">${escapeHtml(subtitle)}</p>` : ''}
           <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
           <div class="pd-meta-row">
             <span class="product-hero__sku">SKU: ${escapeHtml(product.sku)}</span>
-            ${product.reviewCount ? `<span class="pd-reviews">${escapeHtml(String(product.reviewCount))} Reviews</span>` : ''}
+            ${rating}
           </div>
-          ${product.price ? `<p class="product-hero__price">${formatPrice(product.price)}${product.compareAtPrice ? `<span class="product-hero__compare">${formatPrice(product.compareAtPrice)}</span>` : ''}${product.savePercent ? `<span class="pd-save-badge">Save ${product.savePercent}%</span>` : ''}</p>` : ''}
-          <p class="pd-quote-box pd-quote-box--border">${escapeHtml(product.description)}</p>
+          <p class="product-hero__desc">${escapeHtml(product.description)}</p>
           ${renderQuoteActions(product)}
-          ${manifest && !product.whatsInBoxDark ? `
-            <div class="pd-kit-manifest">
-              <h3>Kit Manifest</h3>
-              <ul>${manifest}</ul>
-              <p class="pd-kit-manifest__note"><i data-lucide="circle-check"></i> Meets ANSI/ISEA Z308.1-2015 standards</p>
-            </div>` : ''}
-          ${product.trustBadges ? `<div class="pd-trust-row">${product.trustBadges.map((item) => `<div class="pd-trust"><i data-lucide="${escapeHtml(item.icon)}"></i><span>${escapeHtml(item.label)}</span></div>`).join('')}</div>` : ''}
+          ${trust ? `<div class="pd-trust-row pd-trust-row--hero">${trust}</div>` : ''}
         </div>
       </div>
     </section>
     ${specs ? `
       <section class="pd-pathogen-specs section-y">
         <div class="page-container">
-          <h2>Technical Specifications</h2>
-          <p class="pd-pathogen-specs__subtitle">Precision engineering for life-critical situations.</p>
+          <div class="pd-pathogen-specs__header">
+            <div>
+              <h2>Technical Specifications</h2>
+              <p class="pd-pathogen-specs__subtitle">Precision engineering for life-critical situations.</p>
+            </div>
+            <div class="pd-pathogen-specs__rule" aria-hidden="true"></div>
+          </div>
           <div class="pd-pathogen-specs__grid">${specs}</div>
         </div>
       </section>` : ''}
@@ -563,7 +571,7 @@ function renderPathogenCta(cta) {
       <div class="page-container pd-pathogen-cta__inner">
         <h2>${escapeHtml(cta.title)}</h2>
         <p>${escapeHtml(cta.text)}</p>
-        <a href="/pages/forms/procurement.html" class="pd-actions__secondary">${escapeHtml(cta.buttonLabel)}</a>
+        <a href="/pages/forms/procurement.html" class="pd-pathogen-cta__btn">${escapeHtml(cta.buttonLabel)}</a>
       </div>
     </section>`;
 }
@@ -794,22 +802,28 @@ function renderWhatsInBoxDark(section) {
       (item) => `
         <article class="pd-box-dark__item">
           <i data-lucide="${escapeHtml(item.icon)}"></i>
-          <div>
-            <h3>${escapeHtml(item.title)}</h3>
-            <p>${escapeHtml(item.text)}</p>
-          </div>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.text)}</p>
         </article>`,
     )
     .join('');
 
+  const heading = section.heading ?? "What's in the Box";
+
   return `
     <section class="pd-box-dark section-y">
-      <div class="page-container pd-box-dark__grid">
-        <div class="pd-box-dark__visual">
-          <img src="${escapeHtml(section.image)}" alt="">
-          <p>${escapeHtml(section.title)}</p>
+      <div class="page-container">
+        <h2 class="pd-box-dark__heading">${escapeHtml(heading)}</h2>
+        <div class="pd-box-dark__bento">
+          <div class="pd-box-dark__featured">
+            <img src="${escapeHtml(section.image)}" alt="" aria-hidden="true">
+            <div class="pd-box-dark__featured-copy">
+              <h3>${escapeHtml(section.title)}</h3>
+              ${section.text ? `<p>${escapeHtml(section.text)}</p>` : ''}
+            </div>
+          </div>
+          ${items}
         </div>
-        <div class="pd-box-dark__items">${items}</div>
       </div>
     </section>`;
 }
@@ -817,21 +831,50 @@ function renderWhatsInBoxDark(section) {
 /** @param {NonNullable<import('../../../config/catalog.js').CatalogProduct['complianceAssembly']>} section */
 function renderComplianceAssembly(section) {
   const checks = section.checks
-    .map((check) => `<li><i data-lucide="circle-check"></i>${escapeHtml(check)}</li>`)
+    .map((check) => {
+      if (typeof check === 'string') {
+        return `
+          <li class="pd-compliance-assembly__check">
+            <i data-lucide="circle-check"></i>
+            <span>${escapeHtml(check)}</span>
+          </li>`;
+      }
+      return `
+        <li class="pd-compliance-assembly__check">
+          <i data-lucide="circle-check"></i>
+          <div>
+            <p class="pd-compliance-assembly__check-title">${escapeHtml(check.title)}</p>
+            ${check.text ? `<p class="pd-compliance-assembly__check-text">${escapeHtml(check.text)}</p>` : ''}
+          </div>
+        </li>`;
+    })
     .join('');
+
+  const checklist =
+    section.checklist
+      ?.map(
+        (row) => `
+        <div class="pd-compliance-assembly__row">
+          <span>${escapeHtml(row.label)}</span>
+          <span class="pd-compliance-assembly__status">${escapeHtml(row.status)}</span>
+        </div>`,
+      )
+      .join('') ?? '';
 
   return `
     <section class="pd-compliance-assembly section-y">
       <div class="page-container pd-compliance-assembly__grid">
-        <div>
-          <p class="pd-tagline">Strength &amp; Assembly</p>
+        <div class="pd-compliance-assembly__copy">
+          ${section.eyebrow ? `<p class="pd-compliance-assembly__eyebrow">${escapeHtml(section.eyebrow)}</p>` : ''}
           <h2>${escapeHtml(section.title)}</h2>
           <p>${escapeHtml(section.text)}</p>
           <ul class="pd-compliance-assembly__checks">${checks}</ul>
         </div>
-        <div class="pd-compliance-assembly__card">
-          <h3>Compliance Checklist</h3>
-          <ul>${checks}</ul>
+        <div class="pd-compliance-assembly__panel">
+          <div class="pd-compliance-assembly__card">
+            <h3>Compliance Checklist</h3>
+            ${checklist || `<ul class="pd-compliance-assembly__checks">${checks}</ul>`}
+          </div>
         </div>
       </div>
     </section>`;
@@ -893,7 +936,6 @@ function renderBleedingControlPage(product, category) {
           <img src="${escapeHtml(item.image)}" alt="">
           <p class="pd-related__category">${escapeHtml(item.category)}</p>
           <h3>${escapeHtml(item.name)}</h3>
-          <p class="pd-related__price">${formatPrice(item.price)}</p>
         </a>`,
     )
     .join('');
@@ -909,7 +951,6 @@ function renderBleedingControlPage(product, category) {
             <span class="product-hero__sku">SKU: ${escapeHtml(product.sku)}</span>
             ${product.inStock ? '<span class="pd-stock-pill">In Stock</span>' : ''}
           </div>
-          ${product.price ? `<p class="product-hero__price">${formatPrice(product.price)}</p>` : ''}
           <p class="product-hero__desc">${escapeHtml(product.description)}</p>
           ${product.criticalCallout ? `
             <div class="pd-critical-callout">
@@ -1038,7 +1079,6 @@ function renderAedPlusPage(product, category) {
           <div>
             <h4>${escapeHtml(part.name)}</h4>
             <p>SKU: ${escapeHtml(part.sku)}</p>
-            <p class="pd-replacement__price">${formatPrice(part.price)}</p>
           </div>
           <a href="${part.slug ? `/pages/catalog/products/${escapeHtml(part.slug)}.html` : '/pages/forms/procurement.html'}">Add</a>
         </div>`,
@@ -1052,7 +1092,6 @@ function renderAedPlusPage(product, category) {
         <div class="pd-hero__info">
           <span class="product-hero__sku">SKU: ${escapeHtml(product.sku)}</span>
           <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
-          ${product.price ? `<p class="product-hero__price">${formatPrice(product.price)}${product.compareAtPrice ? `<span class="product-hero__compare">${formatPrice(product.compareAtPrice)}</span>` : ''}</p>` : ''}
           <p class="product-hero__desc">${escapeHtml(product.description)}</p>
           ${featureCards ? `<div class="pd-aed-features">${featureCards}</div>` : ''}
           <div class="pd-actions pd-actions--cart">
@@ -1112,7 +1151,6 @@ function renderAedCabinetPage(product, category) {
         <div class="pd-hero__info">
           <span class="product-hero__sku">SKU: ${escapeHtml(product.sku)}</span>
           <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
-          ${product.price ? `<p class="product-hero__price">${formatPrice(product.price)}${product.compareAtPrice ? `<span class="product-hero__compare">${formatPrice(product.compareAtPrice)}</span>` : ''}</p>` : ''}
           <p class="product-hero__desc">${escapeHtml(product.description)}</p>
           ${checklist ? `<ul class="pd-cabinet-checklist">${checklist}</ul>` : ''}
           <div class="pd-actions">
@@ -1178,6 +1216,868 @@ function renderLegacyLayouts(product, category) {
   return sections.join('');
 }
 
+/** @param {import('../../../config/catalog.js').CatalogProduct} product */
+function renderExtinguisherIndustrialPage(product, category) {
+  const quickSpecs = product.quickSpecs
+    ?.map(
+      (spec) => `
+        <div class="pd-ind-spec">
+          <div class="pd-ind-spec__label">
+            ${spec.icon ? `<i data-lucide="${escapeHtml(spec.icon)}"></i>` : ''}
+            <span>${escapeHtml(spec.label)}</span>
+          </div>
+          <span class="pd-ind-spec__value">${escapeHtml(spec.value)}</span>
+        </div>`,
+    )
+    .join('');
+
+  const trust = product.trustBadges
+    ?.map((item) => `<span class="pd-ind-trust">${escapeHtml(item.label)}</span>`)
+    .join('');
+
+  const features = product.precisionFeatures
+    ?.map(
+      (item) => `
+        <article class="pd-ind-feature">
+          <i data-lucide="${escapeHtml(item.icon)}"></i>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.text)}</p>
+        </article>`,
+    )
+    .join('');
+
+  const specs = product.fullSpecsTable ?? [];
+  const specRows = [];
+  for (let i = 0; i < specs.length; i += 2) {
+    const left = specs[i];
+    const right = specs[i + 1];
+    specRows.push(`
+      <div class="pd-ind-table__row">
+        <div class="pd-ind-table__cell pd-ind-table__cell--label">${escapeHtml(left.label)}</div>
+        <div class="pd-ind-table__cell">${escapeHtml(left.value)}</div>
+        ${
+          right
+            ? `<div class="pd-ind-table__cell pd-ind-table__cell--label">${escapeHtml(right.label)}</div>
+        <div class="pd-ind-table__cell">${escapeHtml(right.value)}</div>`
+            : '<div class="pd-ind-table__cell pd-ind-table__cell--label"></div><div class="pd-ind-table__cell"></div>'
+        }
+      </div>`);
+  }
+
+  const boxItems = product.whatsInBox?.items
+    .map(
+      (item, index) => `
+        <li class="pd-ind-box__item">
+          <span class="pd-ind-box__num">${String(index + 1).padStart(2, '0')}</span>
+          <div>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.text)}</p>
+          </div>
+        </li>`,
+    )
+    .join('');
+
+  const box = product.whatsInBox;
+  const cta = product.bulkFleetCta;
+
+  return `
+    <section class="pd-ind-hero pd-hero section-y">
+      <div class="page-container">
+        <div class="pd-hero__grid pd-hero__grid--wide pd-ind-hero__grid">
+          ${renderGallery(product, { tall: true })}
+          <div class="pd-hero__info">
+            ${product.productEyebrow ? `<p class="pd-tagline pd-tagline--bar">${escapeHtml(product.productEyebrow)}</p>` : ''}
+            <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
+            <div class="pd-meta-row">
+              ${product.inStock ? '<span class="pd-stock-pill">In Stock</span>' : ''}
+              <span class="product-hero__sku">SKU: ${escapeHtml(product.sku)}</span>
+            </div>
+            <p class="product-hero__desc pd-ind-hero__desc">${escapeHtml(product.description)}</p>
+            ${quickSpecs ? `<div class="pd-ind-specs">${quickSpecs}</div>` : ''}
+            <div class="pd-actions pd-actions--stack">
+              <a href="/pages/forms/procurement.html" class="pd-actions__primary pd-actions__primary--wide">
+                ${escapeHtml(product.primaryCtaLabel ?? 'Request a Quote')}
+                <i data-lucide="arrow-right"></i>
+              </a>
+              <a href="/pages/forms/procurement.html" class="pd-actions__secondary pd-actions__secondary--block">
+                ${escapeHtml(product.secondaryCtaLabel ?? 'Contact Specialist')}
+              </a>
+            </div>
+            ${trust ? `<div class="pd-ind-trust-row">${trust}</div>` : ''}
+          </div>
+        </div>
+      </div>
+    </section>
+    ${
+      features
+        ? `
+    <section class="pd-ind-engineering section-y">
+      <div class="page-container">
+        <div class="pd-ind-engineering__header">
+          <h2>Precision Engineering</h2>
+          <div class="pd-ind-engineering__rule" aria-hidden="true"></div>
+        </div>
+        <div class="pd-ind-engineering__grid">${features}</div>
+        ${
+          specRows.length
+            ? `
+        <div class="pd-ind-table" role="table" aria-label="Technical specifications">
+          <div class="pd-ind-table__head" role="row">
+            <div class="pd-ind-table__cell" role="columnheader">Specification</div>
+            <div class="pd-ind-table__cell" role="columnheader">Value</div>
+            <div class="pd-ind-table__cell" role="columnheader">Specification</div>
+            <div class="pd-ind-table__cell" role="columnheader">Value</div>
+          </div>
+          ${specRows.join('')}
+        </div>`
+            : ''
+        }
+      </div>
+    </section>`
+        : ''
+    }
+    ${
+      box
+        ? `
+    <section class="pd-ind-box section-y">
+      <div class="page-container pd-ind-box__grid">
+        <div>
+          <h2>${escapeHtml(box.title)}</h2>
+          <ul class="pd-ind-box__list">${boxItems}</ul>
+        </div>
+        <div class="pd-ind-box__visual">
+          ${box.image ? `<img src="${escapeHtml(box.image)}" alt="">` : ''}
+          ${
+            box.badgeStat
+              ? `<div class="pd-ind-box__badge">
+            <span class="pd-ind-box__badge-stat">${escapeHtml(box.badgeStat)}</span>
+            <span class="pd-ind-box__badge-label">${escapeHtml(box.badgeLabel ?? '')}</span>
+          </div>`
+              : ''
+          }
+        </div>
+      </div>
+    </section>`
+        : ''
+    }
+    ${
+      cta
+        ? `
+    <section class="pd-ind-cta section-y">
+      <div class="page-container pd-ind-cta__inner">
+        <h2>${escapeHtml(cta.title)}</h2>
+        <p>${escapeHtml(cta.text)}</p>
+        <div class="pd-ind-cta__actions">
+          <a href="/pages/forms/procurement.html" class="pd-ind-cta__primary">${escapeHtml(cta.primaryLabel)}</a>
+          ${cta.secondaryLabel ? `<a href="/pages/forms/procurement.html" class="pd-ind-cta__secondary">${escapeHtml(cta.secondaryLabel)}</a>` : ''}
+        </div>
+      </div>
+    </section>`
+        : ''
+    }
+  `;
+}
+
+/**
+ * Split product detail markup so the hero stays in the sidebar layout and
+ * everything below scrolls full-width.
+ * @param {string} html
+ */
+export function splitProductDetailPage(html) {
+  const match = html.match(
+    /^(\s*<section class="[^"]*\b(?:pd-hero|product-hero)\b[^"]*"[\s\S]*?<\/section>)([\s\S]*)$/,
+  );
+  if (!match) {
+    return { hero: html, rest: '' };
+  }
+  return { hero: match[1], rest: match[2] };
+}
+
+/** @param {import('../../../config/catalog.js').CatalogProduct} product */
+function renderMountingBracketPage(product, category) {
+  const specs = product.techSpecsList
+    ?.map(
+      (item) => `
+        <li class="pd-bracket-spec">
+          <i data-lucide="${escapeHtml(item.icon)}"></i>
+          <div>
+            <p class="pd-bracket-spec__label">${escapeHtml(item.title)}</p>
+            <p>${escapeHtml(item.text)}</p>
+          </div>
+        </li>`,
+    )
+    .join('');
+
+  const deployment = product.deploymentCards
+    ?.map(
+      (card) => `
+        <article class="pd-bracket-deploy__card">
+          <i data-lucide="${escapeHtml(card.icon)}"></i>
+          <div>
+            <h3>${escapeHtml(card.title)}</h3>
+            <p>${escapeHtml(card.text)}</p>
+          </div>
+        </article>`,
+    )
+    .join('');
+
+  const engineering = product.engineeringSection;
+  const cta = product.commercialQuoteCta;
+
+  return `
+    <section class="pd-bracket-hero pd-hero section-y">
+      <div class="page-container pd-hero__grid pd-hero__grid--wide">
+        ${renderGallery(product, { tall: true })}
+        <div class="pd-hero__info">
+          ${product.badge ? `<span class="pd-bracket-badge">${escapeHtml(product.badge)}</span>` : ''}
+          <h1 class="product-hero__title pd-bracket-hero__title">${escapeHtml(product.name)}</h1>
+          <p class="product-hero__sku">SKU: ${escapeHtml(product.sku)}</p>
+          <p class="product-hero__desc">${escapeHtml(product.description)}</p>
+          ${product.stockNote || product.inStock ? `
+            <div class="pd-bracket-stock">
+              <i data-lucide="badge-check"></i>
+              <span>${escapeHtml(product.stockNote ?? 'In Stock')}</span>
+            </div>` : ''}
+          ${renderQuoteActions(product)}
+        </div>
+      </div>
+    </section>
+    <section class="pd-bracket-specs section-y">
+      <div class="page-container pd-bracket-specs__grid">
+        <div class="pd-bracket-specs__list">
+          <h2>Technical Specifications</h2>
+          ${specs ? `<ul>${specs}</ul>` : ''}
+        </div>
+        <div class="pd-bracket-deploy">
+          <h2>Professional Deployment</h2>
+          <div class="pd-bracket-deploy__cards">${deployment ?? ''}</div>
+        </div>
+      </div>
+    </section>
+    ${engineering ? `
+      <section class="pd-bracket-engineering section-y">
+        <div class="page-container">
+          <h2>${escapeHtml(engineering.title)}</h2>
+          <div class="pd-bracket-engineering__grid">
+            <blockquote class="pd-bracket-engineering__quote">
+              <p class="pd-bracket-engineering__eyebrow">${escapeHtml(engineering.eyebrow)}</p>
+              <p>${escapeHtml(engineering.text)}</p>
+            </blockquote>
+            <div class="pd-bracket-engineering__visual">
+              <img src="${escapeHtml(engineering.image)}" alt="Technical blueprint of ${escapeHtml(product.name)} installation">
+            </div>
+          </div>
+        </div>
+      </section>` : ''}
+    ${cta ? `
+      <section class="pd-bracket-cta section-y">
+        <div class="page-container">
+          <div class="pd-bracket-cta__card">
+            <i data-lucide="clipboard-list"></i>
+            <h2>${escapeHtml(cta.title)}</h2>
+            <p>${escapeHtml(cta.text)}</p>
+            <a href="/pages/forms/procurement.html" class="pd-bracket-cta__btn">${escapeHtml(cta.buttonLabel)}</a>
+          </div>
+        </div>
+      </section>` : ''}
+  `;
+}
+
+/** @param {import('../../../config/catalog.js').CatalogProduct} product */
+function renderLeatherGlovesPage(product, category) {
+  const defaultSize = product.defaultSize ?? product.availableSizes?.[0];
+  const sizes = product.availableSizes
+    ?.map(
+      (size) => `
+        <span class="pd-gloves-size${size === defaultSize ? ' is-active' : ''}" aria-current="${size === defaultSize ? 'true' : 'false'}">${escapeHtml(size)}</span>`,
+    )
+    .join('');
+
+  const specs = product.specs
+    ?.map(
+      (row) => `
+        <li class="pd-gloves-spec">
+          <span>${escapeHtml(row.label)}</span>
+          <strong${row.label.toLowerCase() === 'compliance' ? ' class="pd-gloves-spec__accent"' : ''}>${escapeHtml(row.value)}</strong>
+        </li>`,
+    )
+    .join('');
+
+  const compliance = product.safetyComplianceCards
+    ?.map(
+      (card) => `
+        <article class="pd-gloves-compliance__card">
+          <i data-lucide="${escapeHtml(card.icon)}"></i>
+          <h3>${escapeHtml(card.title)}</h3>
+          <span class="pd-gloves-compliance__badge">${escapeHtml(card.badge)}</span>
+          <p>${escapeHtml(card.text)}</p>
+        </article>`,
+    )
+    .join('');
+
+  const ratings = product.safetyRatings
+    ?.map(
+      (row) => `
+        <div class="pd-gloves-rating">
+          <span>${escapeHtml(row.label)}</span>
+          <strong class="${row.accent ? 'pd-gloves-rating__accent' : 'pd-gloves-rating__muted'}">${escapeHtml(row.value)}</strong>
+        </div>`,
+    )
+    .join('');
+
+  const useCaseSection = product.useCaseSection;
+  const useCases = product.useCaseCards
+    ?.map(
+      (card, index) => `
+        <article class="pd-gloves-usecase${useCaseSection ? ' pd-gloves-usecase--overlay' : ''}${useCaseSection && index === 1 ? ' pd-gloves-usecase--offset' : ''}">
+          <div class="pd-gloves-usecase__media">
+            <img src="${escapeHtml(card.image)}" alt="">
+            ${useCaseSection ? `
+            <div class="pd-gloves-usecase__caption">
+              <h3>${escapeHtml(card.title)}</h3>
+              <p>${escapeHtml(card.text)}</p>
+            </div>` : `<h3>${escapeHtml(card.title)}</h3>`}
+          </div>
+          ${useCaseSection ? '' : `<p>${escapeHtml(card.text)}</p>`}
+        </article>`,
+    )
+    .join('');
+
+  const bulk = product.bulkProcurement;
+  const tiers = bulk?.tiers
+    .map(
+      (tier) => `
+        <tr${tier.featured ? ' class="pd-gloves-bulk__row--featured"' : ''}>
+          <td>
+            <span>${escapeHtml(tier.qty)}</span>
+            ${tier.savings !== 'Standard' ? `<span class="pd-gloves-bulk__chip${tier.savings.includes('20') ? ' pd-gloves-bulk__chip--accent' : ''}">${escapeHtml(tier.savings)}</span>` : ''}
+          </td>
+          <td class="${tier.savings !== 'Standard' ? 'pd-gloves-bulk__savings' : ''}">${escapeHtml(tier.benefit ?? tier.savings)}</td>
+        </tr>`,
+    )
+    .join('');
+
+  const skuMeta = product.itemNumber
+    ? `<div class="pd-gloves-meta"><span class="product-hero__sku">SKU: ${escapeHtml(product.sku)}</span><span class="pd-gloves-meta__dot" aria-hidden="true"></span><span>Item #${escapeHtml(product.itemNumber)}</span></div>`
+    : `<p class="product-hero__sku">SKU: ${escapeHtml(product.sku)}</p>`;
+
+  const honeySplit = Boolean(bulk && ratings);
+
+  return `
+    <section class="pd-gloves-hero pd-hero section-y">
+      <div class="page-container pd-gloves-hero__grid">
+        ${renderGallery(product, { tall: true })}
+        <div class="pd-hero__info">
+          <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
+          ${skuMeta}
+          <p class="product-hero__desc pd-gloves-hero__desc">${escapeHtml(product.description)}</p>
+          ${sizes ? `
+            <div class="pd-gloves-sizes">
+              <p class="pd-gloves-sizes__label">Size</p>
+              <div class="pd-gloves-sizes__row" role="list">${sizes}</div>
+            </div>` : ''}
+          <div class="pd-actions pd-actions--stack">
+            <a href="/pages/forms/procurement.html" class="pd-actions__primary pd-actions__primary--wide">
+              <i data-lucide="shopping-cart"></i> ${escapeHtml(product.primaryCtaLabel ?? 'Add to Quote')}
+            </a>
+            <a href="/pages/forms/procurement.html" class="pd-actions__secondary pd-actions__secondary--block">${escapeHtml(product.secondaryCtaLabel ?? 'Request Quote')}</a>
+          </div>
+          ${specs ? `
+            <div class="pd-gloves-specs">
+              <h2>Technical Specs</h2>
+              <ul>${specs}</ul>
+            </div>` : ''}
+        </div>
+      </div>
+    </section>
+    ${honeySplit ? `
+      <section class="pd-gloves-split section-y">
+        <div class="page-container pd-gloves-split__grid">
+          <div class="pd-gloves-bulk__panel">
+            <h2>${escapeHtml(bulk.title)}</h2>
+            <p>${escapeHtml(bulk.text)}</p>
+            <div class="pd-gloves-bulk__table-wrap">
+              <table class="pd-gloves-bulk__table">
+                <thead>
+                  <tr>
+                    <th>Quantity</th>
+                    <th>Volume Benefit</th>
+                  </tr>
+                </thead>
+                <tbody>${tiers}</tbody>
+              </table>
+            </div>
+          </div>
+          <div class="pd-gloves-ratings">
+            <div class="pd-gloves-ratings__header">
+              <h2>Safety Ratings</h2>
+              <a href="/pages/forms/procurement.html" class="pd-gloves-bulk__cta">${escapeHtml(bulk.buttonLabel)}</a>
+            </div>
+            <div class="pd-gloves-ratings__list">${ratings}</div>
+            ${product.safetyRatingsNote ? `
+              <p class="pd-gloves-ratings__note">
+                <i data-lucide="${escapeHtml(product.safetyRatingsNoteIcon ?? 'circle-check')}"></i>
+                <span>${escapeHtml(product.safetyRatingsNote)}</span>
+              </p>` : ''}
+          </div>
+        </div>
+      </section>` : ''}
+    ${!honeySplit && bulk ? `
+      <section class="pd-gloves-bulk section-y">
+        <div class="page-container">
+          <div class="pd-gloves-bulk__panel">
+            <div class="pd-gloves-bulk__header">
+              <div>
+                <h2>${escapeHtml(bulk.title)}</h2>
+                <p>${escapeHtml(bulk.text)}</p>
+              </div>
+              <a href="/pages/forms/procurement.html" class="pd-gloves-bulk__cta">${escapeHtml(bulk.buttonLabel)}</a>
+            </div>
+            <div class="pd-gloves-bulk__table-wrap">
+              <table class="pd-gloves-bulk__table">
+                <thead>
+                  <tr>
+                    <th>Quantity</th>
+                    <th>Volume Benefit</th>
+                  </tr>
+                </thead>
+                <tbody>${tiers}</tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>` : ''}
+    ${!honeySplit && compliance ? `
+      <section class="pd-gloves-compliance section-y">
+        <div class="page-container">
+          <div class="pd-gloves-compliance__intro">
+            <h2>Safety &amp; Compliance</h2>
+            <p>Engineered to meet and exceed industry safety standards for maximum protection in rigorous environments.</p>
+          </div>
+          <div class="pd-gloves-compliance__grid">${compliance}</div>
+        </div>
+      </section>` : ''}
+    ${useCases ? `
+      <section class="pd-gloves-usecases section-y${useCaseSection ? ' pd-gloves-usecases--dark' : ''}">
+        <div class="page-container">
+          ${useCaseSection ? `
+            <div class="pd-gloves-usecases__intro">
+              <h2>${escapeHtml(useCaseSection.title)}</h2>
+              <p>${escapeHtml(useCaseSection.text)}</p>
+            </div>` : '<h2>Professional Use Cases</h2>'}
+          <div class="pd-gloves-usecases__grid">${useCases}</div>
+        </div>
+      </section>` : ''}
+  `;
+}
+
+/** @param {import('../../../config/catalog.js').CatalogProduct} product */
+function renderVehicleExtinguisherPage(product) {
+  const features = product.coreFeatures
+    ?.map(
+      (item) => `
+        <article class="pd-vehicle-feature">
+          <div class="pd-vehicle-feature__icon">
+            <i data-lucide="${escapeHtml(item.icon)}"></i>
+          </div>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.text)}</p>
+        </article>`,
+    )
+    .join('');
+
+  const specCards = product.techSpecCards
+    ?.map((card) => {
+      const rows = card.rows
+        .map(
+          (row) => `
+            <li>
+              <span>${escapeHtml(row.label)}</span>
+              <strong>${escapeHtml(row.value)}</strong>
+            </li>`,
+        )
+        .join('');
+      return `
+        <article class="pd-vehicle-spec">
+          <div>
+            <p class="pd-vehicle-spec__eyebrow">${escapeHtml(card.eyebrow)}</p>
+            <h3>${escapeHtml(card.title)}</h3>
+            <p>${escapeHtml(card.text)}</p>
+          </div>
+          <ul>${rows}</ul>
+        </article>`;
+    })
+    .join('');
+
+  const trust = product.trustBadges
+    ?.map(
+      (item) => `
+        <div class="pd-vehicle-trust">
+          <i data-lucide="${escapeHtml(item.icon)}"></i>
+          <span>${escapeHtml(item.label)}</span>
+        </div>`,
+    )
+    .join('');
+
+  const bulk = product.bulkPricing;
+  const mission = product.missionBanner;
+  const missionBadges = mission?.badges
+    .map(
+      (item) => `
+        <span class="pd-vehicle-mission__chip">
+          <i data-lucide="${escapeHtml(item.icon)}"></i>
+          ${escapeHtml(item.label)}
+        </span>`,
+    )
+    .join('');
+
+  return `
+    <section class="pd-vehicle-hero pd-hero section-y">
+      <div class="page-container">
+        <nav class="pd-vehicle-crumbs" aria-label="Breadcrumb">
+          <a href="/pages/catalog/fire-protection.html">Fire Protection</a>
+          <i data-lucide="chevron-right"></i>
+          <span>${escapeHtml(product.sku)}</span>
+        </nav>
+        <div class="pd-vehicle-hero__grid">
+          ${renderGallery(product, { className: 'pd-vehicle-gallery', forceThumbs: true })}
+          <div class="pd-hero__info pd-vehicle-hero__info">
+            <span class="pd-vehicle-sku">SKU: ${escapeHtml(product.sku)}</span>
+            <h1 class="product-hero__title pd-vehicle-hero__title">${escapeHtml(product.name)}</h1>
+            ${
+              product.unitPrice
+                ? `<p class="pd-vehicle-price">${escapeHtml(product.unitPrice)}${
+                    product.unitPriceSuffix
+                      ? ` <span>${escapeHtml(product.unitPriceSuffix)}</span>`
+                      : ''
+                  }</p>`
+                : ''
+            }
+            <p class="product-hero__desc">${escapeHtml(product.description)}</p>
+            <div class="pd-vehicle-panel">
+              <div class="pd-vehicle-qty" data-qty-stepper>
+                <label class="pd-vehicle-qty__label" for="pd-vehicle-qty">Quantity Selector</label>
+                <div class="pd-vehicle-qty__row">
+                  <div class="pd-vehicle-qty__control">
+                    <button type="button" data-qty-dec aria-label="Decrease quantity">&minus;</button>
+                    <input id="pd-vehicle-qty" type="number" min="1" value="1" data-qty-input>
+                    <button type="button" data-qty-inc aria-label="Increase quantity">+</button>
+                  </div>
+                  ${product.stockNote ? `<span class="pd-vehicle-qty__note">${escapeHtml(product.stockNote)}</span>` : ''}
+                </div>
+              </div>
+              ${
+                bulk
+                  ? `<div class="pd-vehicle-bulk">
+                <div>
+                  <span class="pd-vehicle-bulk__label">${escapeHtml(bulk.label)}</span>
+                  <span class="pd-vehicle-bulk__sub">${escapeHtml(bulk.subtitle)}</span>
+                </div>
+                ${bulk.price ? `<span class="pd-vehicle-bulk__price">${escapeHtml(bulk.price)}</span>` : ''}
+              </div>`
+                  : ''
+              }
+              <div class="pd-actions pd-actions--stack">
+                <a href="/pages/forms/procurement.html" class="pd-actions__primary pd-actions__primary--wide pd-vehicle-cta">
+                  <i data-lucide="clipboard-list"></i>
+                  ${escapeHtml(product.primaryCtaLabel ?? 'Request Bulk Quote')}
+                </a>
+                <a href="/pages/forms/procurement.html" class="pd-actions__secondary pd-actions__secondary--block pd-vehicle-cta-secondary">
+                  <i data-lucide="shopping-cart"></i>
+                  ${escapeHtml(product.secondaryCtaLabel ?? 'Add to Fleet Order')}
+                </a>
+              </div>
+            </div>
+            ${trust ? `<div class="pd-vehicle-trust-row">${trust}</div>` : ''}
+          </div>
+        </div>
+      </div>
+    </section>
+    ${
+      features
+        ? `
+    <section class="pd-vehicle-engineering section-y">
+      <div class="page-container">
+        <div class="pd-vehicle-engineering__intro">
+          <p class="pd-vehicle-eyebrow">Engineered for Extremes</p>
+          <h2>Core Engineering Specifications</h2>
+        </div>
+        <div class="pd-vehicle-engineering__grid">${features}</div>
+      </div>
+    </section>`
+        : ''
+    }
+    ${
+      specCards
+        ? `
+    <section class="pd-vehicle-tech section-y">
+      <div class="page-container">
+        <div class="pd-vehicle-tech__header">
+          <div>
+            <p class="pd-vehicle-eyebrow">Specs &amp; Build Data</p>
+            <h2>Technical Specifications</h2>
+          </div>
+          <p>Manufactured to strict military and commercial first responder tolerances for maximum reliability under extreme environmental stress.</p>
+        </div>
+        <div class="pd-vehicle-tech__grid">${specCards}</div>
+      </div>
+    </section>`
+        : ''
+    }
+    ${
+      mission
+        ? `
+    <section class="pd-vehicle-mission section-y">
+      <div class="pd-vehicle-mission__bg" style="background-image: url('${escapeHtml(mission.image)}')" aria-hidden="true"></div>
+      <div class="page-container pd-vehicle-mission__grid">
+        <div>
+          <p class="pd-vehicle-eyebrow pd-vehicle-eyebrow--light">${escapeHtml(mission.eyebrow)}</p>
+          <h2>${escapeHtml(mission.title)}</h2>
+          <p class="pd-vehicle-mission__copy">${escapeHtml(mission.text)}</p>
+          ${missionBadges ? `<div class="pd-vehicle-mission__chips">${missionBadges}</div>` : ''}
+        </div>
+        <aside class="pd-vehicle-advisory">
+          <h3>${escapeHtml(mission.advisory.title)}</h3>
+          <p>${escapeHtml(mission.advisory.text)}</p>
+          <a href="/pages/forms/procurement.html">${escapeHtml(mission.advisory.buttonLabel)}</a>
+        </aside>
+      </div>
+    </section>`
+        : ''
+    }
+  `;
+}
+
+/** @param {import('../../../config/catalog.js').CatalogProduct} product */
+function renderHalotronPage(product) {
+  const specs = product.quickSpecs
+    ?.map(
+      (spec) => `
+        <article class="pd-halotron-spec">
+          ${spec.icon ? `<i data-lucide="${escapeHtml(spec.icon)}"></i>` : ''}
+          <h3>${escapeHtml(spec.label)}</h3>
+          <p>${escapeHtml(spec.value)}</p>
+          ${spec.note ? `<span>${escapeHtml(spec.note)}</span>` : ''}
+        </article>`,
+    )
+    .join('');
+
+  const features = product.coreFeatures
+    ?.map(
+      (item) => `
+        <article class="pd-halotron-feature">
+          <i data-lucide="${escapeHtml(item.icon)}"></i>
+          ${item.eyebrow ? `<p class="pd-halotron-feature__eyebrow">${escapeHtml(item.eyebrow)}</p>` : ''}
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.text)}</p>
+        </article>`,
+    )
+    .join('');
+
+  return `
+    <section class="pd-halotron-hero pd-hero section-y">
+      <div class="page-container pd-halotron-hero__grid">
+        ${renderGallery(product, { className: 'pd-halotron-gallery' })}
+        <div class="pd-hero__info pd-halotron-hero__info">
+          ${product.productEyebrow ? `<span class="pd-halotron-badge">${escapeHtml(product.productEyebrow)}</span>` : ''}
+          <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
+          ${product.productSubtitle ? `<p class="pd-halotron-tagline">${escapeHtml(product.productSubtitle)}</p>` : ''}
+          <p class="product-hero__desc">${escapeHtml(product.description)}</p>
+          <div class="pd-halotron-actions">
+            <a href="/pages/forms/procurement.html" class="pd-halotron-cta">
+              <i data-lucide="mail"></i>
+              ${escapeHtml(product.primaryCtaLabel ?? 'Contact Us')}
+            </a>
+            <a href="/pages/forms/procurement.html" class="pd-halotron-wish" aria-label="Save this product to a quote request">
+              <i data-lucide="heart"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    ${
+      specs
+        ? `
+    <section class="pd-halotron-specs section-y">
+      <div class="page-container">
+        <h2>Technical Specifications</h2>
+        <div class="pd-halotron-specs__grid">${specs}</div>
+      </div>
+    </section>`
+        : ''
+    }
+    ${
+      features
+        ? `
+    <section class="pd-halotron-safety section-y">
+      <div class="page-container">
+        <h2>Clean Agent Deployment &amp; Environmental Safety</h2>
+        <div class="pd-halotron-safety__grid">${features}</div>
+      </div>
+    </section>`
+        : ''
+    }
+  `;
+}
+
+/** @param {import('../../../config/catalog.js').CatalogProduct} product */
+function renderNitrileGlovesPage(product) {
+  const defaultSize = product.defaultSize ?? product.availableSizes?.[0];
+  const sizes = product.availableSizes
+    ?.map(
+      (size) => `
+        <button type="button" class="pd-nitrile-size${size === defaultSize ? ' is-active' : ''}" data-option-pick="size" data-option-value="${escapeHtml(size)}" aria-pressed="${size === defaultSize ? 'true' : 'false'}">${escapeHtml(size)}</button>`,
+    )
+    .join('');
+
+  const defaultColor = product.defaultColor ?? product.availableColors?.[0]?.id;
+  const colors = product.availableColors
+    ?.map(
+      (color) => `
+        <button type="button" class="pd-nitrile-swatch${color.id === defaultColor ? ' is-active' : ''}" data-option-pick="color" data-option-value="${escapeHtml(color.id)}" aria-label="${escapeHtml(color.label)}" aria-pressed="${color.id === defaultColor ? 'true' : 'false'}" style="--swatch:${escapeHtml(color.swatch)}"></button>`,
+    )
+    .join('');
+
+  const specs = product.specs
+    ?.map(
+      (spec) => `
+        <li>
+          <span>${escapeHtml(spec.label)}</span>
+          <strong${spec.accent ? ' class="pd-nitrile-spec--accent"' : ''}>${escapeHtml(spec.value)}</strong>
+        </li>`,
+    )
+    .join('');
+
+  const highlights = product.trustBadges
+    ?.map(
+      (item) => `
+        <li>
+          <i data-lucide="${escapeHtml(item.icon)}"></i>
+          <span>${escapeHtml(item.label)}</span>
+        </li>`,
+    )
+    .join('');
+
+  const bulk = product.bulkProcurement;
+  const tiers = bulk?.tiers
+    .map(
+      (tier) => `
+        <tr>
+          <td>${escapeHtml(tier.qty)}</td>
+          <td${tier.accent ? ' class="pd-nitrile-bulk__accent"' : ''}>${escapeHtml(tier.savings)}</td>
+        </tr>`,
+    )
+    .join('');
+
+  const compliance = product.safetyComplianceCards
+    ?.map(
+      (card) => `
+        <article class="pd-nitrile-compliance__card">
+          <i data-lucide="${escapeHtml(card.icon)}"></i>
+          <h3>${escapeHtml(card.title)}</h3>
+          <p>${escapeHtml(card.text)}</p>
+        </article>`,
+    )
+    .join('');
+
+  return `
+    <section class="pd-nitrile-hero pd-hero section-y">
+      <div class="page-container pd-nitrile-hero__grid">
+        ${renderGallery(product, { className: 'pd-nitrile-gallery' })}
+        <div class="pd-hero__info pd-nitrile-hero__info">
+          <div class="pd-nitrile-pills">
+            ${product.badge ? `<span class="pd-nitrile-pill pd-nitrile-pill--solid">${escapeHtml(product.badge)}</span>` : ''}
+            ${product.inStock ? '<span class="pd-nitrile-pill pd-nitrile-pill--outline">In Stock</span>' : ''}
+          </div>
+          <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
+          <p class="product-hero__desc">${escapeHtml(product.description)}</p>
+          ${product.packUnit ? `<p class="pd-nitrile-unit">${escapeHtml(product.packUnit)}</p>` : ''}
+          ${
+            specs
+              ? `
+            <div class="pd-nitrile-specs">
+              <h2>Technical Specs</h2>
+              <ul>${specs}</ul>
+            </div>`
+              : ''
+          }
+          ${
+            sizes
+              ? `
+            <div class="pd-nitrile-options">
+              <p class="pd-nitrile-options__label">Size</p>
+              <div class="pd-nitrile-sizes" data-option-group="size">${sizes}</div>
+            </div>`
+              : ''
+          }
+          ${
+            colors
+              ? `
+            <div class="pd-nitrile-options">
+              <p class="pd-nitrile-options__label">Color</p>
+              <div class="pd-nitrile-colors" data-option-group="color">${colors}</div>
+            </div>`
+              : ''
+          }
+          <div class="pd-nitrile-actions">
+            <div class="pd-nitrile-qty" data-qty-stepper>
+              <button type="button" data-qty-dec aria-label="Decrease quantity">&minus;</button>
+              <input type="number" min="1" value="1" data-qty-input aria-label="Quantity">
+              <button type="button" data-qty-inc aria-label="Increase quantity">+</button>
+            </div>
+            <a href="/pages/forms/procurement.html" class="pd-nitrile-cta">
+              <i data-lucide="shopping-cart"></i>
+              ${escapeHtml(product.primaryCtaLabel ?? 'Add to Quote')}
+            </a>
+          </div>
+          ${highlights ? `<ul class="pd-nitrile-highlights">${highlights}</ul>` : ''}
+        </div>
+      </div>
+    </section>
+    ${
+      bulk
+        ? `
+    <section class="pd-nitrile-bulk section-y">
+      <div class="page-container">
+        <div class="pd-nitrile-bulk__header">
+          <div>
+            <h2>${escapeHtml(bulk.title)}</h2>
+            <p>${escapeHtml(bulk.text)}</p>
+          </div>
+          <a href="/pages/forms/procurement.html">${escapeHtml(bulk.buttonLabel)}</a>
+        </div>
+        <div class="pd-nitrile-bulk__table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Quantity</th>
+                <th>Availability</th>
+              </tr>
+            </thead>
+            <tbody>${tiers}</tbody>
+          </table>
+        </div>
+      </div>
+    </section>`
+        : ''
+    }
+    ${
+      compliance
+        ? `
+    <section class="pd-nitrile-compliance section-y">
+      <div class="page-container">
+        <div class="pd-nitrile-compliance__intro">
+          <h2>Safety &amp; Compliance</h2>
+          <p>Engineered to meet and exceed industry safety standards for maximum protection in rigorous environments.</p>
+        </div>
+        <div class="pd-nitrile-compliance__grid">${compliance}</div>
+      </div>
+    </section>`
+        : ''
+    }
+  `;
+}
+
 /**
  * @param {import('../../../config/catalog.js').CatalogProduct} product
  * @param {import('../../../config/catalog.js').CatalogCategory} category
@@ -1188,6 +2088,18 @@ export function renderProductDetailPage(product, category) {
       return renderExtinguisherPage(product, category);
     case 'extinguisher-compact':
       return renderExtinguisherCompactPage(product, category);
+    case 'extinguisher-industrial':
+      return renderExtinguisherIndustrialPage(product, category);
+    case 'extinguisher-vehicle':
+      return renderVehicleExtinguisherPage(product);
+    case 'extinguisher-halotron':
+      return renderHalotronPage(product);
+    case 'mounting-bracket':
+      return renderMountingBracketPage(product, category);
+    case 'leather-gloves':
+      return renderLeatherGlovesPage(product, category);
+    case 'nitrile-gloves':
+      return renderNitrileGlovesPage(product);
     case 'first-aid-cabinet':
       return renderFirstAidCabinetPage(product, category);
     case 'gas-cage':

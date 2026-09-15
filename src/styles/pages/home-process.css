@@ -245,8 +245,8 @@
   filter: invert(16%) sepia(84%) saturate(4500%) hue-rotate(340deg) brightness(90%) contrast(95%);
 }
 
-/* Desktop trust bar: single row, fixed height from 1066px up */
-@media (min-width: 1066px) {
+/* Desktop trust bar: single row, fixed height from lg breakpoint up */
+@media (min-width: 1024px) {
   .trust-bar {
     padding-block: 1rem;
     min-height: 3.25rem;
@@ -294,7 +294,7 @@
 @media (max-width: 1023px) {
   .process-section {
     --process-scale: clamp(0.78, 0.55 + 0.55vw, 0.92);
-    --process-cols: 3;
+    --process-cols: 2;
     --process-show-arrows: 0;
     --process-col-gap: calc(1rem * var(--process-scale));
     --process-row-gap: calc(1.5rem * var(--process-scale));

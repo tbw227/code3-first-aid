@@ -17,8 +17,10 @@ function renderPpeGlassCard(product) {
   const href = product.hasDetailPage
     ? `/pages/catalog/products/${product.slug}.html`
     : '/pages/forms/procurement.html';
-  const badge = product.badge
-    ? `<span class="catalog-ppe-card__badge">${escapeHtml(product.badge)}</span>`
+  const displayDescription = product.cardDescription ?? product.description;
+  const displayImage = product.cardImage ?? product.image;
+  const badge = product.cardBadge ?? product.badge
+    ? `<span class="catalog-ppe-card__badge">${escapeHtml(product.cardBadge ?? product.badge)}</span>`
     : '';
   const sizeTags = product.sizeTags?.length
     ? `<div class="catalog-ppe-card__sizes">${product.sizeTags.map((tag) => `<span class="catalog-ppe-card__size">${escapeHtml(tag)}</span>`).join('')}</div>`
@@ -28,16 +30,16 @@ function renderPpeGlassCard(product) {
     <article
       class="catalog-ppe-card catalog-ppe-card--glass catalog-card product-card group"
       data-filter-tag="${escapeHtml(product.filterTag ?? 'all')}"
-      data-search="${escapeHtml(`${product.name} ${product.description} ${product.sku}`.toLowerCase())}"
+      data-search="${escapeHtml(`${product.name} ${displayDescription} ${product.sku}`.toLowerCase())}"
     >
       <a href="${href}" class="catalog-ppe-card__media catalog-ppe-card__media--tall">
         ${badge}
-        <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" class="catalog-ppe-card__image" loading="lazy" decoding="async">
+        <img src="${escapeHtml(displayImage)}" alt="${escapeHtml(product.name)}" class="catalog-ppe-card__image" loading="lazy" decoding="async">
       </a>
       <div class="catalog-ppe-card__body">
         ${sizeTags}
         <h3 class="catalog-ppe-card__title">${escapeHtml(product.name)}</h3>
-        <p class="catalog-ppe-card__desc">${escapeHtml(product.description)}</p>
+        <p class="catalog-ppe-card__desc">${escapeHtml(displayDescription)}</p>
         <div class="catalog-ppe-card__footer">
           <span class="catalog-ppe-card__sku">ID: ${escapeHtml(product.sku)}</span>
           <a href="${href}" class="catalog-ppe-card__link">

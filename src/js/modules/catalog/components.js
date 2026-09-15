@@ -12,10 +12,9 @@ export function escapeHtml(text) {
     .replace(/"/g, '&quot;');
 }
 
-/** @param {number | undefined} value */
-function formatPrice(value) {
-  if (value == null) return '';
-  return `$${value.toFixed(2)}`;
+/** @param {string | undefined} label */
+export function isDataSheetCta(label) {
+  return Boolean(label && /data\s*sheet/i.test(label));
 }
 
 /**
@@ -388,11 +387,13 @@ export function renderCatalogSidebar(activeSlug) {
     .join('');
 
   return `
-    <aside class="catalog-sidebar" aria-label="Catalog categories">
-      <p class="catalog-sidebar__heading">Categories</p>
-      <nav class="catalog-sidebar__nav">${links}</nav>
-      <a href="/pages/forms/procurement.html" class="catalog-sidebar__quote">Request a Quote</a>
-    </aside>`;
+    <div class="catalog-sidebar-rail">
+      <aside class="catalog-sidebar" aria-label="Catalog categories">
+        <p class="catalog-sidebar__heading">Categories</p>
+        <nav class="catalog-sidebar__nav">${links}</nav>
+        <a href="/pages/forms/procurement.html" class="catalog-sidebar__quote">Request a Quote</a>
+      </aside>
+    </div>`;
 }
 
 /**
@@ -496,9 +497,9 @@ export function renderBulkQuoteCta() {
       <div class="page-container catalog-bulk-cta__inner">
         <div>
           <h2>Need a Bulk Quote?</h2>
-          <p>Tiered pricing for fleet orders, multi-site restocking, and annual supply contracts.</p>
+          <p>Multi-site restocking and annual supply contracts available.</p>
         </div>
-        <a href="/pages/forms/procurement.html" class="catalog-bulk-cta__button">Request Volume Pricing</a>
+        <a href="/pages/forms/procurement.html" class="catalog-bulk-cta__button">Request a Quote</a>
       </div>
     </section>
   `;
@@ -506,9 +507,6 @@ export function renderBulkQuoteCta() {
 
 /** @param {import('../../../config/catalog.js').CatalogProduct} product */
 export function renderProductHero(product, category) {
-  const priceBlock = product.price
-    ? `<p class="product-hero__price">${formatPrice(product.price)}${product.compareAtPrice ? `<span class="product-hero__compare">${formatPrice(product.compareAtPrice)}</span>` : ''}${product.detailLayout === 'bleeding-control' ? '<span class="product-hero__price-note">Bulk pricing available for corporate accounts</span>' : ''}</p>`
-    : '';
   const rating = product.rating
     ? `<p class="product-hero__rating">${escapeHtml(product.rating)}</p>`
     : '';
@@ -522,7 +520,7 @@ export function renderProductHero(product, category) {
     ? `<p class="product-hero__tagline">${escapeHtml(product.tagline)}</p>`
     : '';
   const primaryCta = product.detailLayout === 'bleeding-control' ? 'Add to Quote' : 'Add to Quote';
-  const secondaryCta = product.detailLayout === 'cpr-padz' ? 'Request Bulk Quote' : product.detailLayout === 'extinguisher' ? 'Download Data Sheet' : 'Request Bulk Quote';
+  const secondaryCta = product.secondaryCtaLabel ?? 'Request Bulk Quote';
 
   const highlights = product.highlights
     ?.map(
@@ -558,13 +556,12 @@ export function renderProductHero(product, category) {
           <h1 class="product-hero__title">${escapeHtml(product.name)}</h1>
           ${tagline}
           ${rating}
-          ${priceBlock}
           <p class="product-hero__desc">${escapeHtml(product.description)}</p>
           ${highlightChips}
           ${!highlightChips && highlights ? `<ul class="product-hero__highlights">${highlights}</ul>` : ''}
           <div class="product-hero__actions">
             <a href="/pages/forms/procurement.html" class="product-hero__cta product-hero__cta--primary">${primaryCta}</a>
-            <a href="/pages/forms/procurement.html" class="product-hero__cta product-hero__cta--secondary">${secondaryCta}</a>
+            ${!isDataSheetCta(secondaryCta) ? `<a href="/pages/forms/procurement.html" class="product-hero__cta product-hero__cta--secondary">${escapeHtml(secondaryCta)}</a>` : ''}
           </div>
         </div>
       </div>
@@ -692,10 +689,9 @@ export function renderFleetQuoteSection(product) {
           <div class="product-fleet-quote__copy">
             <p class="product-fleet-quote__eyebrow">Fleet Solutions</p>
             <h2>Get Bulk Fleet Quote</h2>
-            <p>Outfit your entire facility or vehicle fleet with professional-grade safety equipment. We offer volume pricing and scheduled maintenance plans for enterprise clients.</p>
+            <p>Outfit your entire facility or vehicle fleet with professional-grade safety equipment. Scheduled maintenance plans available for enterprise clients.</p>
             <div class="product-fleet-quote__actions">
-              <a href="/pages/forms/procurement.html" class="product-fleet-quote__cta product-fleet-quote__cta--primary">Request Pricing</a>
-              <a href="/pages/forms/procurement.html" class="product-fleet-quote__cta product-fleet-quote__cta--ghost">Download Data Sheet</a>
+              <a href="/pages/forms/procurement.html" class="product-fleet-quote__cta product-fleet-quote__cta--primary">Request a Quote</a>
             </div>
           </div>
           <form class="product-fleet-quote__form" action="/pages/forms/procurement.html">

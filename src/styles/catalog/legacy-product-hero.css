@@ -5,11 +5,16 @@
 /* --- BEGIN: legacy product detail hero (.product-hero__) — older product layouts --- */
 .product-hero__grid {
   display: grid;
-  gap: 2.5rem;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
   align-items: start;
 }
 
-@media (min-width: 1024px) {
+.product-hero__grid > *,
+.product-hero__info {
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
   .product-hero__grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -18,7 +23,7 @@
 .product-hero__main {
   position: relative;
   aspect-ratio: 1;
-  padding: 2rem;
+  padding: clamp(1rem, 3vw, 2rem);
   background: #f3f4f6;
 }
 
@@ -140,6 +145,26 @@
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+@media (max-width: 767px) {
+  .product-hero .product-hero__title {
+    font-size: clamp(1.625rem, 7vw, 2.25rem);
+  }
+
+  .product-hero .product-hero__desc {
+    font-size: 0.9375rem;
+  }
+
+  .product-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .product-hero__cta {
+    width: 100%;
+    min-width: 0;
+  }
 }
 
 .product-hero__cta--primary {
@@ -689,7 +714,7 @@
   border-radius: 0.5rem;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .product-fleet-quote__panel {
     grid-template-columns: 1fr 1fr;
     align-items: start;
@@ -792,7 +817,7 @@
   gap: 1rem;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .product-spec-columns__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -824,7 +849,7 @@
   align-items: center;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .product-spotlight__grid {
     grid-template-columns: 1fr 1fr;
   }

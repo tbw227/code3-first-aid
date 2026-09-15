@@ -6,4 +6,5 @@
    Footer
    ========================================================================== */
 
-/* Site footer uses Tailwind utilities in HTML; add shared footer overrides here. */
+/* Site footer uses Tailwind utilities in HTML.
+   Link columns: grid-cols-1 sm:grid-cols-2 on .lg:col-span-5 (single column on narrow phones). */

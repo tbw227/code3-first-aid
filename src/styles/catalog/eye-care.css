@@ -109,8 +109,16 @@
 
 .catalog-eye-filter {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
+}
+
+@media (max-width: 639px) {
+  .catalog-eye-filter__select {
+    min-width: 0;
+    width: 100%;
+  }
 }
 
 .catalog-eye-filter__label {

@@ -109,7 +109,7 @@
  * @property {string} [cardImage]
  * @property {string[]} [gallery]
  * @property {string[]} [heroBadges]
- * @property {ReadonlyArray<{ label: string, value: string }>} [quickSpecs]
+ * @property {ReadonlyArray<{ label: string, value: string, icon?: string, note?: string }>} [quickSpecs]
  * @property {ReadonlyArray<string>} [checklist]
  * @property {ReadonlyArray<{ icon: string, label: string }>} [trustBadges]
  * @property {ReadonlyArray<{ title: string, text: string, icon: string }>} [manifest]
@@ -119,23 +119,27 @@
  * @property {ReadonlyArray<{ title: string, text: string, icon: string, accent?: boolean, stat?: string, image?: string }>} [bentoSpecs]
  * @property {ReadonlyArray<{ category: string, items: string[] }>} [kitInventory]
  * @property {{ title: string, text: string, badges: string[] }} [standardsBand]
- * @property {ReadonlyArray<{ title: string, text: string, icon: string }>} [coreFeatures]
+ * @property {ReadonlyArray<{ title: string, text: string, icon: string, eyebrow?: string }>} [coreFeatures]
+ * @property {string} [unitPrice]
+ * @property {string} [unitPriceSuffix]
+ * @property {{ label: string, subtitle: string, price?: string }} [bulkPricing]
+ * @property {ReadonlyArray<{ eyebrow: string, title: string, text: string, rows: ReadonlyArray<{ label: string, value: string }> }>} [techSpecCards]
+ * @property {{ eyebrow: string, title: string, text: string, image: string, badges: ReadonlyArray<{ icon: string, label: string }>, advisory: { title: string, text: string, buttonLabel: string } }} [missionBanner]
  * @property {{ eyebrow: string, title: string, items: ReadonlyArray<{ title: string, text: string, icon: string }>, image: string }} [reliabilitySection]
  * @property {{ title: string, text: string, primaryLabel: string, secondaryLabel?: string }} [bulkFleetCta]
  * @property {{ title: string, text: string, buttonLabel: string }} [commercialQuoteCta]
  * @property {ReadonlyArray<{ label: string, value: string }>} [specManifest]
- * @property {ReadonlyArray<{ title: string, text: string, icon: string }>} [pathogenSpecs]
+ * @property {ReadonlyArray<{ title: string, text: string, icon: string, footer?: string, accent?: boolean }>} [pathogenSpecs]
  * @property {{ title: string, text: string, stats: string[] }} [vigilancePanel]
  * @property {string} [primaryCtaLabel]
  * @property {string} [secondaryCtaLabel]
  * @property {string} [stockNote]
  * @property {number} [reviewCount]
  * @property {number} [savePercent]
- * @property {string} [priceNote]
  * @property {string} [quoteDescription]
  * @property {boolean} [inStock]
  * @property {boolean} [hasDetailPage]
- * @property {'standard' | 'extinguisher' | 'extinguisher-compact' | 'first-aid-cabinet' | 'gas-cage' | 'eyewash-station' | 'pathogen-pack' | 'bleeding-control' | 'cpr-padz' | 'aed-plus' | 'aed-cabinet'} [detailLayout]
+ * @property {'standard' | 'extinguisher' | 'extinguisher-compact' | 'extinguisher-industrial' | 'extinguisher-vehicle' | 'extinguisher-halotron' | 'mounting-bracket' | 'leather-gloves' | 'nitrile-gloves' | 'first-aid-cabinet' | 'gas-cage' | 'eyewash-station' | 'pathogen-pack' | 'bleeding-control' | 'cpr-padz' | 'aed-plus' | 'aed-cabinet'} [detailLayout]
  * @property {string} [productSubtitle]
  * @property {string} [categoryLabel]
  * @property {{ label: string, text: string }} [criticalCallout]
@@ -145,23 +149,38 @@
  * @property {ReadonlyArray<{ title: string, subtitle: string, selected?: boolean, addon?: string }>} [maintenancePlans]
  * @property {ReadonlyArray<{ title: string, text: string, icon: string, footer?: string }>} [industrialSpecCards]
  * @property {{ eyebrow: string, revision?: string }} [techDataHeader]
- * @property {{ title: string, items: ReadonlyArray<{ title: string, text: string, icon: string }>, image?: string }} [whatsInBox]
+ * @property {{ title: string, items: ReadonlyArray<{ title: string, text: string, icon: string }>, image?: string, badgeStat?: string, badgeLabel?: string }} [whatsInBox]
  * @property {{ title: string, text: string, primaryLabel: string, secondaryLabel: string }} [inspectionCta]
  * @property {{ eyebrow: string, title: string, featured: { badge: string, title: string, text: string, linkLabel: string }, cards: ReadonlyArray<{ title: string, text: string, icon: string }> }} [ecosystemSection]
  * @property {ReadonlyArray<{ title: string, text: string, icon: string }>} [precisionFeatures]
+ * @property {ReadonlyArray<{ title: string, text: string, icon: string }>} [techSpecsList]
+ * @property {ReadonlyArray<{ title: string, text: string, icon: string }>} [deploymentCards]
+ * @property {{ title: string, eyebrow: string, text: string, image: string }} [engineeringSection]
+ * @property {string[]} [availableSizes]
+ * @property {string} [defaultSize]
+ * @property {ReadonlyArray<{ id: string, label: string, swatch: string }>} [availableColors]
+ * @property {string} [defaultColor]
+ * @property {string} [packUnit]
+ * @property {ReadonlyArray<{ title: string, badge: string, text: string, icon: string }>} [safetyComplianceCards]
+ * @property {ReadonlyArray<{ label: string, value: string, accent?: boolean }>} [safetyRatings]
+ * @property {string} [safetyRatingsNote]
+ * @property {string} [itemNumber]
+ * @property {{ title: string, text: string }} [useCaseSection]
+ * @property {ReadonlyArray<{ title: string, text: string, image: string }>} [useCaseCards]
+ * @property {{ title: string, text: string, buttonLabel: string, tiers: ReadonlyArray<{ qty: string, savings: string, accent?: boolean }> }} [bulkProcurement]
  * @property {ReadonlyArray<{ label: string, qty: string }>} [boxContents]
- * @property {ReadonlyArray<{ name: string, sku: string, price: number, image: string, slug?: string }>} [replacementParts]
+ * @property {ReadonlyArray<{ name: string, sku: string, image: string, slug?: string }>} [replacementParts]
  * @property {ReadonlyArray<{ title: string, text: string, icon: string }>} [reliabilityFeatures]
  * @property {{ items: ReadonlyArray<{ title: string, text: string, icon: string }>, customCta: { title: string, text: string, buttonLabel: string } }} [logisticsSection]
  * @property {ReadonlyArray<{ label: string, value: string }>} [fullSpecsTable]
  * @property {{ title: string, text: string, image?: string, badge?: string, checks?: string[] }} [complianceSection]
- * @property {{ title: string, text: string, image: string, items: ReadonlyArray<{ title: string, text: string, icon: string }> }} [whatsInBoxDark]
- * @property {{ title: string, text: string, checks: string[] }} [complianceAssembly]
+ * @property {{ heading?: string, title: string, text?: string, image: string, items: ReadonlyArray<{ title: string, text: string, icon: string }> }} [whatsInBoxDark]
+ * @property {{ eyebrow?: string, title: string, text: string, checks: ReadonlyArray<string | { title: string, text?: string }>, checklist?: ReadonlyArray<{ label: string, status: string }> }} [complianceAssembly]
  * @property {{ title: string, text: string, primaryLabel: string, secondaryLabel: string }} [refillBanner]
  * @property {ReadonlyArray<{ label: string, value: string }>} [constructionSpecs]
  * @property {{ dimensions: string, dimensionsNote?: string, alarmPower: string, alarmNote?: string, audioOutput: string, audioNote?: string, certification: { quote: string, text: string, image?: string } }} [cabinetSpecs]
  * @property {boolean} [darkHero]
- * @property {ReadonlyArray<{ slug: string, name: string, price: number, image: string, category: string }>} [relatedProducts]
+ * @property {ReadonlyArray<{ slug: string, name: string, image: string, category: string }>} [relatedProducts]
  * @property {{ eyebrow: string, title: string, text: string, primaryLabel: string, secondaryLabel: string, cards: ReadonlyArray<{ title: string, text: string, icon: string }> }} [trainingSection]
  * @property {{ rating: string, deployed: string, headline?: string }} [brandBanner]
  * @property {ReadonlyArray<{ title: string, text: string, icon: string }>} [heroFeatureCards]
@@ -169,7 +188,7 @@
  * @property {number} [compareAtPrice]
  * @property {string} [rating]
  * @property {ReadonlyArray<{ title: string, text: string }>} [highlights]
- * @property {ReadonlyArray<{ label: string, value: string }>} [specs]
+ * @property {ReadonlyArray<{ label: string, value: string, accent?: boolean }>} [specs]
  * @property {ReadonlyArray<{ title: string, rows: ReadonlyArray<{ label: string, value: string }> }>} [specGroups]
  * @property {ReadonlyArray<{ title: string, text: string }>} [featureCards]
  * @property {ReadonlyArray<{ title: string, text: string, image: string }>} [highlightCards]
@@ -582,8 +601,6 @@ export const CATALOG_PRODUCTS = {
     inStock: true,
     hasDetailPage: true,
     detailLayout: 'eyewash-station',
-    price: 125.99,
-    compareAtPrice: 149,
     checklist: [
       'ANSI Z358.1 Compliant (Bottled Wash)',
       'Dual 32oz Sterile Saline Solution',
@@ -643,79 +660,93 @@ export const CATALOG_PRODUCTS = {
     name: 'Bloodborne Pathogen Treatment Pack',
     sku: '91169',
     description:
-      'Specialized response kit for biohazard cleanup and protection. Engineered for high-risk environments requiring immediate, sterile containment of infectious materials.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDQ4-ZSY8V4LlZn8WfDjeCUe9BSM8yuHeUh_y6TB64x-k1IDQpDuwzzrd1a5MTHkQaS6GppKgBFrNeKwb60ExmNgypZZUnTsBKRNk4jYzlfnNlxst9h-F__U4BrXlK7PeDiyiSZOX1DIFFCBqN4gZ5c7b75LkE6SVrU_NeHsyQ3TeewI0G51Zqh21urFVItGRmWTrFMUZaXNAN2oLAoaE4eb9cgMdgZYAUzgk82mUhdFkb79FwoptI',
+      'A critical response kit designed for the safe handling and disposal of potentially infectious blood and body fluids. Engineered to meet the highest safety standards for workplace environments.',
+    image: '/images/supplies/bloodborne_pathogen_treatment_pack_img.png',
     gallery: [
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDQ4-ZSY8V4LlZn8WfDjeCUe9BSM8yuHeUh_y6TB64x-k1IDQpDuwzzrd1a5MTHkQaS6GppKgBFrNeKwb60ExmNgypZZUnTsBKRNk4jYzlfnNlxst9h-F__U4BrXlK7PeDiyiSZOX1DIFFCBqN4gZ5c7b75LkE6SVrU_NeHsyQ3TeewI0G51Zqh21urFVItGRmWTrFMUZaXNAN2oLAoaE4eb9cgMdgZYAUzgk82mUhdFkb79FwoptI',
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBeHkxrlC1T4El0HRBFHvizHaxl_VFY4tXTEph8UloWyh6mqXl_uS7vkA3ZciKw0Smcg_YqXQaCc4Reg42nPfOFPeqbr6CqYg_Q9-Cobu5IWM28gStJ-QIE6WAXqlsZlNB_cP3i0lXJ7xOdKUxYK_76W597M3oofwqwd8MhconrwSBFLwTxbdygJONY2fL1_wir6sSXYqF1-CbbM_DyRXadwWeWf3GJVkB-IZwptQ7gN-0u-kbm4Fk',
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCFOXNhjLZ_Mscw3P8FQqBULyMXuZNxDjpM6u_Ej8pMTeYFk3Tj7Qz4A1sqezBx6xzwX9k3xpWzSH5gbrm5HkBlFSIBFfohIxM6fHbbkyMwVj7vCALttqbuzWQD35yj7R1OTeXsS1M4LbMJcliPj22uCYuw7tPQTLBdeR_KRYdLb3RiAYXDn0M14JdDsHSJ-xSxFBHWDiA28PMBW4MSLx5ZFngX73dczkX8GCAItd_xNKLDqVVt5Qg',
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDG1favIwOmDsU3XOjlVVfVukOMDebnD-jWQ_hCncrfvMTIVkArn-DEt2dl38T5-j9bkQ4xq3pVWR10SdV57p1iz9QV8hUZ8459Yeamb0y2Q4e1-zX37ezisBG286cWAeeMRgs3SyfYLgu7SPWLNccovtKdK2FyCvcc8kh5xXwiTtTO-yD8hviKaGkAwnSzIwaQNZPGX8LHhrMgLCGFwCsVgFv-ZRP_zTY4iTuJLjGiS-AEK8uxBjo',
+      '/images/supplies/bloodborne_pathogen_treatment_pack_img.png',
+      '/images/supplies/bbp_product_contents_1.jpg',
+      '/images/supplies/bbp_product_contents_2.jpg',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuAgn_Mgy5rtV1EZB_rr30_dRkne-iaffMDh78o2XCmpfu0sU7ZaW2jaQjyqipyZmeYAa9WoSB_4SsdzlKYJ_nW0oLBAAjRyyjn_fBGmQnC3HhqUALKS_4Nw_a88FH-byHo6Alum6DI3UlfE4o8ZRg29tRUbVaHyE_4DXCKtkFAaBxiMWHarunH3_SoB-IRN6mk3MJ7Ls8qyVLJwJr2SYzfiye95hPCHBIwMKbh8bk9Va4gYcndbhQw',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuACCzLGu2fm3QXhVhTjBUHv_OzjROvlRLw1QJTxfCf3xRlhRNNqBj5rdKbkbNzj3M1gF5roFAgaKDuI3njUhGY7Z16H_jQQNMvfZ_4-N3Td6GylpSGOW5bJm7Tu5UtHLuix8T6hRTL1Xoq2jbW3PYp7H5YEquUDfTWbE4tSWUdxuA5Zl8CLawn7wvWnhvePcR-G_Ok7Xtk_hE78w94D6lOYIRz40NgsoU6ysrgP5jqlSl3XkWRjkhI',
     ],
-    heroBadges: ['Critical Asset'],
-    badge: 'Critical Asset',
+    badge: 'Urgent Response',
     filterTag: 'treatment',
     inStock: true,
     hasDetailPage: true,
     detailLayout: 'pathogen-pack',
-    darkHero: true,
-    price: 61,
-    compareAtPrice: 75,
-    savePercent: 18,
-    reviewCount: 46,
-    complianceBadge: 'Biohazard & Medical Supply',
+    darkHero: false,
+    reviewCount: 48,
+    productSubtitle: 'Emergency Medical Supply',
     primaryCtaLabel: 'Add to Quote',
     secondaryCtaLabel: 'Download SDS',
     trustBadges: [
-      { icon: 'shield-check', label: 'OSHA Compliant' },
-      { icon: 'badge-check', label: 'Made in USA' },
-    ],
-    specManifest: [
-      { label: 'Fluid Control Solidifier (2oz)', value: '1 EA' },
-      { label: 'Biohazard Bags with Ties', value: '2 EA' },
-      { label: 'Disposable Protective Apron', value: '1 EA' },
-      { label: 'Nitrile Medical Grade Gloves', value: '2 PRS' },
-      { label: 'Antimicrobial Germicidal Wipes', value: '4 EA' },
-      { label: 'Eye Shield with Ear Loop Mask', value: '1 EA' },
+      { icon: 'badge-check', label: 'OSHA Compliant' },
+      { icon: 'truck', label: 'Ships in 24h' },
     ],
     pathogenSpecs: [
       {
         title: 'Regulatory Compliance',
-        text: 'Meets OSHA 1910.1030 bloodborne pathogen standards for workplace exposure control and cleanup protocols.',
-        icon: 'clipboard-check',
+        text: 'Strictly adheres to OSHA 1910.1030 Bloodborne Pathogens Standard requirements for PPE and waste disposal.',
+        icon: 'clipboard-list',
+        footer: 'Certified Validated',
+        accent: true,
       },
       {
         title: 'Material Quality',
-        text: 'Nitrile gloves and high-density polyethylene components selected for chemical resistance and sterile integrity.',
-        icon: 'shield',
+        text: 'Nitrile medical-grade gloves (latex-free), high-density polyethylene biohazard liners, and premium antimicrobial formula.',
+        icon: 'package',
+        footer: 'Heavy Duty',
       },
       {
         title: 'Dimensions & Weight',
-        text: 'Compact 10" x 7" x 3" profile at 2.4 lbs — ideal for wall cabinets, vehicles, and mobile response kits.',
+        text: 'Compact 10" x 7" x 3" form factor. Optimized for wall-mounting or vehicle placement with quick-release velcro straps.',
         icon: 'scan',
+        footer: 'Unit Wt: 1.4 lbs',
+        accent: true,
       },
     ],
     whatsInBoxDark: {
+      heading: "What's in the Box",
       title: 'Complete Response Ensemble',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDG1favIwOmDsU3XOjlVVfVukOMDebnD-jWQ_hCncrfvMTIVkArn-DEt2dl38T5-j9bkQ4xq3pVWR10SdV57p1iz9QV8hUZ8459Yeamb0y2Q4e1-zX37ezisBG286cWAeeMRgs3SyfYLgu7SPWLNccovtKdK2FyCvcc8kh5xXwiTtTO-yD8hviKaGkAwnSzIwaQNZPGX8LHhrMgLCGFwCsVgFv-ZRP_zTY4iTuJLjGiS-AEK8uxBjo',
+      text: 'Every component is selected for its reliability in high-stress biohazard scenarios.',
+      image:
+        'https://lh3.googleusercontent.com/aida-public/AB6AXuACCzLGu2fm3QXhVhTjBUHv_OzjROvlRLw1QJTxfCf3xRlhRNNqBj5rdKbkbNzj3M1gF5roFAgaKDuI3njUhGY7Z16H_jQQNMvfZ_4-N3Td6GylpSGOW5bJm7Tu5UtHLuix8T6hRTL1Xoq2jbW3PYp7H5YEquUDfTWbE4tSWUdxuA5Zl8CLawn7wvWnhvePcR-G_Ok7Xtk_hE78w94D6lOYIRz40NgsoU6ysrgP5jqlSl3XkWRjkhI',
       items: [
-        { title: 'Nitrile Gloves', text: '3 pairs high visibility for safe handling.', icon: 'shield-check' },
-        { title: 'Biohazard Bags', text: '2× marked polybags for secure disposal.', icon: 'package' },
-        { title: 'Antiseptic Wipes', text: '10× saturated wipes for surface decontamination.', icon: 'scan' },
-        { title: 'Micro-Shield', text: 'Integrated splash guard for facial protection.', icon: 'shield' },
+        { title: 'Nitrile Gloves', text: '2 Pairs High-Dexterity', icon: 'hand' },
+        { title: 'Biohazard Bags', text: '2x Marked Polybags', icon: 'trash-2' },
+        { title: 'Antimicrobial', text: '10x Saturated Wipes', icon: 'spray-can' },
+        { title: 'Face Shield', text: 'Integrated Splash Guard', icon: 'shield' },
       ],
     },
     complianceAssembly: {
+      eyebrow: 'Security & Assurance',
       title: 'Zero-Failure Compliance',
-      text: 'Assembled under emergency medical professional oversight with verified expiry tracking and sterile integrity guarantees.',
-      checks: ['Verified Expiry Tracking', 'Sterile Integrity Guaranteed', 'PPE Requirements Met', 'Removal Labels Included'],
+      text: 'Our treatment packs are designed with the strict oversight of emergency medical professionals. We guarantee that every kit shipped from our facility meets or exceeds OSHA 1910.1030 standards for the workplace.',
+      checks: [
+        {
+          title: 'Verified Expiry Tracking',
+          text: 'We provide automated alerts when your kit components are nearing their expiration dates.',
+        },
+        {
+          title: 'Sterile Integrity Guaranteed',
+          text: 'Triple-sealed packaging ensures zero contamination before first use.',
+        },
+      ],
+      checklist: [
+        { label: 'PPE Requirements', status: 'Pass' },
+        { label: 'Disposal Labels', status: 'Pass' },
+        { label: 'Fluid Control', status: 'Pass' },
+        { label: 'Antiseptic Conc.', status: 'Pass' },
+        { label: 'Sterile Gloves', status: 'Pass' },
+      ],
     },
     commercialQuoteCta: {
       title: 'Outfit Your Entire Facility',
-      text: 'Volume pricing available for corporate safety programs and multi-site fleet management.',
+      text: 'Need multi-location corporate safety coverage? Contact our enterprise team for a custom quote today.',
       buttonLabel: 'Inquire About Bulk Orders',
     },
     seoTitle: 'Bloodborne Pathogen Treatment Pack | Code 3 First Aid',
-    seoDescription: 'OSHA-compliant biohazard cleanup kit for workplace safety programs. Request bulk pricing.',
+    seoDescription: 'OSHA-compliant biohazard cleanup kit for workplace safety programs. Request a quote.',
   },
   '4-shelf-class-b-kit': {
     slug: '4-shelf-class-b-kit',
@@ -736,10 +767,8 @@ export const CATALOG_PRODUCTS = {
     hasDetailPage: true,
     detailLayout: 'first-aid-cabinet',
     productEyebrow: 'Industrial Grade Solutions',
-    price: 350.5,
-    priceNote: 'USD / Per Unit',
     stockNote: 'In Stock: Ready for immediate dispatch to your facility.',
-    reviewCount: 12,
+    reviewCount: 0,
     primaryCtaLabel: 'Add to Fleet',
     secondaryCtaLabel: 'View Specs',
     trustBadges: [
@@ -831,7 +860,7 @@ export const CATALOG_PRODUCTS = {
     filterTag: 'treatment',
     inStock: true,
     seoTitle: 'Burn Care Treatment Pack | Code 3 First Aid',
-    seoDescription: 'Industrial burn care pack for workplace first aid programs. Request bulk pricing.',
+    seoDescription: 'Industrial burn care pack for workplace first aid programs. Request a quote.',
   },
   'industrial-trauma-kit': {
     slug: 'industrial-trauma-kit',
@@ -844,7 +873,7 @@ export const CATALOG_PRODUCTS = {
     filterTag: 'trauma',
     inStock: true,
     seoTitle: 'Industrial Trauma Kit | Code 3 First Aid',
-    seoDescription: 'Heavy-duty trauma kit for industrial job sites. Request bulk pricing and restock scheduling.',
+    seoDescription: 'Heavy-duty trauma kit for industrial job sites. Request a quote and restock scheduling.',
   },
   'bleeding-control-pack': {
     slug: 'bleeding-control-pack',
@@ -861,12 +890,12 @@ export const CATALOG_PRODUCTS = {
       'https://lh3.googleusercontent.com/aida-public/AB6AXuD-qhUTj230ref1Q-Zvn6eurKjciFwqBV1byIjpw0fS5NZXb-74voEGKpI0J79w3nrmxonopy8BwcSEfbn-wBlmLO7c_CsGU8MIq2a0nQTbGpQM2K2fQBvzEc_STBFZZwvn1yMXhwsdVbYYyZF6b3yf3s-hkOEXUfbILdSAFr1eB-XRPkMB0S9RbsA3j7gueu4mt4tIKLa78FaIqD67QJslg45PAXTNt-ULOAEVJ4y0lJgTfDAs7fA',
     ],
     badge: 'Certified Equipment',
+    heroBadges: ['STOP THE BLEED® Compliant'],
     complianceBadge: 'STOP THE BLEED® Compliant',
     filterTag: 'treatment',
     inStock: true,
     hasDetailPage: true,
     detailLayout: 'bleeding-control',
-    price: 153.9,
     primaryCtaLabel: 'Add to Mission Pack',
     secondaryCtaLabel: 'Request Quote for Bulk',
     criticalCallout: {
@@ -937,20 +966,18 @@ export const CATALOG_PRODUCTS = {
       {
         slug: 'blood-stopper-cabinet',
         name: 'Bleeding Control Station',
-        price: 245,
         category: 'Cabinets',
         image: '/images/supplies/safety-supplies-trauma-kit.webp',
       },
       {
         slug: 'bleeding-control-pack',
         name: 'C.A.T. Gen 7 Tourniquet',
-        price: 32.9,
         category: 'Medical',
         image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAXp4OlSIHdxCgHBp3HFFAquuEfqrjNrkMNc9s6LyeBbQL9feTt8GmfeMQMHOLpBa8D6s0iYgw2K0O0yU93UEIJ1yKwIIdUIKNGgxeNvIY3x0KaNtEXa7pMc2GUnSN1wnsFoo1xKfBjoTERt6fmMpe1gOEn87vzBzWY3u7CawuHYzcqhx_f_QiwSrzu3omHPJ_8Nf2N2RFzoeV7kRjXrzzdhMJ98NFfJqqOMAMfgkxX8S57IvdMwqY',
       },
     ],
     seoTitle: 'Bleeding Control Treatment Pack | Code 3 First Aid',
-    seoDescription: 'ANSI-compliant bleeding control pack for workplace trauma response. Request volume pricing.',
+    seoDescription: 'ANSI-compliant bleeding control pack for workplace trauma response. Request a quote.',
   },
   '5lb-abc-extinguisher': {
     slug: '5lb-abc-extinguisher',
@@ -978,8 +1005,6 @@ export const CATALOG_PRODUCTS = {
       'https://lh3.googleusercontent.com/aida-public/AB6AXuBSxxvFl8ZLomAD1C8Zms5-WkV6TWqiJlf8lXwjBZMQtjnNErd2tWVk89Mh1CI9RTihw-P00oiqOuMEA6BO11L9o8sT4r-9RDUh4eJ2XHWyCVBREWwgxj8p5Sp8SOUV3KRzas1e1CYF8QDCOXTiKOPWBR07z7v_678BL7erkt7cH3CM4kcjptCi35wIkW5WaxtKhpWpdGgiVypX5kJyBXmRuzmzSmicJ1GKbp4gIAsDcJtqqDhPyAc',
     cardBadge: 'In Stock',
     cardBadgeTone: 'dark',
-    price: 100,
-    priceNote: 'USD / Per Unit',
     quoteDescription:
       'Essential protection for commercial fleets and high-traffic facilities. Multi-purpose dry chemical agent effective against fires involving ordinary combustibles, flammable liquids, and electrical equipment.',
     quickSpecs: [
@@ -1014,7 +1039,7 @@ export const CATALOG_PRODUCTS = {
     },
     bulkFleetCta: {
       title: 'Scaling Protection for Your Entire Fleet?',
-      text: 'We offer specialized bulk pricing for logistics firms and construction sites looking to standardize safety across all remote locations.',
+      text: 'We support logistics firms and construction sites looking to standardize safety across all remote locations.',
       primaryLabel: 'Get Bulk Fleet Quote',
       secondaryLabel: 'Contact Specialist',
     },
@@ -1047,21 +1072,15 @@ export const CATALOG_PRODUCTS = {
       'https://lh3.googleusercontent.com/aida-public/AB6AXuAcJqfZ8i6SNIi8tTS_18odze6L2IiDxWxZWycFjuuacCQOrW2qDcgLp3U4ok-Bu7U9IrADuSW8Z8ZHjj45hMTryiLYg2WNkVuMaWv8zKlP6JTNti3z0PQBO6ynmAsXyzw25tXdNY0EgpadTzA96Kzh5cIKuvji8TV_dN4DKye5peicsatiT3boN0R6cTZEGcELr3xd3ZJ3WI3ogX_3tkoa1Eb2G4vJz_REs8yw6PAVCG3UFBro8HQ',
     cardBadge: 'Commercial Grade',
     cardBadgeTone: 'dark',
-    price: 150,
-    compareAtPrice: 185,
-    savePercent: 19,
     primaryCtaLabel: 'Request Quantity Quote',
-    secondaryCtaLabel: 'Download Data Sheet (PDF)',
     maintenancePlans: [
       {
         title: 'Initial Purchase + Tagging',
         subtitle: 'Standard compliance certification included',
-        selected: true,
       },
       {
-        title: '6-Year Internal Maintenance',
+        title: 'Inspection & Maintenance',
         subtitle: 'Scheduled breakdown and hydro-test',
-        addon: '+ $85.00',
       },
     ],
     trustBadges: [
@@ -1120,48 +1139,211 @@ export const CATALOG_PRODUCTS = {
       secondaryLabel: 'Book On-Site Training',
     },
     seoTitle: '10 lb ABC Fire Extinguisher | Code 3 First Aid',
-    seoDescription: 'Professional-grade 10 lb ABC fire extinguisher with wall bracket. Request bulk fleet pricing.',
+    seoDescription: 'Professional-grade 10 lb ABC fire extinguisher with wall bracket. Request a fleet quote.',
   },
   '2-5lb-abc-extinguisher-mount': {
     slug: '2-5lb-abc-extinguisher-mount',
     categorySlug: 'fire-protection',
     name: '2.5 lb ABC Fire Extinguisher w/ Mount',
-    sku: 'C3-FE2.5M',
+    sku: '2.5LBABCW/M',
     description:
-      'Compact suppression unit with vehicle-grade vibration-resistant mounting hardware included.',
+      'Compact suppression unit with vehicle-grade vibration-resistant mounting hardware included. Engineered for mobile fleet vehicles, commercial service vans, tight industrial spaces, and emergency response kits.',
     image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuC1skh_T28HOODU1xEUOyptKYTSuQoRxAUZLJ-pI5ko7SMgzsbV-oEFSWLyn-ndWxL_En6KwZ9axKhtF5ckJSEmcNRMKy6_PWKqb3zXm4mwLwGG1HbSIhsHJ6132AsOyu5JjIxAIFRcEsUKIbzRIsdEh8_pK5OgjzlnL1hJ4cDvY-1-_4L3W1G7gj5v5BhjPuWbV5MsHqtJMoO_FGDIlqpS2t7KLUrnKI3IP9m4XQA76lyYHFTK08Q',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDqqsi0A2NfPc58OsKKSIdeXJZKCDQgAEFczWKIUjZmyzn6QHYMb99Ds3_RKABcUGXzOYRmxYSqI894bmCJPhRK9neocVtnLGUgqgJ3xxr69dUmnZk_Lue_Re3ptaVGHJpqrLlkSLCHPkLZaetuu53BqBpuj7-2iS3_RARuveUveQSb3R8a_l9nuN8z9IqjykpD1tMzIb9PK4JREtK5wUMuglzzNrpZjYYBmhlOADtpLaTBZDmMTEw',
+    gallery: [
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDqqsi0A2NfPc58OsKKSIdeXJZKCDQgAEFczWKIUjZmyzn6QHYMb99Ds3_RKABcUGXzOYRmxYSqI894bmCJPhRK9neocVtnLGUgqgJ3xxr69dUmnZk_Lue_Re3ptaVGHJpqrLlkSLCHPkLZaetuu53BqBpuj7-2iS3_RARuveUveQSb3R8a_l9nuN8z9IqjykpD1tMzIb9PK4JREtK5wUMuglzzNrpZjYYBmhlOADtpLaTBZDmMTEw',
+    ],
     filterTag: 'extinguisher',
     inStock: true,
+    hasDetailPage: true,
+    detailLayout: 'extinguisher-vehicle',
+    badge: 'UL Rated 1-A:10-B:C',
+    heroBadges: ['Vehicle Grade'],
     cardName: '2.5 lb ABC w/mount',
     cardDescription:
       'Compact suppression unit with vehicle-grade vibration-resistant mounting hardware included.',
     cardImage:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuC1skh_T28HOODU1xEUOyptKYTSuQoRxAUZLJ-pI5ko7SMgzsbV-oEFSWLyn-ndWxL_En6KwZ9axKhtF5ckJSEmcNRMKy6_PWKqb3zXm4mwLwGG1HbSIhsHJ6132AsOyu5JjIxAIFRcEsUKIbzRIsdEh8_pK5OgjzlnL1hJ4cDvY-1-_4L3W1G7gj5v5BhjPuWbV5MsHqtJMoO_FGDIlqpS2t7KLUrnKI3IP9m4XQA76lyYHFTK08Q',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDqqsi0A2NfPc58OsKKSIdeXJZKCDQgAEFczWKIUjZmyzn6QHYMb99Ds3_RKABcUGXzOYRmxYSqI894bmCJPhRK9neocVtnLGUgqgJ3xxr69dUmnZk_Lue_Re3ptaVGHJpqrLlkSLCHPkLZaetuu53BqBpuj7-2iS3_RARuveUveQSb3R8a_l9nuN8z9IqjykpD1tMzIb9PK4JREtK5wUMuglzzNrpZjYYBmhlOADtpLaTBZDmMTEw',
     cardBadge: 'Vehicle Ready',
     cardBadgeTone: 'primary',
     fireCardFeatured: true,
+    stockNote: 'In Stock — Ready for Rapid Dispatch',
+    bulkPricing: {
+      label: 'Bulk Pricing Available',
+      subtitle: 'Case of 6 Units',
+    },
+    primaryCtaLabel: 'Request Bulk Quote',
+    secondaryCtaLabel: 'Add to Fleet Order',
+    trustBadges: [
+      { icon: 'badge-check', label: 'UL Certified' },
+      { icon: 'truck', label: 'Fleet Direct' },
+      { icon: 'shield', label: '12-Yr Warranty' },
+    ],
+    coreFeatures: [
+      {
+        title: 'Vehicle-Grade Mount',
+        text: 'Heavy-duty red metal bracket with secure quick-release retention straps built for high-vibration mobile deployments.',
+        icon: 'wrench',
+      },
+      {
+        title: 'Compact Footprint',
+        text: 'Optimized 2.5 lb dry chemical capacity tailored specifically for confined operational areas and tight vehicle cabins.',
+        icon: 'package',
+      },
+      {
+        title: 'Vibration Resistant',
+        text: 'Engineered rigorously to withstand heavy mobile transport, rough terrain, and continuous heavy machinery vibration.',
+        icon: 'vibrate',
+      },
+      {
+        title: 'UL Rated',
+        text: 'Certified 1-A:10-B:C multi-class firefighting capability capable of extinguishing trash, wood, liquids, and electrical hazards.',
+        icon: 'badge-check',
+      },
+    ],
+    techSpecCards: [
+      {
+        eyebrow: 'Agent Specification',
+        title: 'Dry Chemical Agent',
+        text: 'Monoammonium phosphate powder rated for Class A (trash, wood, paper), Class B (liquids, gases), and Class C (energized electrical equipment) fires.',
+        rows: [
+          { label: 'Capacity', value: '2.5 lbs' },
+          { label: 'Discharge Time', value: '9-10 seconds' },
+          { label: 'Range', value: '9-15 feet' },
+        ],
+      },
+      {
+        eyebrow: 'Hardware Build',
+        title: 'Heavy-Duty Bracket',
+        text: 'Robust stamped steel construction featuring an adjustable steel strap and pull-pin quick-release latch for instantaneous emergency deployment.',
+        rows: [
+          { label: 'Material', value: 'Stamped Steel' },
+          { label: 'Finish', value: 'Corrosion-Resistant Red Powder Coat' },
+          { label: 'Retention', value: 'Quick-Release Strap' },
+        ],
+      },
+      {
+        eyebrow: 'Deployment Environment',
+        title: 'Fleet & Mobile Ready',
+        text: 'Designed specifically for service trucks, commercial forklifts, emergency response vehicles, semi-truck cabs, and marine vessel cabins.',
+        rows: [
+          { label: 'Operating Temp', value: '-40°F to 120°F' },
+          { label: 'Valve Type', value: 'Anodized Aluminum' },
+          { label: 'Compliance', value: 'DOT & USCG Approved' },
+        ],
+      },
+    ],
+    missionBanner: {
+      eyebrow: 'Mission-Critical Performance',
+      title: 'Rapid-Deployment Fire Suppression in Mobile Environments',
+      text: 'When seconds count in a mobile fleet or tight industrial workspace, equipment failure is never an option. The Code 3 First Aid 2.5 lb ABC unit is engineered from the valve up to provide uncompromising reliability. Its vibration-resistant bracket ensures the extinguisher remains firmly anchored through the roughest terrain, while permitting an instantaneous one-handed pull release when an emergency strikes.',
+      image:
+        'https://lh3.googleusercontent.com/aida-public/AB6AXuBFyV6JGFYezLXh4aRJAeTR1sxHZTRQi99D8RQZPl4G5K9D6riqbHVKYjX2kJzfvfd7pePS9wVEKhDXzLIkJAv4AZLyojvU4KyylWqWL9pTAjAry6jIx0J6r_UFXm67xh-W1oXniaiuOZ9eDX_Lj2Msiptk_Sie8DktBYbQj0purNt_XmTH5hUu5803ugT7NOOb8Sq2agKjj8GAIhvbhotJzm15JRwUuZBL2OBzZTKHX5GL57F0p3k',
+      badges: [
+        { icon: 'zap', label: 'Instant Release Latch' },
+        { icon: 'shield-check', label: 'ISO 9001 Quality Assured' },
+      ],
+      advisory: {
+        title: 'Fleet Deployment Advisory',
+        text: 'Equipping your commercial or municipal fleet with certified suppression hardware minimizes liability and ensures full compliance with OSHA and DOT safety mandates.',
+        buttonLabel: 'Speak with a Fleet Specialist',
+      },
+    },
     seoTitle: '2.5 lb ABC Fire Extinguisher with Mount | Code 3 First Aid',
-    seoDescription: 'Compact ABC fire extinguisher with vehicle mounting bracket. Request fleet pricing.',
+    seoDescription: 'Compact ABC fire extinguisher with vehicle mounting bracket. Request a fleet quote.',
   },
   '20lb-abc-extinguisher': {
     slug: '20lb-abc-extinguisher',
     categorySlug: 'fire-protection',
     name: '20 lb ABC Fire Extinguisher',
-    sku: 'C3-FE20ABC',
+    sku: 'C3-20ABC-IND',
     description:
-      'Maximum capacity industrial unit designed for large-scale fire threats and rapid suppression in high-hazard areas.',
+      "Our flagship industrial-grade fire protection solution. Engineered for high-risk environments where reliability isn't an option—it's a requirement. The 20 lb ABC dry chemical unit provides maximum coverage for Class A (trash, wood, paper), Class B (liquids), and Class C (electrical) fires.",
     image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuAGZEeTN570I5E9E3YJN1r_9MN8ggnejDHBNKyD4I3lNrmRm9oB9cY-0Fr-F7uZW0IlcjqrGrTW8f93xoq_fD2ubHqS7Ux-bJFaQhKzAzfw7u_a6JTDTuYBVbvEdmparXNnoBI-i2QEgG6HlDwDImLZFmr7NcV6_y27BRHNcc-ei7-lNs4wtT9yOcvcBTVFEaVYsd4OFfo1rjnUZ8_VorYihLaqefYfKxjGhdfuvp0kCnf_E-pxpKY',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuBNg3iks5lpVuOkHApyXFVkCGWTad_o9hklPcmG2BR1dSBkv7_h2asewURX0FRe2OkiTxvGNeOcX4Ze5A9x6Kohze0yQuBMItj2AJHvrEjKqO94EboDwPkQHi5SMes1Exkpr0xM6gnvlaQsb06fu3JQd0PdaBecl2xbe0OJjHvi27-gwBA_FEhmbcWKShmfAWcyQwON3odBW-R94zm7pM8xXAR__gviFd26BO9QypIBF7UxubPB1wM',
+    gallery: [
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuBNg3iks5lpVuOkHApyXFVkCGWTad_o9hklPcmG2BR1dSBkv7_h2asewURX0FRe2OkiTxvGNeOcX4Ze5A9x6Kohze0yQuBMItj2AJHvrEjKqO94EboDwPkQHi5SMes1Exkpr0xM6gnvlaQsb06fu3JQd0PdaBecl2xbe0OJjHvi27-gwBA_FEhmbcWKShmfAWcyQwON3odBW-R94zm7pM8xXAR__gviFd26BO9QypIBF7UxubPB1wM',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuCpUy_em0szKTAQChG67rzSQkWggYwe_PUgYRWvp7--8dH0tMLB2u3dvk6OL-tZguwKiI1rEp9o8zEgcU0--NPp7gVSbjAkSWSP0keynyR33hJp_iGWBeH0DNqsy1rj3T3s9a4c3Lked5N6Fy6j_vKylnSm7eEj0-iEawweolcPm1sPqiQPCcA1JVPpU-dLOHvfbO8mKocpmUPK4Wzuo_mhw7u3UET1KD_WQz4Q32jGL0gfb9DMVJI',
+      '/images/supplies/fire-extinguisher-mount.jpg',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuAenjPJmWcaqo-Tnl2CZMAqDFh0yicN5mT3fDoCCzQESn8Bo-EtslMOQFf_QPe1Ld7W2GudZiMQC46YUbeGF4TNGfcYSx1t5v3GP2Kvzef3Nl2QngkqDrdyEqe0yp3tBQAkt8MJ7YQeDdbzwbcht-AbKvn1eT1oTfQxcEstjo45eraFcJbQQ8T49nq6DxYCQoDMyyr89ZE_se0y98zcWFRkRwipWDo44e9n-EkEHdbTenqe0TRGQNk',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuAEHwXv_Ej9HZxIg4dWCK-vIs1uq4IaRzQWxIxvuNp_Vjnj91IBR8r8NCnFVkf-qrSysVKm50cKzlpnFerAbF7QPItoPCHrKEjscdtEhX_e-NAHCctmzXwMFSrkSZE2zEh5XgLokn_gQwU1qSHJ4dlW7H94pwIm0MrFNArDDm-_chEpIVAQ1i4eeYcLJIklfhGqA1qx9k29cXMHi4PBz8yaBCDZlPL55v4DnQQj5bnFVekH8uFtwmA',
+    ],
     filterTag: 'extinguisher',
     inStock: true,
+    hasDetailPage: true,
+    detailLayout: 'extinguisher-industrial',
+    productEyebrow: 'Industrial Series',
     cardName: '20 lb ABC FE',
     cardDescription:
       'Maximum capacity industrial unit designed for large-scale fire threats and rapid suppression in high-hazard areas.',
     cardImage:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuAGZEeTN570I5E9E3YJN1r_9MN8ggnejDHBNKyD4I3lNrmRm9oB9cY-0Fr-F7uZW0IlcjqrGrTW8f93xoq_fD2ubHqS7Ux-bJFaQhKzAzfw7u_a6JTDTuYBVbvEdmparXNnoBI-i2QEgG6HlDwDImLZFmr7NcV6_y27BRHNcc-ei7-lNs4wtT9yOcvcBTVFEaVYsd4OFfo1rjnUZ8_VorYihLaqefYfKxjGhdfuvp0kCnf_E-pxpKY',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuBNg3iks5lpVuOkHApyXFVkCGWTad_o9hklPcmG2BR1dSBkv7_h2asewURX0FRe2OkiTxvGNeOcX4Ze5A9x6Kohze0yQuBMItj2AJHvrEjKqO94EboDwPkQHi5SMes1Exkpr0xM6gnvlaQsb06fu3JQd0PdaBecl2xbe0OJjHvi27-gwBA_FEhmbcWKShmfAWcyQwON3odBW-R94zm7pM8xXAR__gviFd26BO9QypIBF7UxubPB1wM',
     cardBadge: 'Max Capacity',
     cardBadgeTone: 'dark',
+    quickSpecs: [
+      { label: 'Operating Temp', value: '-40°F to 120°F', icon: 'thermometer' },
+      { label: 'UL Rating', value: '10-A:120-B:C', icon: 'badge-check' },
+    ],
+    primaryCtaLabel: 'Request a Quote',
+    secondaryCtaLabel: 'Contact Specialist',
+    trustBadges: [
+      { icon: 'shield-check', label: 'OSHA Compliant' },
+      { icon: 'badge-check', label: 'NFPA 10 Certified' },
+      { icon: 'circle-check', label: 'UL Listed' },
+    ],
+    precisionFeatures: [
+      {
+        title: '20 lb Capacity',
+        text: 'Heavy-duty agent load designed for larger commercial spaces, warehouses, and industrial workshops. Provides extended discharge time for maximum suppression.',
+        icon: 'package',
+      },
+      {
+        title: 'Steel Cylinder',
+        text: 'Rugged steel construction with polyester powder coating for maximum corrosion resistance in harsh industrial environments. Built to last 12+ years with maintenance.',
+        icon: 'wrench',
+      },
+      {
+        title: '26-30s Discharge',
+        text: 'Optimized nozzle flow rate provides a powerful 15-21 foot range, allowing for safe stand-off distances during emergency deployment.',
+        icon: 'zap',
+      },
+    ],
+    fullSpecsTable: [
+      { label: 'Model Number', value: 'C3-20ABC-IND' },
+      { label: 'Valve Material', value: 'Anodized Aluminum' },
+      { label: 'Total Weight', value: '32.5 lbs (Charged)' },
+      { label: 'Pressure Gauge', value: 'UL Validated Dial' },
+    ],
+    whatsInBox: {
+      title: "What's in the Box",
+      image:
+        'https://lh3.googleusercontent.com/aida-public/AB6AXuD-sKddbNRWD_Ii6OTNMH9lODz5NpNlpNPjZQXOfqqSSdLDXCDmoMRhd_2BFpCoEewpz-nsOLEFx5T_shhTWmpbQdDU_quQH-mG5-_x-nmd94ZsNo3SmebhOemnEHce5eGPkMeYp617ELhgeVfwSoo7sY8T08aSquPpZaSFpPn23Tk4qONGNm_mbKLqRMr2-JowvhB12vcQ_r03nufVj5Mm7xX6clqIdhkQq3sFTljpUyDyGLSAa-c',
+      badgeStat: '100%',
+      badgeLabel: 'Ready for Service',
+      items: [
+        {
+          title: 'Heavy Duty Wall Bracket',
+          text: 'Industrial-grade steel wall hanger included for secure mounting on structural walls or columns.',
+          icon: 'wrench',
+        },
+        {
+          title: 'Installation Documentation',
+          text: 'Full NFPA 10 compliant placement guides, mounting instructions, and initial inspection tags.',
+          icon: 'file-text',
+        },
+        {
+          title: 'Pre-Charged Unit',
+          text: 'Delivered pressurized and ready for service, sealed with safety pin and tamper indicator.',
+          icon: 'check',
+        },
+      ],
+    },
+    bulkFleetCta: {
+      title: 'Need a Bulk Solution for Your Facility?',
+      text: 'We provide custom quotes for facility-wide outfitting, including professional installation and monthly compliance monitoring.',
+      primaryLabel: 'Request a Volume Quote',
+      secondaryLabel: 'Contact Specialist',
+    },
     seoTitle: '20 lb ABC Fire Extinguisher | Code 3 First Aid',
     seoDescription: 'High-capacity 20 lb ABC fire extinguisher for industrial facilities. Request a quote.',
   },
@@ -1171,39 +1353,135 @@ export const CATALOG_PRODUCTS = {
     name: '5 lb Halotron Fire Extinguisher',
     sku: 'C3-FE5HAL',
     description:
-      'Clean agent suppression for electronics and data centers. Leaves no residue and is non-conductive.',
+      'Leaves no residue and is non-conductive. This extinguisher uses a clean, rapidly evaporating liquid that leaves no residue behind, making it the ideal choice for protecting sensitive electronic equipment, data centers, and server rooms. It discharges as a rapidly evaporating liquid that leaves no residue, minimizing secondary damage after a fire.',
     image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDxIynSUDSbWstRf8y6zmX8fYB3bIYzLios6UnwuTZj9jpavAPs4tOKorQmu8ynFkBzhMvI5tpXgoip70DW2etIYLoEKSz_oahwRXT77-L8o4DJ8gyn090KiauV5_ONWuOP_64hbtH-YnSSTiDWbiaa65qMhXZTgpM9uD_l6Hmi9fZgxQkacrQjawofzCw-RAuxygJRTDn4S9v0VkYxmnNNYm8OfbukQQrjpPmzMvaIPlxhjsSiHU4',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuB-fC83ZeuinyfZsnT_X2zYF699iypRyJfANcuDw-sLkgS_8Cc9nf7tLCR9OFaH0z4br6Z1qu9OPTNf2Ci_fejXO9sdkHcF8bMd1aQs3xlEF7HT7M1vKtGaCiDsLk2QWNwOt4t1VMUiN1OUkf14EB3bc5p3z4DB-FbySx5pmOPonjHiUdztVOMCRM-7P89NE-A2B8ukxeOxUs5RYR-B0cmDrZBVToXVuKiOdddWsH0692a9tjw6clA',
+    gallery: [
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuB-fC83ZeuinyfZsnT_X2zYF699iypRyJfANcuDw-sLkgS_8Cc9nf7tLCR9OFaH0z4br6Z1qu9OPTNf2Ci_fejXO9sdkHcF8bMd1aQs3xlEF7HT7M1vKtGaCiDsLk2QWNwOt4t1VMUiN1OUkf14EB3bc5p3z4DB-FbySx5pmOPonjHiUdztVOMCRM-7P89NE-A2B8ukxeOxUs5RYR-B0cmDrZBVToXVuKiOdddWsH0692a9tjw6clA',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuCJnuvbdUzXuAV6Xj8C5hT0cyXp2D_TA65_3MR3YautacRQUnVbjMPxKWzMooGPvAiNz4dLySIh8uEK_GypwsyKqDxlC-wnEkZdpDOPbBq0XHNsEJdT_MsM-q8HPIBEr7ojE8zvL5vrsr513UfWZxLiuhIsJMfhA9uFpGsy4fgFY3pZN-x0WPLZzQfWZaD078ieZUwi9RvpFe-glDSX_d7J3R_Tp48Lo7T642_JquelAeryVJfnq3Q',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDjAW01Kmikf5yNFwGYBCFu5lzAdONaeN3MhifAKE0xsIelGeP5od7mRtHb5ZyFaj51Z4v07cNLLx-h8uMF6f3KEpouaBHN1ZFrqIwyoh3Z-0KPRZgQrtn8dKgvfz1J6izXmOEoS5OI18UxdLCYkAbUherIhoVMRkbFcl21YRt58CDiWeUS82As4kOysYpEsS8G0T3vpEt59xKbgPv7lZG8GbrpwvadJK4DUJ5fsivwEvmJN8bdTtc',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuD03nbQCdwDlQkURXF0iF9ZlrJeBhAe4EpPDLD4lV4U7elZtUnDihZrlFUZ0A8208Csh7M6U32SwKkgJc9d0qQyHAtBLAdEFi1xipXeOr3RYPzydsGJvC7QJpQwcNGi7mSs8wxtvx6e6dcqcdrGlLmjyPbtS9nEJczeoitEfyvn8MbrBLROtNv1kAFFVbm2E9rqvpQOT5JPaQbY_3bdAijb6qM3gvs5ZPT7D2OkxNQoQuU3GvC7S94',
+    ],
     filterTag: 'extinguisher',
     inStock: true,
+    hasDetailPage: true,
+    detailLayout: 'extinguisher-halotron',
+    badge: 'Class B, C',
+    productEyebrow: 'Clean Agent',
+    productSubtitle: 'Clean agent suppression for electronics and data centers.',
+    primaryCtaLabel: 'Contact Us',
     cardName: '5 lb Halotron',
     cardDescription:
       'Clean agent suppression for electronics and data centers. Leaves no residue and is non-conductive.',
     cardImage:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDxIynSUDSbWstRf8y6zmX8fYB3bIYzLios6UnwuTZj9jpavAPs4tOKorQmu8ynFkBzhMvI5tpXgoip70DW2etIYLoEKSz_oahwRXT77-L8o4DJ8gyn090KiauV5_ONWuOP_64hbtH-YnSSTiDWbiaa65qMhXZTgpM9uD_l6Hmi9fZgxQkacrQjawofzCw-RAuxygJRTDn4S9v0VkYxmnNNYm8OfbukQQrjpPmzMvaIPlxhjsSiHU4',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuB-fC83ZeuinyfZsnT_X2zYF699iypRyJfANcuDw-sLkgS_8Cc9nf7tLCR9OFaH0z4br6Z1qu9OPTNf2Ci_fejXO9sdkHcF8bMd1aQs3xlEF7HT7M1vKtGaCiDsLk2QWNwOt4t1VMUiN1OUkf14EB3bc5p3z4DB-FbySx5pmOPonjHiUdztVOMCRM-7P89NE-A2B8ukxeOxUs5RYR-B0cmDrZBVToXVuKiOdddWsH0692a9tjw6clA',
     cardBadge: 'Clean Agent',
     cardBadgeTone: 'dark',
+    quickSpecs: [
+      { label: 'Fire Rating', value: '5B:C', icon: 'flame' },
+      { label: 'Capacity', value: '5 lbs', icon: 'package' },
+      { label: 'Discharge Time', value: '9 Sec', icon: 'cloud' },
+      { label: 'Mounting', value: 'Wall Bracket', icon: 'wrench', note: '(Included)' },
+    ],
+    coreFeatures: [
+      {
+        eyebrow: 'Zero Residue',
+        title: 'Clean Discharge',
+        text: 'Protects sensitive electronics, servers, and high-end machinery from secondary agent damage.',
+        icon: 'zap',
+      },
+      {
+        eyebrow: 'SNAP Approved',
+        title: 'Environmentally Safe',
+        text: 'Zero ozone depletion potential with rapid atmospheric evaporation for eco-conscious facilities.',
+        icon: 'leaf',
+      },
+      {
+        eyebrow: 'Non-Conductive',
+        title: 'Class C Protection',
+        text: 'Safely suppresses live electrical fires without risking operator shock or short circuits.',
+        icon: 'shield',
+      },
+    ],
     seoTitle: '5 lb Halotron Fire Extinguisher | Code 3 First Aid',
     seoDescription: 'Clean agent Halotron fire extinguisher for electronics and data centers. Request a quote.',
   },
   'fire-extinguisher-mounting-brackets': {
     slug: 'fire-extinguisher-mounting-brackets',
     categorySlug: 'fire-protection',
-    name: 'Fire Extinguisher Mounting Brackets',
-    sku: 'C3-FEMB',
+    name: 'Universal Fire Extinguisher Mounting Bracket',
+    sku: 'UVMB-110HD',
     description:
-      'Heavy-duty steel wall and vehicle brackets. Powder-coated for corrosion resistance and long-term durability.',
+      'Engineered for absolute reliability in high-stress environments. This heavy-duty steel bracket, finished in a professional matte black powder coat, secures your critical fire suppression equipment firmly in place, ensuring immediate access when seconds matter. Designed for industrial, commercial, and fleet applications.',
     image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBerK9lr7TTkfqR7lxb9m-Jr5vl4baPoSCgA8Esji6Gd-3WDnkZ757btKapbTFDYQsv1enxzEqCXAkq8jZ1zedfg4bdqgqk2Dt0o6HXJzpGZelDwEb0gwIZnycGV_W5KTFrUgV7VGsVx2ZlDjIBn3SzaI9eT4ij1akXH2N3Lk_ulgQ4ZLDVGMIaw7q-nE0CLA5HIwS3-3RywAD1137hgwy8-1UsoaELNpVeA6x7wJBCHIOueHtzHaA',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuBqQjlg2lReKEMCYMCOA_LJnJN7-Yyl27oCapFLaVIX3niIpc3qbMqf0apkEww4GsgpKi69vOiDzTPQFPpiSOeAQAUOiF6f7xx8BC5t_6O5VzlYpbVqBlmb7iVOGR3R1-SRIzHLInjsEUEcvgNmP_pUIRTv4oEOvxSsETSF15tQEWJpNDGHiWMcXRqS4N5jc9Vgxy83eOpS_v4w8hm_alQKy-Jn6iHMUdNctWyiybvYdefXhZKwhIM',
+    gallery: [
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuBqQjlg2lReKEMCYMCOA_LJnJN7-Yyl27oCapFLaVIX3niIpc3qbMqf0apkEww4GsgpKi69vOiDzTPQFPpiSOeAQAUOiF6f7xx8BC5t_6O5VzlYpbVqBlmb7iVOGR3R1-SRIzHLInjsEUEcvgNmP_pUIRTv4oEOvxSsETSF15tQEWJpNDGHiWMcXRqS4N5jc9Vgxy83eOpS_v4w8hm_alQKy-Jn6iHMUdNctWyiybvYdefXhZKwhIM',
+      '/images/supplies/fire-extinguisher-mount.jpg',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuA7eHoXhxZsiqk_mzUA81TTl-q8YecWrEMNXcpYooydAmt2lcPDE9-Z06MzJVfkkF8MuFlEguujgy4jpSboW31CosODjlaa45LPN7BaWwXHWkKebcbSyy6qtSZOucheRqdmOx0YbCJ4CLWJglQ2ODMkZpwDJHHonXoOUJiKLiOlVR-M4LSkO0f9GklU8rYK6N_vS2X-1TTYweVkA1pmAdeiFuLLACiXjXbUg7WPpcne3PxBv___3Yg',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuBroEg_QS-gpwrhrPq1fXNxes5tFCV2ggBJh6njyC7k1WaqV3GXrVNadlYZwmwUH94q5U3-KoTJ4_nE-ey5Y0tSAs6mzzZu9777TPIl7i7w0YgzVYDpV-Z-bjhvlqNGVqRYS29jlSNAh0I-TfktixZyICZAIoFkCWlYrEclkVS72b3YyJFylhSNJM6OFr8UFhx4tBUL8wwHQu_q_2IiMgPRp1b7Ug97Zd_fIIJ0Vpxp9cbxkPrpLEM',
+    ],
+    badge: 'Heavy-Duty Equipment',
     filterTag: 'extinguisher',
     inStock: true,
+    hasDetailPage: true,
+    detailLayout: 'mounting-bracket',
+    stockNote: 'In Stock & Ready to Deploy',
+    primaryCtaLabel: 'Add to Deployment Kit',
+    secondaryCtaLabel: 'Contact Specialist',
     cardName: 'Fire Extinguisher Mounting Brackets',
     cardDescription:
       'Heavy-duty steel wall and vehicle brackets. Powder-coated for corrosion resistance and long-term durability.',
     cardImage:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBerK9lr7TTkfqR7lxb9m-Jr5vl4baPoSCgA8Esji6Gd-3WDnkZ757btKapbTFDYQsv1enxzEqCXAkq8jZ1zedfg4bdqgqk2Dt0o6HXJzpGZelDwEb0gwIZnycGV_W5KTFrUgV7VGsVx2ZlDjIBn3SzaI9eT4ij1akXH2N3Lk_ulgQ4ZLDVGMIaw7q-nE0CLA5HIwS3-3RywAD1137hgwy8-1UsoaELNpVeA6x7wJBCHIOueHtzHaA',
-    seoTitle: 'Fire Extinguisher Mounting Brackets | Code 3 First Aid',
-    seoDescription: 'Heavy-duty fire extinguisher mounting brackets for wall and vehicle use. Request a quote.',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuBqQjlg2lReKEMCYMCOA_LJnJN7-Yyl27oCapFLaVIX3niIpc3qbMqf0apkEww4GsgpKi69vOiDzTPQFPpiSOeAQAUOiF6f7xx8BC5t_6O5VzlYpbVqBlmb7iVOGR3R1-SRIzHLInjsEUEcvgNmP_pUIRTv4oEOvxSsETSF15tQEWJpNDGHiWMcXRqS4N5jc9Vgxy83eOpS_v4w8hm_alQKy-Jn6iHMUdNctWyiybvYdefXhZKwhIM',
+    techSpecsList: [
+      {
+        title: 'Material',
+        text: 'Heavy-duty 11-gauge rolled steel construction.',
+        icon: 'wrench',
+      },
+      {
+        title: 'Finish',
+        text: 'Weather-resistant, professional matte black powder coat.',
+        icon: 'droplet',
+      },
+      {
+        title: 'Retention',
+        text: 'Quick-release industrial nylon strapping system.',
+        icon: 'lock',
+      },
+      {
+        title: 'Compatibility',
+        text: 'Universal fit for standard 5 lb to 20 lb cylinders.',
+        icon: 'scan',
+      },
+    ],
+    deploymentCards: [
+      {
+        title: 'Industrial Warehouses',
+        text: 'Secure mounting on steel beams and concrete pillars in high-traffic zones.',
+        icon: 'warehouse',
+      },
+      {
+        title: 'Commercial Fleets',
+        text: 'Vibration-resistant retention for utility vehicles and transport trucks.',
+        icon: 'truck',
+      },
+    ],
+    engineeringSection: {
+      title: 'Engineering & Installation Specifications',
+      eyebrow: 'Precision Engineering Standards.',
+      text: 'Our mounting systems are built to exact architectural specifications, ensuring compliant, high-fidelity installation across any facility. Every bracket is engineered for structural integrity and rapid deployment in critical environments.',
+      image: '/images/supplies/fire-extinguisher-mount-blueprint.jpg',
+    },
+    commercialQuoteCta: {
+      title: 'Facility Procurement',
+      text: 'Equipping a large facility or managing a fleet? We offer dedicated account management for bulk orders of critical safety infrastructure.',
+      buttonLabel: 'Request Bulk Quote',
+    },
+    seoTitle: 'Universal Fire Extinguisher Mounting Bracket | Code 3 First Aid',
+    seoDescription:
+      'Heavy-duty 11-gauge steel fire extinguisher mounting brackets for wall and vehicle use. Request a quote.',
   },
   'fire-extinguisher-signs': {
     slug: 'fire-extinguisher-signs',
@@ -1222,7 +1500,7 @@ export const CATALOG_PRODUCTS = {
     cardImage:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuBECWYQZQCRO315C1ZjWYIpxppux-kE0_nKAO1N2I1rIAZW_1wX0fGv5n8zJonmPeud-Dlbq_3ZtxhIsYzJRId24-uiGLIxAnzXcxWWm2TRsionv66WTf6ecZOZ6nYsJlV4KaT0qplE6_oxdKXqmiv4q0uAhnHrGFKi2gzXJJQGLlOoYn4AbqjmQbb3wawCk86PvBKu88Pf96j81N6JnKqak5r6lfWCgi8Ros30xCqzI1T75vz2nTc',
     seoTitle: 'Fire Extinguisher Signs | Code 3 First Aid',
-    seoDescription: 'OSHA-compliant fire extinguisher identification signs. Request bulk pricing.',
+    seoDescription: 'OSHA-compliant fire extinguisher identification signs. Request a quote.',
   },
   'aed-wall-cabinet': {
     slug: 'aed-wall-cabinet',
@@ -1243,8 +1521,6 @@ export const CATALOG_PRODUCTS = {
     inStock: true,
     hasDetailPage: true,
     detailLayout: 'aed-cabinet',
-    price: 250,
-    compareAtPrice: 295,
     primaryCtaLabel: 'Add to Fleet',
     secondaryCtaLabel: 'Request a Quote',
     checklist: [
@@ -1302,8 +1578,6 @@ export const CATALOG_PRODUCTS = {
     inStock: true,
     hasDetailPage: true,
     detailLayout: 'aed-plus',
-    price: 2299,
-    compareAtPrice: 2549,
     primaryCtaLabel: 'Add to Fleet',
     secondaryCtaLabel: 'Request Quantity Quote',
     heroFeatureCards: [
@@ -1339,8 +1613,7 @@ export const CATALOG_PRODUCTS = {
       {
         name: 'CPR-D Padz',
         sku: '8900-0800-01',
-        price: 235.99,
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDa5X8zKgqpWGVdIjL9QSXmM2AEA1yOCQohvt51qjpdXucRp9oMnB9kloFGak9H81GxVD8QqJOo0UrMB4nV9LkE5t3iuOqdkDiYquat07xoSDMr6jeHy4ZozD4a-hQ-qA8YN-BKJFF1VMH9puQjcG2rjyzHb3XgkBE8X1HJVEP9BwsV9Yc40A2sMfsVuw_hdms5vKZZ9wc_VRof4O9yOt9MRrJvqhH1dMDmqJxDXa4kgheQHc57cNc',
+        image: '/images/supplies/cpr-d-padz.png',
         slug: 'cpr-d-padz',
       },
     ],
@@ -1365,7 +1638,6 @@ export const CATALOG_PRODUCTS = {
     filterTag: 'station',
     inStock: true,
     hasDetailPage: true,
-    price: 1050,
     highlights: [
       { title: 'Instant Mobility', text: 'Locking casters move protection where hazards shift.' },
       { title: '15-Minute Flow', text: 'Meets OSHA and ANSI continuous-flow requirements.' },
@@ -1382,7 +1654,7 @@ export const CATALOG_PRODUCTS = {
       { title: 'One-Step Activation', text: 'Pull-handle design for fast emergency response.' },
     ],
     seoTitle: 'Mobile Eyewash Station | Code 3 First Aid',
-    seoDescription: 'Mobile gravity-fed eyewash station for industrial jobsites. Request pricing and facility audit.',
+    seoDescription: 'Mobile gravity-fed eyewash station for industrial jobsites. Request a quote and facility audit.',
   },
   '16oz-eyewash-bottles': {
     slug: '16oz-eyewash-bottles',
@@ -1394,7 +1666,7 @@ export const CATALOG_PRODUCTS = {
     filterTag: 'bottle',
     inStock: true,
     seoTitle: '16oz Eyewash Bottles | Code 3 First Aid',
-    seoDescription: 'Portable 16oz eyewash bottles for industrial eye safety programs. Request bulk pricing.',
+    seoDescription: 'Portable 16oz eyewash bottles for industrial eye safety programs. Request a quote.',
   },
   '4oz-eyewash': {
     slug: '4oz-eyewash',
@@ -1406,7 +1678,7 @@ export const CATALOG_PRODUCTS = {
     filterTag: 'bottle',
     inStock: true,
     seoTitle: '4oz Eyewash | Code 3 First Aid',
-    seoDescription: 'Compact 4oz eyewash for vehicle and mobile kits. Request bulk pricing.',
+    seoDescription: 'Compact 4oz eyewash for vehicle and mobile kits. Request a quote.',
   },
   'half-oz-eyewash-4ct': {
     slug: 'half-oz-eyewash-4ct',
@@ -1430,7 +1702,7 @@ export const CATALOG_PRODUCTS = {
     filterTag: 'ocular',
     inStock: true,
     seoTitle: 'Eye Pads & Lubricants | Code 3 First Aid',
-    seoDescription: 'Sterile eye pads and lubricating drops for post-irrigation care. Request bulk pricing.',
+    seoDescription: 'Sterile eye pads and lubricating drops for post-irrigation care. Request a quote.',
   },
   'slim-eyewash-station': {
     slug: 'slim-eyewash-station',
@@ -1452,14 +1724,12 @@ export const CATALOG_PRODUCTS = {
     sku: 'CPRDPAD',
     tagline: 'Standardized one-piece defibrillation electrode with Real CPR Help® technology.',
     description: 'Replacement electrodes for Zoll AED Plus. One-piece design with Real CPR Help technology.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDa5X8zKgqpWGVdIjL9QSXmM2AEA1yOCQohvt51qjpdXucRp9oMnB9kloFGak9H81GxVD8QqJOo0UrMB4nV9LkE5t3iuOqdkDiYquat07xoSDMr6jeHy4ZozD4a-hQ-qA8YN-BKJFF1VMH9puQjcG2rjyzHb3XgkBE8X1HJVEP9BwsV9Yc40A2sMfsVuw_hdms5vKZZ9wc_VRof4O9yOt9MRrJvqhH1dMDmqJxDXa4kgheQHc57cNc',
+    image: '/images/supplies/cpr-d-padz.png',
     badge: 'Premium Supply',
     filterTag: 'cabinet',
     inStock: true,
     hasDetailPage: true,
     detailLayout: 'cpr-padz',
-    price: 235.99,
-    compareAtPrice: 268,
     highlights: [
       { title: 'Real CPR Help®', text: 'Provides real-time feedback on compression depth and rate during resuscitation.' },
       { title: '5-Year Shelf Life', text: 'Industry-leading longevity for long-term fleet storage programs.' },
@@ -1491,7 +1761,7 @@ export const CATALOG_PRODUCTS = {
       { label: 'Manufactured In', value: 'USA' },
     ],
     seoTitle: 'CPR-D Padz | Code 3 First Aid',
-    seoDescription: 'Zoll CPR-D Padz with Real CPR Help. Request bulk AED consumables pricing.',
+    seoDescription: 'Zoll CPR-D Padz with Real CPR Help. Request a quote for AED consumables.',
   },
   'steel-gas-cylinder-cage': {
     slug: 'steel-gas-cylinder-cage',
@@ -1514,9 +1784,6 @@ export const CATALOG_PRODUCTS = {
     hasDetailPage: true,
     detailLayout: 'gas-cage',
     productEyebrow: 'Industrial Safety Solutions',
-    price: 1899,
-    compareAtPrice: 2145,
-    priceNote: 'USD / EA',
     quoteDescription:
       'Engineered for high-risk industrial environments. Reinforced steel construction with manual-close safety locks and open mesh ventilation for LP-gas cylinder storage.',
     quickSpecs: [
@@ -1524,7 +1791,6 @@ export const CATALOG_PRODUCTS = {
       { label: 'Dimensions', value: '36" x 36" x 60"' },
     ],
     primaryCtaLabel: 'Add to Quote',
-    secondaryCtaLabel: 'View Data Sheet',
     trustBadges: [
       { icon: 'shield-check', label: 'OSHA Compliant' },
       { icon: 'package', label: 'Freight Shipping' },
@@ -1558,7 +1824,7 @@ export const CATALOG_PRODUCTS = {
     ],
     commercialQuoteCta: {
       title: 'Need a Custom Fleet Quote?',
-      text: 'Outfit multiple sites with standardized cylinder containment. Volume pricing and delivery coordination available.',
+      text: 'Outfit multiple sites with standardized cylinder containment. Delivery coordination available.',
       buttonLabel: 'Inquire Now',
     },
     seoTitle: 'Steel Gas Cylinder Cages | Code 3 First Aid',
@@ -1568,29 +1834,156 @@ export const CATALOG_PRODUCTS = {
     slug: 'cowhide-leather-gloves',
     categorySlug: 'industrial-ppe',
     name: 'Cowhide Leather Gloves',
-    sku: 'C3-HND-L88',
+    sku: 'IB1240P-L / IB2240P-M',
     description:
-      'Premium heavy-duty split cowhide for superior abrasion resistance and thermal protection in rugged environments.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDERniXCFSjkSSkMGhZHvY11Ro3pkK-ff5W0yhvfMfO_L-BdgHyt70b3xVaO8NEhXkBYKBQ5mbgGRTDyDXaME4ndcHWZjKmekMYQtujhkm-w_N_MRSSFN4mLyQbTHzdXzwg8bAmEhuTvNl_yB9grV_CxR12eIqo-uiffQD5eYItGMWHw4AYXRCNHB5yKXcUlXaTDAk21W6Wy5YjqcgHTIvyhk-wnAiXN_7wGSQZXsu-JXuxsoqE7XA',
+      'Premium grain cowhide provides excellent abrasion resistance and durability for heavy construction and material handling.',
+    image:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuCYW74Dd2CTYeYYZBuHxH4sg7wCx7D2oT_N3v-AZdZJvqtFoPBICwpt6A6pV1u3si7SpErCnCgRzhHnZgMgwefrUkCEkidUyZIeDlpyiKNR0TxFolmoXXBSoSs4WE5W0vfkBk3DDG6glUnGo-sx-5jVyAPbLJz1ph5dKhYrhqj5-GKbjhHeQMnXiQwb8I5oseUt6MmCDWLA-iZaGLPLJszltlG3MrIszs2Bf8ytdySVPmi1qIhQrjM',
+    gallery: [
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuCYW74Dd2CTYeYYZBuHxH4sg7wCx7D2oT_N3v-AZdZJvqtFoPBICwpt6A6pV1u3si7SpErCnCgRzhHnZgMgwefrUkCEkidUyZIeDlpyiKNR0TxFolmoXXBSoSs4WE5W0vfkBk3DDG6glUnGo-sx-5jVyAPbLJz1ph5dKhYrhqj5-GKbjhHeQMnXiQwb8I5oseUt6MmCDWLA-iZaGLPLJszltlG3MrIszs2Bf8ytdySVPmi1qIhQrjM',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDtGJR3yks_vdQSiuo1xcazs2Jpv9RMr1AD7idBgD4OkTruX6eBlhI5mJGqibPjcFh3qEPTmcFKRbhLzW3RA_cg2F1NLvWkxpN_qQKkk95Gvq875J6kp1rJAuXgeszKjObH2pNWz3WDqxj1WAHUNrQOEynX96fjSTUYr6ivuJ3k2vfMnoG6l6xuu8Onol0ijgUkVkLz9dL7uPSgzZN2j_WcEaT78Ctqbj8-VMFlDk0qTUbztKKkmDo',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDnPafqfq_rS2fFA1jPJ7qfgk2cEhkG9lGuDPRnB_b0irUy3BqxlDz1mLmtPviyj_LpEWr2IFgwEak_QI4yal9-Q3WCz19h_0ffDF0cnwk7mfgyPBBDQpxy3c60DsekgvmOeJ_ta9i0fhd7LT7Biksi7iAPockctGOLK_nLKq35V1Nz-9uyUR87aFIVp1YcqN-d4HvrfrmURwHfIpJFaI5zQXPFD4U01gu4hbqDZ7_LJ0LFfE2U0MY',
+    ],
+    badge: 'ANSI/ISEA 105',
     filterTag: 'hand',
     ppeSection: 'hand',
     ppeCardStyle: 'glass',
     inStock: true,
+    hasDetailPage: true,
+    detailLayout: 'leather-gloves',
+    availableSizes: ['M', 'L', 'XL'],
+    defaultSize: 'L',
+    primaryCtaLabel: 'Add to Quote',
+    secondaryCtaLabel: 'Request Quote',
+    specs: [
+      { label: 'Material', value: 'Premium Grain Cowhide' },
+      { label: 'Protection', value: 'Abrasion Resistant' },
+      { label: 'Compliance', value: 'OSHA / ANSI Compliant' },
+    ],
+    safetyComplianceCards: [
+      {
+        title: 'ANSI Abrasion Level',
+        badge: 'Level 4',
+        text: 'High resistance to wear and tear during heavy material handling.',
+        icon: 'shield',
+      },
+      {
+        title: 'Puncture Resistance',
+        badge: 'Level 3',
+        text: 'Protects against sharp edges, wire, and jagged materials.',
+        icon: 'circle-check',
+      },
+      {
+        title: 'Heat Resistance',
+        badge: 'Contact Temp',
+        text: 'Safe for intermittent contact with hot materials up to 250°F.',
+        icon: 'triangle-alert',
+      },
+    ],
+    useCaseCards: [
+      {
+        title: 'Heavy Construction',
+        text: 'Ideal for masonry, concrete work, and handling rough framing materials where abrasion resistance is paramount.',
+        image:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuAuwVcuaQA5mEbuaVH-WjNdhl__Qrx3-PO6D5fLe9R2TLV5CWMnv8YpjsCaxz_BMMFTBWSr9sOXYJBB00xnnhKpLgjm-avpK30it6_ZyNjQTfTIsNvA_4PGKBmD_PPFz01TGdb7Bo6ExsDeTmjKy9vF0loaAtI7aqzjNk7dKqkqBOAhFqVy4RDvrAtu1eAHbSUHtb40F_2EB11Zcikq8fSEt0LO6llqRvmFCsBkl6Znis2bRxCDvt8',
+      },
+      {
+        title: 'Metal Fabrication',
+        text: 'Provides essential protection against sharp edges, metal burrs, and minor slag during grinding and cutting tasks.',
+        image:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuDzDxDczFK5Omp7mwMSAXrE2nlo7KZe64_1aK4l0tYA2429-I5wjduZ3g9CD96pqRWSHHjib83RuAhYSum6c0ZmD3ne7Ijr7gmEGOUnxoJc98y1dGZDV-Ddq_r1Aoudc28Pn6eCCPXePwShOHbhYpkKzlkwHz0sMwwTJcNxTN1ikO7YRIhGxd4BZvq7oYlrBK4LHWSvyLCFsVWlaguclQDw53LeD5IQbUOnsBpo2ocii7z-otcMp5c',
+      },
+      {
+        title: 'Industrial Rigging',
+        text: 'Superior grip and durability for handling steel cables, chains, and heavy loads in harsh industrial environments.',
+        image:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuCdyPQtkJv-aw4g4WlbVP8eTb7EqwQAWGu9na8cpLMmTwnkZROqTmvTR8e5ifWNK-zUuPnI25jjr-Nn84xVmuUqOQxI99L2Jrs1Ro0346TJs2ECU393HkdSZZ6YdP7astlvRjEHzNGVG_dld9mjGBWd1WymxVqoqxXh5YnlFJ2O0c5yIYSujGDk-8w__5Mn63XO8G4LxYMn8nYuiqganan9H_EJeL5kkbbSk1GP2HM8MI6gzKJlYpc',
+      },
+    ],
+    bulkProcurement: {
+      title: 'Bulk Procurement',
+      text: 'Volume options for enterprise and professional teams.',
+      buttonLabel: 'Request Enterprise Quote',
+      tiers: [
+        { qty: '1-10 Pairs', savings: 'Standard' },
+        { qty: '11-50 Pairs', savings: '10% Off' },
+        { qty: '50+ Pairs', savings: '20% Off' },
+      ],
+    },
     seoTitle: 'Cowhide Leather Gloves | Code 3 First Aid',
-    seoDescription: 'Heavy-duty cowhide leather gloves for industrial hand protection. Request bulk pricing.',
+    seoDescription: 'Heavy-duty cowhide leather gloves for industrial hand protection. Request a quote.',
   },
   'honey-grip-gloves': {
     slug: 'honey-grip-gloves',
     categorySlug: 'industrial-ppe',
     name: 'Honey Grip Gloves',
-    sku: 'C3-HND-G22',
+    sku: 'HONEYG',
+    itemNumber: '9001',
     description:
-      'Crinkle-finish latex coating provides exceptional wet/dry grip. Breathable knit shell for all-day comfort and dexterity.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuARrWQh03ZA_Tt0xCRYcGfsgpNb7S2rVxb_FOmW2pw1TQiDIQJPyMY_MFcIuxCU5ii-5zqG9bwVddnHCX11NJ1_G0aSUOaSIpQgRTDYsWzsDha8iI-cQZm69CX_A4WWAUayiCSopXi64u4fWyoeju5byTYkgiOSQJ8K3JfiNZP_JaJeiASMRp5HELQpDqzPCL8ENJaj0qJpH_bcXBleN5T9H76WACIOQVTspSG4ap-Ma_g2SqZy9LQ',
+      'Premium high-visibility yellow gloves featuring a honeycomb crinkle latex coating for superior dry and wet grip. Built for durability and demanding material handling.',
+    image: '/images/supplies/honey-grip-gloves.png',
+    gallery: [
+      '/images/supplies/honey-grip-gloves.png',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuB9-C9_orulBxvC9_PkgMXl9uBtReHfgU2AwAshf4s774eI095P9nfVjjJ8GofS2a1a9ZaQNPiEkiAJslSpghiQvxE-e3gZdFjwHIbZNNNnBovrrYntkC_25YfKrTIGcNHNBk5fAnYF4y93h-C8Km92VFcSowd_yEYk_oX9pY0qOTq202MuXNu2OJnVbMtqqRe6tzmiMK1BnXjrTVbhUc4-cO1XP_JtYjMOLnPoiVgCC9ezQH_SPtY',
+    ],
+    badge: 'ANSI/ISEA 105',
     filterTag: 'hand',
     ppeSection: 'hand',
     ppeCardStyle: 'glass',
     inStock: true,
+    hasDetailPage: true,
+    detailLayout: 'leather-gloves',
+    availableSizes: ['M', 'L', 'XL'],
+    defaultSize: 'L',
+    primaryCtaLabel: 'Add to Quote',
+    secondaryCtaLabel: 'Request Quote',
+    specs: [
+      { label: 'Material', value: 'Latex / Cotton' },
+      { label: 'Coating', value: 'Honeycomb Crinkle' },
+      { label: 'Compliance', value: 'OSHA / ANSI Compliant' },
+    ],
+    safetyRatings: [
+      { label: 'Abrasion Resistance', value: 'Level 4', accent: true },
+      { label: 'Puncture Resistance', value: 'Level 3', accent: true },
+      { label: 'Cut Resistance', value: 'Level A2' },
+    ],
+    safetyRatingsNote:
+      'Ratings are based on ANSI/ISEA 105-2016 standards. For detailed test reports, please contact our support team.',
+    safetyRatingsNoteIcon: 'info',
+    bulkProcurement: {
+      title: 'Bulk Procurement',
+      text: 'Volume pricing for enterprise and professional teams.',
+      buttonLabel: 'Request Enterprise Quote',
+      tiers: [
+        { qty: '1-10 Pairs', savings: 'Standard' },
+        { qty: '11-50 Pairs', savings: '10% Off' },
+        { qty: '51+ Pairs', savings: '20% Off', featured: true },
+      ],
+    },
+    useCaseSection: {
+      title: 'Engineered for the Extremes',
+      text: 'Professional-grade hand protection trusted across demanding industrial applications.',
+    },
+    useCaseCards: [
+      {
+        title: 'HVAC',
+        text: 'Superior grip for handling smooth, sheet metal and ducting in tight spaces.',
+        image:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuB01Dj8k3rQGnIRIpvOPjeTC1nQ6TrgIBeMugXlNZa6IAT20PEkqSLhddXZiIiAln82R-4pKywWbBFAuashfg4nP-VkOuNLJdCyqgTWhiLnupzEE2tfb1PlMYWLWADhnhxgtvKSgLaR_HuweSDy43OuscKn35TyD_Y_5lqwgQyGkK8pZKAmDzdPffLkYvniFE_GL1MH63DHjoVDMnBOYfcMbFANk7ejLvcGay-Yu4wmbm5NxPWgIJM',
+      },
+      {
+        title: 'Glass Handling',
+        text: 'Confident, non-slip secure grip critical for carrying fragile and sharp materials.',
+        image:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuBQxHgX1WgkSYjwRM3rCPwo-ymIGdj-z9Xh1s-LNTVwH9C8LFIGnofA4Kl4ciPJn8zLrkf3dZdM4bUpUZ6rt7pvS-UyvGBCleOsSoOEvQSgpwUUmeFtjWYaCXTkcM2TYY_f9r0OF7l0TW-OCGvXnjjd8m5wjDmtVh6mHvUeIbTEWH8NEWbtSDztBkkcA8HIg1sOo_QtecFhl8Mrtaz-7x46q1uhqO3h9tMFnVZnyJiKR2eKZ9j0Rs8',
+      },
+      {
+        title: 'General Assembly',
+        text: 'Dexterity and protection balanced for continuous workflow in manufacturing.',
+        image:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuBp2lhXtwUrgiqmQvBXHV1Tulo_PFUwU2_7FKSfzBJEHsK4ShelJZ3NMsRNSN6CQuQ-7zOl61lUqSQndRNq2o-OXmDTv8GiIJHLa4uFY51DN31pZLRm6PQz_aefc5vp72TMVmuIcOe6hdui82jj_uaXI-J9_3nqWXGjzBJCqHLNjeFCXPis049HvuLazw6gksLOH_odIN_SA5C5ltbgMWOOpr2XGVjNw3bENnjfW636TzX6aBNmIes',
+      },
+    ],
     seoTitle: 'Honey Grip Gloves | Code 3 First Aid',
     seoDescription: 'High-visibility honey grip gloves with latex palm coating. Request a quote.',
   },
@@ -1600,15 +1993,78 @@ export const CATALOG_PRODUCTS = {
     name: 'Nitrile Gloves (LG/XL)',
     sku: 'C3-HND-N44',
     description:
-      'Industrial strength chemical resistant nitrile. Powder-free and latex-free for sensitive skin. Available in bulk cases.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDH9foDFr_bsbO-9lUjKhRV6WVikELqKmG0eJ17S83N359z5jsvxb5Hf-D0-cHLXNIOPEJcU9EfUsLB6tY5zryQUYKEMJ6WfDK5E3ZBSA4BBeOxIBsJATCh3SnHO0Gh9hUB9ADG0JzQ7Mel2IAUCjfsLZN9vCka-dKnTTxYGWap1WLOQNNT0-LEys-G3VoQbPA8s72pWaY7-4lHqnLwAjUKOxND7haG3-4cpJObQSzjM6bfX_R7Vc8',
+      'Premium, powder-free nitrile gloves designed for maximum tactile sensitivity and critical barrier protection in demanding environments.',
+    image:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuAbWGS_sT08HdFsLrllj07A0hx-gA_lLX5NUg0h0zE8kWhGlHUsjfGO5wtvbYxzTk9aCswmT6_2t4fMNDa0Xez2uf8wl-0Q4EJDbQJpKbgbEO-qDeLy6NEpDyRoMcb5NPmgyqzQ9oQi6sTgYd70ZDgYzB3wbEbUyvJdEsr2mt-p7wGL5WUPmQvMym9umEyMiPDmsJRr79jVqGofvv5UnHULBPK61nE2wQly3OJ39XquNkOL-yyfgZs',
+    gallery: [
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuAbWGS_sT08HdFsLrllj07A0hx-gA_lLX5NUg0h0zE8kWhGlHUsjfGO5wtvbYxzTk9aCswmT6_2t4fMNDa0Xez2uf8wl-0Q4EJDbQJpKbgbEO-qDeLy6NEpDyRoMcb5NPmgyqzQ9oQi6sTgYd70ZDgYzB3wbEbUyvJdEsr2mt-p7wGL5WUPmQvMym9umEyMiPDmsJRr79jVqGofvv5UnHULBPK61nE2wQly3OJ39XquNkOL-yyfgZs',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuCq6lkKizlPvEaaIWu9ieznamLpmoNNfB_3qzEvBnWL4pJrnbmxZpy51a33EeaR7BHskZBYPn6fpHlug4ozkGfS-rkmYED2r0MTSVZgHBB99jsEvFZFwB8VKXQ4CrzIYlla5mUTAEkmuembO2XEWVe2UQHdLA16dEZlTecFaSiENyKt65TShLmC58GxgWdas6cC2xJItzGt7bNc29G3XlCqoL5YEN-6TDUSa1eEdlqQmKDA9AyKaR0',
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuCS5hErqY5UyTnZxuV3PDwR4MVOoKyxwFwW9FBGoflZH01O02gJn_2_QDH8EG9WIMH1xEe9mPy99rrRxtFYPLEgSIZxVxL4rnPiAQgYR8NzQ-5LKE8rBTBU28bq8t_YIeCZbzG-ylP7RLN3ubsWc5EnEYIQxTPouuIl_4cyxKUIyfs5KKIlKguGhchKBJ6rxFlCnWENEVGpVQbzC5yeMhQTObO_Exme8Veefm42QGTpGy4DJHcy48w',
+    ],
     filterTag: 'hand',
     ppeSection: 'hand',
     ppeCardStyle: 'glass',
     sizeTags: ['LG', 'XL'],
     inStock: true,
+    hasDetailPage: true,
+    detailLayout: 'nitrile-gloves',
+    badge: 'Medical Grade',
+    cardDescription:
+      'Industrial strength chemical resistant nitrile. Powder-free and latex-free for sensitive skin. Available in bulk cases.',
+    cardImage:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuAbWGS_sT08HdFsLrllj07A0hx-gA_lLX5NUg0h0zE8kWhGlHUsjfGO5wtvbYxzTk9aCswmT6_2t4fMNDa0Xez2uf8wl-0Q4EJDbQJpKbgbEO-qDeLy6NEpDyRoMcb5NPmgyqzQ9oQi6sTgYd70ZDgYzB3wbEbUyvJdEsr2mt-p7wGL5WUPmQvMym9umEyMiPDmsJRr79jVqGofvv5UnHULBPK61nE2wQly3OJ39XquNkOL-yyfgZs',
+    packUnit: '/ box (100 ct)',
+    availableSizes: ['L', 'XL'],
+    defaultSize: 'L',
+    availableColors: [
+      { id: 'blue', label: 'Blue', swatch: '#3b82f6' },
+      { id: 'black', label: 'Black', swatch: '#141d23' },
+    ],
+    defaultColor: 'blue',
+    primaryCtaLabel: 'Add to Quote',
+    specs: [
+      { label: 'Material', value: '100% Nitrile (Latex-Free)' },
+      { label: 'Thickness', value: '5 mil (Industrial Grade)' },
+      { label: 'Finish', value: 'Micro-Textured Fingertips' },
+      { label: 'Grade', value: 'Medical / Examination', accent: true },
+    ],
+    trustBadges: [
+      { icon: 'badge-check', label: 'Medical grade, 5mil thickness' },
+      { icon: 'ban', label: 'Powder-free & Latex-free' },
+      { icon: 'hand', label: 'Superior tactile sensitivity' },
+    ],
+    bulkProcurement: {
+      title: 'Bulk Procurement',
+      text: 'Volume pricing for enterprise and professional teams.',
+      buttonLabel: 'Request Enterprise Quote',
+      tiers: [
+        { qty: '1-10 Boxes', savings: 'Available' },
+        { qty: '11-50 Boxes', savings: 'Tier Inquiry Required', accent: true },
+        { qty: '51+ Boxes', savings: 'Enterprise Quote Needed', accent: true },
+      ],
+    },
+    safetyComplianceCards: [
+      {
+        title: 'FDA 510(k) Cleared',
+        badge: '',
+        text: 'Certified for medical use and patient examination.',
+        icon: 'badge-check',
+      },
+      {
+        title: 'Chemo Rated',
+        badge: '',
+        text: 'Tested for use with chemotherapy drugs (ASTM D6978).',
+        icon: 'briefcase-medical',
+      },
+      {
+        title: 'Barrier Protection',
+        badge: '',
+        text: 'Superior resistance to punctures and hazardous chemicals.',
+        icon: 'shield',
+      },
+    ],
     seoTitle: 'Nitrile Gloves LG/XL | Code 3 First Aid',
-    seoDescription: 'Industrial nitrile gloves in large and extra-large sizes. Request bulk case pricing.',
+    seoDescription: 'Industrial nitrile gloves in large and extra-large sizes. Request a case quote.',
   },
   'nemesis-smoked-mirror': {
     slug: 'nemesis-smoked-mirror',
@@ -1638,7 +2094,7 @@ export const CATALOG_PRODUCTS = {
     ppeCardStyle: 'compact',
     inStock: true,
     seoTitle: 'Nemesis Clear Lens Safety Glasses | Code 3 First Aid',
-    seoDescription: 'Clear anti-fog safety glasses for indoor industrial work. Request bulk pricing.',
+    seoDescription: 'Clear anti-fog safety glasses for indoor industrial work. Request a quote.',
   },
   'lens-cleaning-towelettes': {
     slug: 'lens-cleaning-towelettes',
@@ -1655,7 +2111,7 @@ export const CATALOG_PRODUCTS = {
     ctaLabel: 'Add to Bulk Quote',
     inStock: true,
     seoTitle: 'Lens Cleaning Towelettes | Code 3 First Aid',
-    seoDescription: 'Anti-static lens cleaning towelettes for safety eyewear maintenance. Request bulk pricing.',
+    seoDescription: 'Anti-static lens cleaning towelettes for safety eyewear maintenance. Request a quote.',
   },
   'blue-detectable-bandage': {
     slug: 'blue-detectable-bandage',
@@ -1668,7 +2124,7 @@ export const CATALOG_PRODUCTS = {
     filterTag: 'detectable',
     inStock: true,
     seoTitle: 'Blue Detectable Bandage | Code 3 First Aid',
-    seoDescription: 'Metal-detectable 1×3 bandages for industrial first aid programs. Request bulk pricing.',
+    seoDescription: 'Metal-detectable 1×3 bandages for industrial first aid programs. Request a quote.',
   },
   'knuckle-bandage-lg': {
     slug: 'knuckle-bandage-lg',

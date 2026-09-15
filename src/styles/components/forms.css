@@ -50,6 +50,43 @@ body[data-page="fire-enrollment"] .form-glass {
   clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
 }
 
+.form-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 0.875rem 0.5rem 0.75rem;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.form-back:hover {
+  background: #b7102a;
+  border-color: #b7102a;
+  color: #ffffff;
+}
+
+.form-back:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.form-back .lucide {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
 .form-venue-card:has(input:checked) {
   border-color: #b7102a;
 }

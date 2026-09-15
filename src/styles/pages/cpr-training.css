@@ -19,10 +19,22 @@ body[data-page="cpr-training"] .cpr-hero__texture {
 
 body[data-page="cpr-training"] .cpr-hero__gallery {
   --cpr-gallery-w: calc(12rem + 1rem + 14rem + 1rem + 12rem);
-  transform: translateX(150px);
+  transform: none;
   min-height: 450px;
   width: fit-content;
   max-width: 100%;
+}
+
+@media (min-width: 1280px) {
+  body[data-page="cpr-training"] .cpr-hero__gallery {
+    transform: translateX(150px);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  body[data-page="cpr-training"] .cpr-hero__gallery {
+    transform: translateX(clamp(0px, 6vw, 100px));
+  }
 }
 
 body[data-page="cpr-training"] .cpr-hero > .max-w-container-max {

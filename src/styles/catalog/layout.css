@@ -39,6 +39,13 @@
     margin-inline: auto;
     padding-inline: 0.75rem;
   }
+
+  /* Below-fold product sections — match hero/image column gutters */
+  .catalog-page-root > section .page-container {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 0.75rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -57,7 +64,21 @@
     padding-block: 1.5rem 2rem;
   }
 
+  .catalog-layout--product:has(.pd-ind-hero),
+  .catalog-layout--product:has(.pd-vehicle-hero),
+  .catalog-layout--product:has(.pd-halotron-hero),
+  .catalog-layout--product:has(.pd-nitrile-hero) {
+    padding-block: 0.5rem 2rem;
+  }
+
   .catalog-layout__main .page-container {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 0;
+  }
+
+  /* Below-fold product sections — match hero/image column gutters */
+  .catalog-page-root > section .page-container {
     max-width: 72rem;
     margin-inline: auto;
     padding-inline: 0;

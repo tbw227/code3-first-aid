@@ -33,11 +33,13 @@
 
     <main id="main-content">
         <div data-product-root class="catalog-page-root">
+    
     <div class="catalog-layout catalog-layout--product">
       
-    <aside class="catalog-sidebar" aria-label="Catalog categories">
-      <p class="catalog-sidebar__heading">Categories</p>
-      <nav class="catalog-sidebar__nav">
+    <div class="catalog-sidebar-rail">
+      <aside class="catalog-sidebar" aria-label="Catalog categories">
+        <p class="catalog-sidebar__heading">Categories</p>
+        <nav class="catalog-sidebar__nav">
         <a
           href="/pages/catalog.html"
           class="catalog-sidebar__link"
@@ -68,15 +70,16 @@
           class="catalog-sidebar__link"
           
         >Bandages &amp; Dressings</a></nav>
-      <a href="/pages/forms/procurement.html" class="catalog-sidebar__quote">Request a Quote</a>
-    </aside>
+        <a href="/pages/forms/procurement.html" class="catalog-sidebar__quote">Request a Quote</a>
+      </aside>
+    </div>
       <div class="catalog-layout__main">
     <section class="product-hero section-y">
       <div class="page-container product-hero__grid">
         <div class="product-hero__gallery">
           <div class="product-hero__main">
             <span class="product-hero__badge">Premium Supply</span>
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa5X8zKgqpWGVdIjL9QSXmM2AEA1yOCQohvt51qjpdXucRp9oMnB9kloFGak9H81GxVD8QqJOo0UrMB4nV9LkE5t3iuOqdkDiYquat07xoSDMr6jeHy4ZozD4a-hQ-qA8YN-BKJFF1VMH9puQjcG2rjyzHb3XgkBE8X1HJVEP9BwsV9Yc40A2sMfsVuw_hdms5vKZZ9wc_VRof4O9yOt9MRrJvqhH1dMDmqJxDXa4kgheQHc57cNc" alt="CPR-D Padz (5-yr shelf life)">
+            <img src="/images/supplies/cpr-d-padz.png" alt="CPR-D Padz (5-yr shelf life)">
           </div>
         </div>
         <div class="product-hero__info">
@@ -87,7 +90,6 @@
           <h1 class="product-hero__title">CPR-D Padz (5-yr shelf life)</h1>
           <p class="product-hero__tagline">Standardized one-piece defibrillation electrode with Real CPR Help® technology.</p>
           
-          <p class="product-hero__price">$235.99<span class="product-hero__compare">$268.00</span></p>
           <p class="product-hero__desc">Replacement electrodes for Zoll AED Plus. One-piece design with Real CPR Help technology.</p>
           
           <ul class="product-hero__highlights">
@@ -118,7 +120,9 @@
           </div>
         </div>
       </div>
-    </section>
+    </section></div>
+    </div>
+    
   
     <section class="product-marketing section-y">
       <div class="page-container">
@@ -196,13 +200,13 @@
       <div class="page-container catalog-bulk-cta__inner">
         <div>
           <h2>Need a Bulk Quote?</h2>
-          <p>Tiered pricing for fleet orders, multi-site restocking, and annual supply contracts.</p>
+          <p>Multi-site restocking and annual supply contracts available.</p>
         </div>
-        <a href="/pages/forms/procurement.html" class="catalog-bulk-cta__button">Request Volume Pricing</a>
+        <a href="/pages/forms/procurement.html" class="catalog-bulk-cta__button">Request a Quote</a>
       </div>
     </section>
+  
   </div>
-    </div></div>
     </main>
 
     <footer class="bg-[#111] text-white border-t-4 border-stone-800">
@@ -217,7 +221,7 @@
                         OSHA-aligned training and industrial safety supplies for Midwest workplaces.
                     </p>
                 </div>
-                <div class="lg:col-span-5 grid grid-cols-2 gap-8">
+                <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div>
                         <h3 class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-accent-red mb-4">Services</h3>
                         <ul class="space-y-2.5 text-sm text-white/65" data-nav="footer-services"></ul>

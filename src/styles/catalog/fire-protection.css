@@ -308,6 +308,16 @@
   grid-column: 1 / -1;
 }
 
+@media (max-width: 479px) {
+  .catalog-fire-grid--list .catalog-fire-card {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-fire-grid--list .catalog-fire-card__media {
+    max-width: 10rem;
+  }
+}
+
 .catalog-fire-card {
   display: flex;
   flex-direction: column;
