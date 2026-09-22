@@ -17,7 +17,7 @@ import {
 export const SITE = {
   name: 'Code 3 First Aid',
   legalName: 'Code 3 First Aid',
-  url: 'https://code3firstaid.com',
+  url: 'https://code3fa.com',
   email: 'Byoung@code3firstaid.com',
   phone: '+19133131125',
   phoneDisplay: '913-313-1125',
