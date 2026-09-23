@@ -2,6 +2,7 @@ node_modules/
 dist/
 .DS_Store
 *.local
+*.code-search
 
 # Full-resolution image originals. Only the optimized WebP derivatives in
 # public/images/ are committed — run `npm run images` to regenerate them.
