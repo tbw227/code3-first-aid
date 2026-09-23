@@ -1,0 +1,468 @@
+# Query: code3firstaid.com
+# ContextLines: 1
+
+153 results - 53 files
+
+index.html:
+  372                              <dd class="min-w-0">
+  373:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  374                              </dd>
+
+pages\catalog.html:
+  767                              <dd class="min-w-0">
+  768:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  769                              </dd>
+
+pages\cpr-training.html:
+  270                              <dd class="min-w-0">
+  271:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  272                              </dd>
+
+pages\fire-training.html:
+  189                              <dd class="min-w-0">
+  190:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  191                              </dd>
+
+pages\ppe-training.html:
+  225                              <dd class="min-w-0">
+  226:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  227                              </dd>
+
+pages\safety-supplies.html:
+  220                              <dd class="min-w-0">
+  221:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  222                              </dd>
+
+pages\service-areas.html:
+  263                              <dd class="min-w-0">
+  264:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  265                              </dd>
+
+pages\catalog\bandages-dressings.html:
+  232                              <dd class="min-w-0">
+  233:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  234                              </dd>
+
+pages\catalog\eye-care.html:
+  389                              <dd class="min-w-0">
+  390:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  391                              </dd>
+
+pages\catalog\fire-protection.html:
+  351                              <dd class="min-w-0">
+  352:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  353                              </dd>
+
+pages\catalog\first-aid-kits.html:
+  403                              <dd class="min-w-0">
+  404:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  405                              </dd>
+
+pages\catalog\industrial-ppe.html:
+  311                              <dd class="min-w-0">
+  312:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  313                              </dd>
+
+pages\catalog\products\2-5lb-abc-extinguisher-mount.html:
+  321                              <dd class="min-w-0">
+  322:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  323                              </dd>
+
+pages\catalog\products\4-shelf-class-b-kit.html:
+  262                              <dd class="min-w-0">
+  263:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  264                              </dd>
+
+pages\catalog\products\5lb-abc-extinguisher.html:
+  217                              <dd class="min-w-0">
+  218:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  219                              </dd>
+
+pages\catalog\products\5lb-halotron-extinguisher.html:
+  209                              <dd class="min-w-0">
+  210:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  211                              </dd>
+
+pages\catalog\products\10lb-abc-extinguisher.html:
+  279                              <dd class="min-w-0">
+  280:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  281                              </dd>
+
+pages\catalog\products\20lb-abc-extinguisher.html:
+  272                              <dd class="min-w-0">
+  273:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  274                              </dd>
+
+pages\catalog\products\32oz-eyewash-station-double.html:
+  228                              <dd class="min-w-0">
+  229:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  230                              </dd>
+
+pages\catalog\products\aed-wall-cabinet.html:
+  214                              <dd class="min-w-0">
+  215:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  216                              </dd>
+
+pages\catalog\products\bleeding-control-pack.html:
+  277                              <dd class="min-w-0">
+  278:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  279                              </dd>
+
+pages\catalog\products\cowhide-leather-gloves.html:
+  274                              <dd class="min-w-0">
+  275:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  276                              </dd>
+
+pages\catalog\products\cpr-d-padz.html:
+  243                              <dd class="min-w-0">
+  244:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  245                              </dd>
+
+pages\catalog\products\fire-extinguisher-mounting-brackets.html:
+  234                              <dd class="min-w-0">
+  235:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  236                              </dd>
+
+pages\catalog\products\honey-grip-gloves.html:
+  279                              <dd class="min-w-0">
+  280:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  281                              </dd>
+
+pages\catalog\products\mobile-eyewash-station.html:
+  206                              <dd class="min-w-0">
+  207:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  208                              </dd>
+
+pages\catalog\products\nitrile-gloves-lg-xl.html:
+  260                              <dd class="min-w-0">
+  261:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  262                              </dd>
+
+pages\catalog\products\pathogen-treatment-pack.html:
+  300                              <dd class="min-w-0">
+  301:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  302                              </dd>
+
+pages\catalog\products\steel-gas-cylinder-cage.html:
+  269                              <dd class="min-w-0">
+  270:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  271                              </dd>
+
+pages\catalog\products\zoll-aed-plus.html:
+  235                              <dd class="min-w-0">
+  236:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  237                              </dd>
+
+pages\forms\cpr-enrollment.html:
+  157                          <p class="text-secondary text-sm mb-6">Our specialists can tailor courses for hazardous environments or high-risk industrial sites.</p>
+  158:                         <a href="mailto:Byoung@code3firstaid.com" class="text-primary font-label-caps text-xs uppercase tracking-widest inline-flex items-center gap-2 hover:gap-4 transition-all">
+  159                              Talk to a Specialist
+
+  201                              <dd class="min-w-0">
+  202:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  203                              </dd>
+
+pages\forms\fire-enrollment.html:
+  144                      <p class="text-white/90 text-sm mb-6">For organizations with 500+ employees, we offer multi-site enterprise scheduling.</p>
+  145:                     <a href="mailto:Byoung@code3firstaid.com" class="inline-flex items-center gap-2 font-label-caps text-xs uppercase border-b border-white pb-1 hover:opacity-80 transition-opacity">
+  146                          Speak to a Specialist
+
+  187                              <dd class="min-w-0">
+  188:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  189                              </dd>
+
+pages\forms\procurement.html:
+   29                  </button>
+   30:                 <a href="mailto:Byoung@code3firstaid.com" class="bg-primary hover:bg-primary-container text-on-primary px-5 py-2 font-label-caps text-label-caps transition-all active:scale-95">Email Us</a>
+   31              </div>
+
+  191                              <dd class="min-w-0">
+  192:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  193                              </dd>
+
+pages\locations\fort-scott-ks.html:
+  201                              <dd class="min-w-0">
+  202:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  203                              </dd>
+
+pages\locations\joplin-mo.html:
+  201                              <dd class="min-w-0">
+  202:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  203                              </dd>
+
+pages\locations\kansas-city-mo.html:
+  201                              <dd class="min-w-0">
+  202:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  203                              </dd>
+
+pages\locations\lincoln-ne.html:
+  200                              <dd class="min-w-0">
+  201:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  202                              </dd>
+
+pages\locations\maryville-mo.html:
+  200                              <dd class="min-w-0">
+  201:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  202                              </dd>
+
+pages\locations\oklahoma-city-ok.html:
+  200                              <dd class="min-w-0">
+  201:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  202                              </dd>
+
+pages\locations\omaha-ne.html:
+  200                              <dd class="min-w-0">
+  201:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  202                              </dd>
+
+pages\locations\salina-ks.html:
+  200                              <dd class="min-w-0">
+  201:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  202                              </dd>
+
+pages\locations\sedalia-mo.html:
+  200                              <dd class="min-w-0">
+  201:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  202                              </dd>
+
+pages\locations\springfield-mo.html:
+  200                              <dd class="min-w-0">
+  201:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  202                              </dd>
+
+pages\locations\st-joseph-mo.html:
+  200                              <dd class="min-w-0">
+  201:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  202                              </dd>
+
+pages\locations\topeka-ks.html:
+  201                              <dd class="min-w-0">
+  202:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  203                              </dd>
+
+pages\locations\tulsa-ok.html:
+  200                              <dd class="min-w-0">
+  201:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  202                              </dd>
+
+pages\locations\warrensburg-mo.html:
+  200                              <dd class="min-w-0">
+  201:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  202                              </dd>
+
+pages\locations\wichita-ks.html:
+  201                              <dd class="min-w-0">
+  202:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  203                              </dd>
+
+public\robots.txt:
+  4  
+  5: Sitemap: https://code3fa.com/sitemap.xml
+
+public\sitemap.xml:
+    4    <url>
+    5:     <loc>https://code3fa.com/</loc>
+    6      <lastmod>2026-09-09</lastmod>
+
+   10    <url>
+   11:     <loc>https://code3fa.com/pages/fire-training</loc>
+   12      <lastmod>2026-09-09</lastmod>
+
+   16    <url>
+   17:     <loc>https://code3fa.com/pages/cpr-training</loc>
+   18      <lastmod>2026-09-09</lastmod>
+
+   22    <url>
+   23:     <loc>https://code3fa.com/pages/ppe-training</loc>
+   24      <lastmod>2026-09-09</lastmod>
+
+   28    <url>
+   29:     <loc>https://code3fa.com/pages/safety-supplies</loc>
+   30      <lastmod>2026-09-09</lastmod>
+
+   34    <url>
+   35:     <loc>https://code3fa.com/pages/catalog</loc>
+   36      <lastmod>2026-09-09</lastmod>
+
+   40    <url>
+   41:     <loc>https://code3fa.com/pages/service-areas</loc>
+   42      <lastmod>2026-09-09</lastmod>
+
+   46    <url>
+   47:     <loc>https://code3fa.com/pages/forms/cpr-enrollment</loc>
+   48      <lastmod>2026-09-09</lastmod>
+
+   52    <url>
+   53:     <loc>https://code3fa.com/pages/forms/fire-enrollment</loc>
+   54      <lastmod>2026-09-09</lastmod>
+
+   58    <url>
+   59:     <loc>https://code3fa.com/pages/forms/procurement</loc>
+   60      <lastmod>2026-09-09</lastmod>
+
+   64    <url>
+   65:     <loc>https://code3fa.com/pages/locations/maryville-mo</loc>
+   66      <lastmod>2026-09-09</lastmod>
+
+   70    <url>
+   71:     <loc>https://code3fa.com/pages/locations/st-joseph-mo</loc>
+   72      <lastmod>2026-09-09</lastmod>
+
+   76    <url>
+   77:     <loc>https://code3fa.com/pages/locations/kansas-city-mo</loc>
+   78      <lastmod>2026-09-09</lastmod>
+
+   82    <url>
+   83:     <loc>https://code3fa.com/pages/locations/sedalia-mo</loc>
+   84      <lastmod>2026-09-09</lastmod>
+
+   88    <url>
+   89:     <loc>https://code3fa.com/pages/locations/warrensburg-mo</loc>
+   90      <lastmod>2026-09-09</lastmod>
+
+   94    <url>
+   95:     <loc>https://code3fa.com/pages/locations/springfield-mo</loc>
+   96      <lastmod>2026-09-09</lastmod>
+
+  100    <url>
+  101:     <loc>https://code3fa.com/pages/locations/joplin-mo</loc>
+  102      <lastmod>2026-09-09</lastmod>
+
+  106    <url>
+  107:     <loc>https://code3fa.com/pages/locations/omaha-ne</loc>
+  108      <lastmod>2026-09-09</lastmod>
+
+  112    <url>
+  113:     <loc>https://code3fa.com/pages/locations/lincoln-ne</loc>
+  114      <lastmod>2026-09-09</lastmod>
+
+  118    <url>
+  119:     <loc>https://code3fa.com/pages/locations/wichita-ks</loc>
+  120      <lastmod>2026-09-09</lastmod>
+
+  124    <url>
+  125:     <loc>https://code3fa.com/pages/locations/salina-ks</loc>
+  126      <lastmod>2026-09-09</lastmod>
+
+  130    <url>
+  131:     <loc>https://code3fa.com/pages/locations/fort-scott-ks</loc>
+  132      <lastmod>2026-09-09</lastmod>
+
+  136    <url>
+  137:     <loc>https://code3fa.com/pages/locations/topeka-ks</loc>
+  138      <lastmod>2026-09-09</lastmod>
+
+  142    <url>
+  143:     <loc>https://code3fa.com/pages/locations/tulsa-ok</loc>
+  144      <lastmod>2026-09-09</lastmod>
+
+  148    <url>
+  149:     <loc>https://code3fa.com/pages/locations/oklahoma-city-ok</loc>
+  150      <lastmod>2026-09-09</lastmod>
+
+  154    <url>
+  155:     <loc>https://code3fa.com/pages/catalog/first-aid-kits</loc>
+  156      <lastmod>2026-09-09</lastmod>
+
+  160    <url>
+  161:     <loc>https://code3fa.com/pages/catalog/fire-protection</loc>
+  162      <lastmod>2026-09-09</lastmod>
+
+  166    <url>
+  167:     <loc>https://code3fa.com/pages/catalog/eye-care</loc>
+  168      <lastmod>2026-09-09</lastmod>
+
+  172    <url>
+  173:     <loc>https://code3fa.com/pages/catalog/industrial-ppe</loc>
+  174      <lastmod>2026-09-09</lastmod>
+
+  178    <url>
+  179:     <loc>https://code3fa.com/pages/catalog/bandages-dressings</loc>
+  180      <lastmod>2026-09-09</lastmod>
+
+  184    <url>
+  185:     <loc>https://code3fa.com/pages/catalog/products/32oz-eyewash-station-double</loc>
+  186      <lastmod>2026-09-09</lastmod>
+
+  190    <url>
+  191:     <loc>https://code3fa.com/pages/catalog/products/pathogen-treatment-pack</loc>
+  192      <lastmod>2026-09-09</lastmod>
+
+  196    <url>
+  197:     <loc>https://code3fa.com/pages/catalog/products/4-shelf-class-b-kit</loc>
+  198      <lastmod>2026-09-09</lastmod>
+
+  202    <url>
+  203:     <loc>https://code3fa.com/pages/catalog/products/bleeding-control-pack</loc>
+  204      <lastmod>2026-09-09</lastmod>
+
+  208    <url>
+  209:     <loc>https://code3fa.com/pages/catalog/products/5lb-abc-extinguisher</loc>
+  210      <lastmod>2026-09-09</lastmod>
+
+  214    <url>
+  215:     <loc>https://code3fa.com/pages/catalog/products/10lb-abc-extinguisher</loc>
+  216      <lastmod>2026-09-09</lastmod>
+
+  220    <url>
+  221:     <loc>https://code3fa.com/pages/catalog/products/2-5lb-abc-extinguisher-mount</loc>
+  222      <lastmod>2026-09-09</lastmod>
+
+  226    <url>
+  227:     <loc>https://code3fa.com/pages/catalog/products/20lb-abc-extinguisher</loc>
+  228      <lastmod>2026-09-09</lastmod>
+
+  232    <url>
+  233:     <loc>https://code3fa.com/pages/catalog/products/5lb-halotron-extinguisher</loc>
+  234      <lastmod>2026-09-09</lastmod>
+
+  238    <url>
+  239:     <loc>https://code3fa.com/pages/catalog/products/fire-extinguisher-mounting-brackets</loc>
+  240      <lastmod>2026-09-09</lastmod>
+
+  244    <url>
+  245:     <loc>https://code3fa.com/pages/catalog/products/aed-wall-cabinet</loc>
+  246      <lastmod>2026-09-09</lastmod>
+
+  250    <url>
+  251:     <loc>https://code3fa.com/pages/catalog/products/zoll-aed-plus</loc>
+  252      <lastmod>2026-09-09</lastmod>
+
+  256    <url>
+  257:     <loc>https://code3fa.com/pages/catalog/products/mobile-eyewash-station</loc>
+  258      <lastmod>2026-09-09</lastmod>
+
+  262    <url>
+  263:     <loc>https://code3fa.com/pages/catalog/products/cpr-d-padz</loc>
+  264      <lastmod>2026-09-09</lastmod>
+
+  268    <url>
+  269:     <loc>https://code3fa.com/pages/catalog/products/steel-gas-cylinder-cage</loc>
+  270      <lastmod>2026-09-09</lastmod>
+
+  274    <url>
+  275:     <loc>https://code3fa.com/pages/catalog/products/cowhide-leather-gloves</loc>
+  276      <lastmod>2026-09-09</lastmod>
+
+  280    <url>
+  281:     <loc>https://code3fa.com/pages/catalog/products/honey-grip-gloves</loc>
+  282      <lastmod>2026-09-09</lastmod>
+
+  286    <url>
+  287:     <loc>https://code3fa.com/pages/catalog/products/nitrile-gloves-lg-xl</loc>
+  288      <lastmod>2026-09-09</lastmod>
+
+scripts\generate-catalog-pages.mjs:
+  114                              <dd class="min-w-0">
+  115:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  116                              </dd>
+
+scripts\generate-location-pages.mjs:
+  209                              <dd class="min-w-0">
+  210:                                 <a href="mailto:Byoung@code3firstaid.com" class="text-white/80 hover:text-accent-red transition-colors break-words">Byoung@code3firstaid.com</a>
+  211                              </dd>
+
+src\config\seo.js:
+  20    url: 'https://code3fa.com',
+  21:   email: 'Byoung@code3firstaid.com',
+  22    phone: '+19133131125',
