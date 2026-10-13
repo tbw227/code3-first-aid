@@ -1,38 +1,22 @@
 /**
- * How It Works — renders numbered steps and dashboard feature tiles.
+ * How It Works — renders the feature rows beside the warehouse photo.
  */
-import { initIcons } from '../utils/icons.js';
 
 const STEPS = [
   {
-    icon: 'calendar-days',
-    title: 'Schedule Service',
-    text: 'Choose a monthly or quarterly visit plan for your facility.',
-  },
-  {
     icon: 'clipboard-check',
-    title: 'On-Site Inspection',
-    text: 'We inspect kits, AEDs, extinguishers, and eyewash stations.',
-  },
-  {
-    icon: 'package',
-    title: 'Restock & Replace',
-    text: 'Expired or damaged items are replaced on every visit.',
-  },
-  {
-    icon: 'chart-line',
-    title: 'Digital Inventory',
-    text: 'Every item is tracked in our inventory platform.',
-  },
-  {
-    icon: 'file-text',
-    title: 'Compliance Reporting',
-    text: 'Inspection reports and service history stay on file.',
+    title: 'Inventory Management',
+    text: 'We track what you have, what you use, and what needs attention.',
   },
   {
     icon: 'shield-check',
-    title: 'Stay Ready',
-    text: 'Your facility stays stocked, compliant, and prepared.',
+    title: 'Compliance Ready',
+    text: 'All inspections and services are documented and always accessible.',
+  },
+  {
+    icon: 'chart-line',
+    title: 'Total Visibility',
+    text: 'Updates and reports from every location you manage.',
   },
 ];
 
@@ -59,26 +43,17 @@ const FEATURES = [
   },
 ];
 
-function step({ icon, title, text }, index, total) {
-  const number = index + 1;
-  const isLast = index === total - 1;
+function step({ icon, title, text }) {
   return `
-    <div class="process-step${isLast ? ' process-step--last' : ''}">
-      <div class="process-step__icon" aria-hidden="true">
-        <img src="/icons/${icon}.svg" alt="" class="process-step__svg">
+    <li class="hiw-feature">
+      <span class="hiw-feature__icon" aria-hidden="true">
+        <img src="/icons/${icon}.svg" alt="">
+      </span>
+      <div>
+        <h3 class="hiw-feature__title">${title}</h3>
+        <p class="hiw-feature__text">${text}</p>
       </div>
-      <div class="process-step__body">
-        <h3 class="process-step__heading font-headline-md font-bold text-on-surface">
-          <span class="process-step__number">${number}</span>
-          <span class="process-step__title">${title}</span>
-        </h3>
-        <p class="process-step__text font-body-md text-secondary">${text}</p>
-      </div>
-      ${isLast ? '' : `
-      <div class="process-step__arrow" aria-hidden="true">
-        <i data-lucide="arrow-right"></i>
-      </div>`}
-    </div>
+    </li>
   `;
 }
 
@@ -102,10 +77,7 @@ export function initProcessSection() {
   const featuresRoot = document.querySelector('[data-process-features]');
 
   if (stepsRoot) {
-    stepsRoot.innerHTML = STEPS.map((item, index) =>
-      step(item, index, STEPS.length)
-    ).join('');
-    initIcons(stepsRoot);
+    stepsRoot.innerHTML = STEPS.map((item) => step(item)).join('');
   }
 
   if (featuresRoot) {
